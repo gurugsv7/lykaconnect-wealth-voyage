@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -122,47 +121,47 @@ const AIInvestmentMatcher = () => {
   };
 
   return (
-    <section id="ai-matcher" className="py-20 bg-gradient-to-br from-black via-slate-900 to-slate-800">
+    <section id="ai-matcher" className="py-12 md:py-20 bg-gradient-to-br from-black via-slate-900 to-slate-800">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
             AI Investment
             <span className="block bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
               Property Matcher
             </span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4">
             Tell us your investment goals and let our AI find the perfect property for you
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             {/* Input Form */}
             <Card className="bg-slate-800/50 border-slate-700">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-white flex items-center text-lg md:text-xl">
                   <Brain className="mr-2 h-5 w-5 text-amber-400" />
                   Your Investment Profile
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4 md:space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="investment-amount" className="text-gray-300">Investment Amount (AED)</Label>
+                  <Label htmlFor="investment-amount" className="text-gray-300 text-sm md:text-base">Investment Amount (AED)</Label>
                   <Input
                     id="investment-amount"
                     type="number"
                     placeholder="e.g., 2000000"
                     value={investmentAmount}
                     onChange={(e) => setInvestmentAmount(e.target.value)}
-                    className="bg-slate-700 border-slate-600 text-white"
+                    className="bg-slate-700 border-slate-600 text-white h-12 text-base"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-gray-300">Risk Tolerance</Label>
+                  <Label className="text-gray-300 text-sm md:text-base">Risk Tolerance</Label>
                   <Select value={riskTolerance} onValueChange={setRiskTolerance}>
-                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white h-12">
                       <SelectValue placeholder="Select your risk level" />
                     </SelectTrigger>
                     <SelectContent>
@@ -174,44 +173,46 @@ const AIInvestmentMatcher = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="min-roi" className="text-gray-300">Minimum Expected ROI (%)</Label>
+                  <Label htmlFor="min-roi" className="text-gray-300 text-sm md:text-base">Minimum Expected ROI (%)</Label>
                   <Input
                     id="min-roi"
                     type="number"
                     placeholder="e.g., 7"
                     value={minRoi}
                     onChange={(e) => setMinRoi(e.target.value)}
-                    className="bg-slate-700 border-slate-600 text-white"
+                    className="bg-slate-700 border-slate-600 text-white h-12 text-base"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-gray-300">Preferred Areas</Label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <Label className="text-gray-300 text-sm md:text-base">Preferred Areas</Label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {areas.map((area) => (
-                      <div key={area} className="flex items-center space-x-2">
+                      <div key={area} className="flex items-center space-x-2 p-2">
                         <Checkbox
                           id={area}
                           checked={preferredAreas.includes(area)}
                           onCheckedChange={(checked) => handleAreaChange(area, checked as boolean)}
+                          className="h-4 w-4"
                         />
-                        <Label htmlFor={area} className="text-sm text-gray-300">{area}</Label>
+                        <Label htmlFor={area} className="text-sm text-gray-300 flex-1 cursor-pointer">{area}</Label>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-gray-300">Property Types</Label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <Label className="text-gray-300 text-sm md:text-base">Property Types</Label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {types.map((type) => (
-                      <div key={type} className="flex items-center space-x-2">
+                      <div key={type} className="flex items-center space-x-2 p-2">
                         <Checkbox
                           id={type}
                           checked={propertyTypes.includes(type)}
                           onCheckedChange={(checked) => handleTypeChange(type, checked as boolean)}
+                          className="h-4 w-4"
                         />
-                        <Label htmlFor={type} className="text-sm text-gray-300">{type}</Label>
+                        <Label htmlFor={type} className="text-sm text-gray-300 flex-1 cursor-pointer">{type}</Label>
                       </div>
                     ))}
                   </div>
@@ -220,7 +221,7 @@ const AIInvestmentMatcher = () => {
                 <Button 
                   onClick={handleFindProperties}
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700"
+                  className="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 h-12 text-base font-semibold"
                 >
                   {isLoading ? (
                     <>
@@ -238,14 +239,14 @@ const AIInvestmentMatcher = () => {
             </Card>
 
             {/* Results */}
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {recommendations.length === 0 && !isLoading && (
                 <Card className="bg-slate-800/50 border-slate-700">
-                  <CardContent className="flex items-center justify-center h-64">
-                    <div className="text-center">
-                      <Brain className="h-12 w-12 text-amber-400 mx-auto mb-4" />
-                      <h3 className="text-xl font-semibold text-white mb-2">Ready to Find Your Property?</h3>
-                      <p className="text-gray-400">Fill in your investment profile and let our AI do the magic!</p>
+                  <CardContent className="flex items-center justify-center h-48 md:h-64">
+                    <div className="text-center p-4">
+                      <Brain className="h-10 w-10 md:h-12 md:w-12 text-amber-400 mx-auto mb-4" />
+                      <h3 className="text-lg md:text-xl font-semibold text-white mb-2">Ready to Find Your Property?</h3>
+                      <p className="text-gray-400 text-sm md:text-base">Fill in your investment profile and let our AI do the magic!</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -257,45 +258,45 @@ const AIInvestmentMatcher = () => {
                     <img
                       src={property.image}
                       alt={property.title}
-                      className="w-full h-48 object-cover rounded-t-lg"
+                      className="w-full h-40 md:h-48 object-cover rounded-t-lg"
                     />
-                    <Badge className="absolute top-4 left-4 bg-amber-600 text-black">
+                    <Badge className="absolute top-3 left-3 bg-amber-600 text-black text-xs md:text-sm">
                       {property.matchScore}% Match
                     </Badge>
-                    <div className="absolute top-4 right-4 flex items-center bg-black/80 text-amber-400 px-2 py-1 rounded">
+                    <div className="absolute top-3 right-3 flex items-center bg-black/80 text-amber-400 px-2 py-1 rounded text-xs">
                       <Star className="h-3 w-3 mr-1 fill-current" />
                       AI Pick
                     </div>
                   </div>
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
+                  <CardContent className="p-4 md:p-6">
+                    <div className="space-y-3 md:space-y-4">
                       <div>
-                        <h3 className="text-xl font-semibold text-white mb-1">{property.title}</h3>
+                        <h3 className="text-lg md:text-xl font-semibold text-white mb-1">{property.title}</h3>
                         <div className="flex items-center text-gray-400 mb-2">
                           <MapPin className="h-4 w-4 mr-1" />
-                          {property.location}
+                          <span className="text-sm md:text-base">{property.location}</span>
                         </div>
-                        <p className="text-sm text-amber-400">{property.whyMatched}</p>
+                        <p className="text-xs md:text-sm text-amber-400">{property.whyMatched}</p>
                       </div>
 
-                      <div className="flex justify-between items-center">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                         <div>
-                          <div className="text-2xl font-bold text-amber-400">
+                          <div className="text-xl md:text-2xl font-bold text-amber-400">
                             AED {property.price.toLocaleString()}
                           </div>
-                          <div className="text-sm text-gray-400">
+                          <div className="text-xs md:text-sm text-gray-400">
                             Monthly: AED {property.monthlyRent.toLocaleString()}
                           </div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-lg font-semibold text-green-400">
+                        <div className="text-left sm:text-right">
+                          <div className="text-base md:text-lg font-semibold text-green-400">
                             {property.roi}% ROI
                           </div>
-                          <div className="text-sm text-gray-400">Annual Return</div>
+                          <div className="text-xs md:text-sm text-gray-400">Annual Return</div>
                         </div>
                       </div>
 
-                      <div className="flex items-center space-x-4 text-gray-400">
+                      <div className="flex items-center justify-between text-gray-400 text-sm">
                         <div className="flex items-center">
                           <Bed className="h-4 w-4 mr-1" />
                           {property.bedrooms} BR
@@ -310,11 +311,11 @@ const AIInvestmentMatcher = () => {
                         </div>
                       </div>
 
-                      <div className="flex space-x-2">
-                        <Button className="flex-1 bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700">
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <Button className="flex-1 bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 h-10 text-sm font-semibold">
                           View Details
                         </Button>
-                        <Button variant="outline" className="border-amber-600 text-amber-400 hover:bg-amber-600 hover:text-black">
+                        <Button variant="outline" className="flex-1 sm:flex-none border-amber-600 text-amber-400 hover:bg-amber-600 hover:text-black h-10 text-sm">
                           Get Report
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
