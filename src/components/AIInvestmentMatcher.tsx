@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Brain, TrendingUp, MapPin, Bed, Bath, Square, Star, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -186,19 +187,21 @@ const AIInvestmentMatcher = () => {
 
                 <div className="space-y-3">
                   <Label className="text-gray-300 text-sm md:text-base">Preferred Areas</Label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {areas.map((area) => (
-                      <div key={area} className="flex items-center space-x-2 p-2">
-                        <Checkbox
-                          id={area}
-                          checked={preferredAreas.includes(area)}
-                          onCheckedChange={(checked) => handleAreaChange(area, checked as boolean)}
-                          className="h-4 w-4"
-                        />
-                        <Label htmlFor={area} className="text-sm text-gray-300 flex-1 cursor-pointer">{area}</Label>
-                      </div>
-                    ))}
-                  </div>
+                  <ScrollArea className="h-32 w-full rounded-md border border-slate-600 bg-slate-700/50 p-3">
+                    <div className="space-y-2">
+                      {areas.map((area) => (
+                        <div key={area} className="flex items-center space-x-2 p-1">
+                          <Checkbox
+                            id={area}
+                            checked={preferredAreas.includes(area)}
+                            onCheckedChange={(checked) => handleAreaChange(area, checked as boolean)}
+                            className="h-4 w-4"
+                          />
+                          <Label htmlFor={area} className="text-sm text-gray-300 flex-1 cursor-pointer">{area}</Label>
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollArea>
                 </div>
 
                 <div className="space-y-3">
