@@ -9,6 +9,7 @@ import HeroSection from "@/components/HeroSection";
 import AIFeatures from "@/components/AIFeatures";
 import TamilMillionaireJourney from "@/components/TamilMillionaireJourney";
 import PropertyListings from "@/components/PropertyListings";
+import AIInvestmentMatcher from "@/components/AIInvestmentMatcher";
 import ClientDashboard from "@/components/ClientDashboard";
 import BlogSection from "@/components/BlogSection";
 import Footer from "@/components/Footer";
@@ -28,6 +29,9 @@ const Index = () => {
       
       {/* Tamil Millionaire Journey */}
       <TamilMillionaireJourney />
+      
+      {/* AI Investment Matcher */}
+      <AIInvestmentMatcher />
       
       {/* Property Listings */}
       <PropertyListings />
