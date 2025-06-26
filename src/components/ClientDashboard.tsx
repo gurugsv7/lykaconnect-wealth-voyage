@@ -1,9 +1,8 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Calculator, Compare, PieChart, ArrowUp, ArrowDown } from "lucide-react";
+import { TrendingUp, Calculator, GitCompare, PieChart, ArrowUp, ArrowDown } from "lucide-react";
 
 const ClientDashboard = () => {
   const portfolioData = {
@@ -139,7 +138,7 @@ const ClientDashboard = () => {
                     ROI Calculator
                   </Button>
                   <Button className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800">
-                    <Compare className="mr-2 h-4 w-4" />
+                    <GitCompare className="mr-2 h-4 w-4" />
                     Compare Properties
                   </Button>
                 </div>
