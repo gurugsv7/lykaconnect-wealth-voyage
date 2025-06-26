@@ -59,7 +59,7 @@ const TamilMillionaireJourney = () => {
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-4xl mx-auto space-y-12">
           {/* Form */}
           <Card className="bg-slate-800/50 border-slate-700">
             <CardHeader>
@@ -152,61 +152,68 @@ const TamilMillionaireJourney = () => {
             </CardContent>
           </Card>
 
-          {/* Results */}
-          <div className="space-y-6">
-            {prediction ? (
-              <Card className="bg-gradient-to-br from-amber-900/20 to-amber-800/20 border-amber-600/30">
-                <CardHeader>
-                  <CardTitle className="text-amber-400 flex items-center">
-                    <Star className="mr-2 h-6 w-6" />
-                    Your Millionaire Prediction
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-4 bg-slate-800/50 rounded-lg">
-                      <div className="text-2xl font-bold text-amber-400">AED {prediction.monthlyRental.toLocaleString()}</div>
-                      <div className="text-gray-400">Monthly Rental</div>
+          {/* Results - Full Width */}
+          {prediction ? (
+            <Card className="bg-gradient-to-br from-amber-900/20 to-amber-800/20 border-amber-600/30">
+              <CardHeader>
+                <CardTitle className="text-amber-400 flex items-center">
+                  <Star className="mr-2 h-6 w-6" />
+                  Your Millionaire Prediction
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="text-center p-6 bg-slate-800/50 rounded-lg">
+                    <div className="text-3xl font-bold text-amber-400">AED {prediction.monthlyRental.toLocaleString()}</div>
+                    <div className="text-gray-400 mt-2">Monthly Rental Income</div>
+                  </div>
+                  <div className="text-center p-6 bg-slate-800/50 rounded-lg">
+                    <div className="text-3xl font-bold text-amber-400">AED {prediction.annualRental.toLocaleString()}</div>
+                    <div className="text-gray-400 mt-2">Annual Rental Income</div>
+                  </div>
+                </div>
+                <div className="text-center p-8 bg-gradient-to-r from-amber-600/20 to-amber-400/20 rounded-lg">
+                  <div className="text-4xl font-bold text-amber-400 mb-3">{prediction.millionaireYears} Years</div>
+                  <div className="text-xl text-gray-300 mb-2">To Reach Millionaire Status</div>
+                  <div className="text-lg text-gray-400">ROI: {prediction.roi}% annually</div>
+                </div>
+                
+                <div className="mt-8">
+                  <h3 className="text-xl font-semibold text-white mb-4">Why Tamil Millionaire Journey?</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="flex items-start p-4 bg-slate-800/30 rounded-lg">
+                      <div className="w-3 h-3 bg-amber-400 rounded-full mt-2 mr-3 flex-shrink-0" />
+                      <div>
+                        <div className="text-white font-medium mb-1">AI-Powered Analysis</div>
+                        <div className="text-gray-400 text-sm">Using Dubai's historical market data</div>
+                      </div>
                     </div>
-                    <div className="text-center p-4 bg-slate-800/50 rounded-lg">
-                      <div className="text-2xl font-bold text-amber-400">AED {prediction.annualRental.toLocaleString()}</div>
-                      <div className="text-gray-400">Annual Rental</div>
+                    <div className="flex items-start p-4 bg-slate-800/30 rounded-lg">
+                      <div className="w-3 h-3 bg-amber-400 rounded-full mt-2 mr-3 flex-shrink-0" />
+                      <div>
+                        <div className="text-white font-medium mb-1">Personalized Timeline</div>
+                        <div className="text-gray-400 text-sm">Based on your specific property</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start p-4 bg-slate-800/30 rounded-lg">
+                      <div className="w-3 h-3 bg-amber-400 rounded-full mt-2 mr-3 flex-shrink-0" />
+                      <div>
+                        <div className="text-white font-medium mb-1">Real-Time Calculations</div>
+                        <div className="text-gray-400 text-sm">Rental yields and ROI projections</div>
+                      </div>
                     </div>
                   </div>
-                  <div className="text-center p-6 bg-gradient-to-r from-amber-600/20 to-amber-400/20 rounded-lg">
-                    <div className="text-3xl font-bold text-amber-400 mb-2">{prediction.millionaireYears} Years</div>
-                    <div className="text-gray-300">To Reach Millionaire Status</div>
-                    <div className="text-sm text-gray-400 mt-2">ROI: {prediction.roi}% annually</div>
-                  </div>
-                </CardContent>
-              </Card>
-            ) : (
-              <Card className="bg-slate-800/30 border-slate-700 border-dashed">
-                <CardContent className="text-center py-16">
-                  <TrendingUp className="h-16 w-16 text-amber-400 mx-auto mb-4 opacity-50" />
-                  <p className="text-gray-400">Fill out the form to see your millionaire journey prediction</p>
-                </CardContent>
-              </Card>
-            )}
-
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white">Why Tamil Millionaire Journey?</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                  AI-powered market analysis using Dubai's historical data
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                  Personalized investment timeline based on your property
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                  Real-time rental yield calculations and ROI projections
-                </li>
-              </ul>
-            </div>
-          </div>
+                </div>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="bg-slate-800/30 border-slate-700 border-dashed">
+              <CardContent className="text-center py-16">
+                <TrendingUp className="h-16 w-16 text-amber-400 mx-auto mb-4 opacity-50" />
+                <p className="text-gray-400 text-lg">Fill out the form to see your millionaire journey prediction</p>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </section>

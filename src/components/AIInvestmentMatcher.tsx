@@ -11,302 +11,279 @@ import { Brain, TrendingUp, MapPin, Bed, Bath, Square, Star, ArrowRight } from "
 import { useToast } from "@/hooks/use-toast";
 
 const AIInvestmentMatcher = () => {
-  const [investmentAmount, setInvestmentAmount] = useState('');
-  const [riskTolerance, setRiskTolerance] = useState('');
-  const [preferredAreas, setPreferredAreas] = useState<string[]>([]);
-  const [propertyTypes, setPropertyTypes] = useState<string[]>([]);
-  const [minRoi, setMinRoi] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [propertyType, setPropertyType] = useState('');
+  const [location, setLocation] = useState('');
+  const [minBudget, setMinBudget] = useState('');
+  const [maxBudget, setMaxBudget] = useState('');
+  const [bedrooms, setBedrooms] = useState('');
+  const [minArea, setMinArea] = useState('');
+  const [maxArea, setMaxArea] = useState('');
+  const [amenities, setAmenities] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
   const { toast } = useToast();
 
-  const areas = [
-    'Dubai Marina', 'Downtown Dubai', 'Business Bay', 'JLT', 'DIFC', 
-    'Palm Jumeirah', 'JBR', 'Dubai Hills', 'Arabian Ranches', 'Dubai South'
-  ];
+  const propertyTypes = ['Apartment', 'Villa', 'Townhouse', 'Land', 'Commercial'];
+  const locations = ['Downtown Dubai', 'Dubai Marina', 'Palm Jumeirah', 'Jumeirah Village Circle', 'Business Bay', 'Arabian Ranches'];
+  const bedroomOptions = ['Studio', '1', '2', '3', '4+'];
+  const allAmenities = ['Pool', 'Gym', 'Beach Access', 'Park View', 'Balcony', 'Security', 'Parking'];
 
-  const types = ['Apartment', 'Villa', 'Penthouse', 'Townhouse', 'Studio'];
-
-  const handleAreaChange = (area: string, checked: boolean) => {
-    if (checked) {
-      setPreferredAreas([...preferredAreas, area]);
+  const toggleAmenity = (amenity) => {
+    if (amenities.includes(amenity)) {
+      setAmenities(amenities.filter((a) => a !== amenity));
     } else {
-      setPreferredAreas(preferredAreas.filter(a => a !== area));
+      setAmenities([...amenities, amenity]);
     }
   };
 
-  const handleTypeChange = (type: string, checked: boolean) => {
-    if (checked) {
-      setPropertyTypes([...propertyTypes, type]);
-    } else {
-      setPropertyTypes(propertyTypes.filter(t => t !== type));
-    }
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  const mockRecommendations = [
-    {
-      id: 1,
-      title: "Marina Heights Premium",
-      location: "Dubai Marina",
-      price: 2200000,
-      monthlyRent: 14000,
-      roi: 7.6,
-      bedrooms: 2,
-      bathrooms: 2,
-      area: 1200,
-      image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?q=80&w=800&auto=format&fit=crop",
-      matchScore: 95,
-      whyMatched: "Perfect fit for your budget with high ROI potential"
-    },
-    {
-      id: 2,
-      title: "Business Bay Elite",
-      location: "Business Bay",
-      price: 1800000,
-      monthlyRent: 12000,
-      roi: 8.0,
-      bedrooms: 1,
-      bathrooms: 2,
-      area: 900,
-      image: "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?q=80&w=800&auto=format&fit=crop",
-      matchScore: 92,
-      whyMatched: "Exceeds your ROI expectations with growing area value"
-    },
-    {
-      id: 3,
-      title: "Downtown Luxury Suite",
-      location: "Downtown Dubai",
-      price: 2500000,
-      monthlyRent: 16000,
-      roi: 7.7,
-      bedrooms: 2,
-      bathrooms: 3,
-      area: 1400,
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop",
-      matchScore: 88,
-      whyMatched: "Premium location with stable rental demand"
-    }
-  ];
-
-  const handleFindProperties = async () => {
-    if (!investmentAmount || !riskTolerance) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in your investment amount and risk tolerance.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsLoading(true);
-    
-    // Simulate AI processing
+    // Simulate AI-powered property matching
     setTimeout(() => {
-      const filteredRecommendations = mockRecommendations.filter(property => {
-        const budget = parseInt(investmentAmount);
-        const withinBudget = property.price <= budget * 1.1; // 10% flexibility
-        const meetsRoi = parseFloat(minRoi) ? property.roi >= parseFloat(minRoi) : true;
-        const inPreferredArea = preferredAreas.length === 0 || preferredAreas.some(area => property.location.includes(area));
-        
-        return withinBudget && meetsRoi && inPreferredArea;
-      });
+      const matchedProperties = [
+        {
+          name: 'Luxury Apartment in Dubai Marina',
+          location: 'Dubai Marina',
+          price: 2500000,
+          expectedROI: 7.5,
+          bedrooms: '2',
+          bathrooms: '3',
+          area: 1500,
+          amenities: ['Pool', 'Gym', 'Balcony'],
+          matchScore: 92,
+          matchReasons: ['Matches your preferred location', 'High ROI potential', 'Includes desired amenities'],
+        },
+        {
+          name: 'Stunning Villa in Palm Jumeirah',
+          location: 'Palm Jumeirah',
+          price: 8000000,
+          expectedROI: 6.8,
+          bedrooms: '4',
+          bathrooms: '5',
+          area: 4000,
+          amenities: ['Pool', 'Beach Access', 'Security'],
+          matchScore: 88,
+          matchReasons: ['Matches your property type preference', 'Located in a prime area', 'Offers high-end amenities'],
+        },
+        {
+          name: 'Modern Townhouse in Arabian Ranches',
+          location: 'Arabian Ranches',
+          price: 3200000,
+          expectedROI: 7.2,
+          bedrooms: '3',
+          bathrooms: '4',
+          area: 2200,
+          amenities: ['Park View', 'Security', 'Parking'],
+          matchScore: 85,
+          matchReasons: ['Matches your budget range', 'Family-friendly community', 'Good investment potential'],
+        },
+      ];
 
-      setRecommendations(filteredRecommendations);
-      setIsLoading(false);
-      
+      setRecommendations(matchedProperties);
+      setLoading(false);
       toast({
-        title: "AI Analysis Complete",
-        description: `Found ${filteredRecommendations.length} properties matching your criteria.`
-      });
-    }, 2000);
+        title: "AI Recommendations Ready!",
+        description: "Check out the properties our AI matched for you.",
+      })
+    }, 2500);
   };
 
   return (
-    <section id="ai-matcher" className="py-12 md:py-20 bg-gradient-to-br from-black via-slate-900 to-slate-800">
+    <section className="py-20 bg-gradient-to-br from-slate-950 via-black to-slate-900">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-            AI Investment
-            <span className="block bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
-              Property Matcher
+        <div className="text-center mb-16">
+          <Badge className="bg-blue-600/20 text-blue-400 border-blue-600/30 mb-4">
+            AI-Powered Matching
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              AI Investment Matcher
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4">
-            Tell us your investment goals and let our AI find the perfect property for you
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            Tell us your investment criteria and our AI will find the perfect Dubai properties for you
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-            {/* Input Form */}
-            <Card className="bg-slate-800/50 border-slate-700">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-white flex items-center text-lg md:text-xl">
-                  <Brain className="mr-2 h-5 w-5 text-amber-400" />
-                  Your Investment Profile
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4 md:space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="investment-amount" className="text-gray-300 text-sm md:text-base">Investment Amount (AED)</Label>
-                  <Input
-                    id="investment-amount"
-                    type="number"
-                    placeholder="e.g., 2000000"
-                    value={investmentAmount}
-                    onChange={(e) => setInvestmentAmount(e.target.value)}
-                    className="bg-slate-700 border-slate-600 text-white h-12 text-base"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label className="text-gray-300 text-sm md:text-base">Risk Tolerance</Label>
-                  <Select value={riskTolerance} onValueChange={setRiskTolerance}>
-                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white h-12">
-                      <SelectValue placeholder="Select your risk level" />
+        <div className="max-w-4xl mx-auto space-y-12">
+          {/* Investment Form */}
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center">
+                <Brain className="mr-2 h-6 w-6 text-blue-400" />
+                Investment Criteria
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <Label htmlFor="propertyType" className="text-gray-300">Property Type</Label>
+                  <Select value={propertyType} onValueChange={setPropertyType}>
+                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                      <SelectValue placeholder="Select type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="low">Conservative (Low Risk)</SelectItem>
-                      <SelectItem value="medium">Moderate (Medium Risk)</SelectItem>
-                      <SelectItem value="high">Aggressive (High Risk)</SelectItem>
+                      {propertyTypes.map((type) => (
+                        <SelectItem key={type} value={type}>{type}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="min-roi" className="text-gray-300 text-sm md:text-base">Minimum Expected ROI (%)</Label>
-                  <Input
-                    id="min-roi"
-                    type="number"
-                    placeholder="e.g., 7"
-                    value={minRoi}
-                    onChange={(e) => setMinRoi(e.target.value)}
-                    className="bg-slate-700 border-slate-600 text-white h-12 text-base"
-                  />
+                <div>
+                  <Label htmlFor="location" className="text-gray-300">Location</Label>
+                  <Select value={location} onValueChange={setLocation}>
+                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                      <SelectValue placeholder="Select location" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {locations.map((loc) => (
+                        <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
-                <div className="space-y-3">
-                  <Label className="text-gray-300 text-sm md:text-base">Preferred Areas</Label>
-                  <ScrollArea className="h-32 w-full rounded-md border border-slate-600 bg-slate-700/50 p-3">
-                    <div className="space-y-2">
-                      {areas.map((area) => (
-                        <div key={area} className="flex items-center space-x-2 p-1">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="minBudget" className="text-gray-300">Min Budget (AED)</Label>
+                    <Input
+                      id="minBudget"
+                      type="number"
+                      value={minBudget}
+                      onChange={(e) => setMinBudget(e.target.value)}
+                      placeholder="e.g., 500000"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="maxBudget" className="text-gray-300">Max Budget (AED)</Label>
+                    <Input
+                      id="maxBudget"
+                      type="number"
+                      value={maxBudget}
+                      onChange={(e) => setMaxBudget(e.target.value)}
+                      placeholder="e.g., 1500000"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="bedrooms" className="text-gray-300">Bedrooms</Label>
+                  <Select value={bedrooms} onValueChange={setBedrooms}>
+                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                      <SelectValue placeholder="Any" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {bedroomOptions.map((beds) => (
+                        <SelectItem key={beds} value={beds}>{beds} BR</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="minArea" className="text-gray-300">Min Area (sq ft)</Label>
+                    <Input
+                      id="minArea"
+                      type="number"
+                      value={minArea}
+                      onChange={(e) => setMinArea(e.target.value)}
+                      placeholder="e.g., 800"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="maxArea" className="text-gray-300">Max Area (sq ft)</Label>
+                    <Input
+                      id="maxArea"
+                      type="number"
+                      value={maxArea}
+                      onChange={(e) => setMaxArea(e.target.value)}
+                      placeholder="e.g., 2000"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label className="text-gray-300">Amenities</Label>
+                  <ScrollArea className="rounded-md border bg-slate-700 border-slate-600 p-4 h-32">
+                    <div className="grid grid-cols-2 gap-2">
+                      {allAmenities.map((amenity) => (
+                        <div key={amenity} className="flex items-center space-x-2">
                           <Checkbox
-                            id={area}
-                            checked={preferredAreas.includes(area)}
-                            onCheckedChange={(checked) => handleAreaChange(area, checked as boolean)}
-                            className="h-4 w-4"
+                            id={amenity}
+                            checked={amenities.includes(amenity)}
+                            onCheckedChange={() => toggleAmenity(amenity)}
+                            className="border-slate-500 text-blue-500 focus:ring-blue-500"
                           />
-                          <Label htmlFor={area} className="text-sm text-gray-300 flex-1 cursor-pointer">{area}</Label>
+                          <Label htmlFor={amenity} className="text-sm text-gray-300">{amenity}</Label>
                         </div>
                       ))}
                     </div>
                   </ScrollArea>
                 </div>
 
-                <div className="space-y-3">
-                  <Label className="text-gray-300 text-sm md:text-base">Property Types</Label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {types.map((type) => (
-                      <div key={type} className="flex items-center space-x-2 p-2">
-                        <Checkbox
-                          id={type}
-                          checked={propertyTypes.includes(type)}
-                          onCheckedChange={(checked) => handleTypeChange(type, checked as boolean)}
-                          className="h-4 w-4"
-                        />
-                        <Label htmlFor={type} className="text-sm text-gray-300 flex-1 cursor-pointer">{type}</Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <Button 
-                  onClick={handleFindProperties}
-                  disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 h-12 text-base font-semibold"
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600"
+                  disabled={loading}
                 >
-                  {isLoading ? (
-                    <>
-                      <Brain className="mr-2 h-4 w-4 animate-spin" />
-                      AI Analyzing...
-                    </>
-                  ) : (
-                    <>
-                      <Brain className="mr-2 h-4 w-4" />
-                      Find My Perfect Property
-                    </>
-                  )}
+                  {loading ? 'Finding Matches...' : 'Find My Investment Match'}
                 </Button>
-              </CardContent>
-            </Card>
+              </form>
+            </CardContent>
+          </Card>
 
-            {/* Results */}
-            <div className="space-y-4 md:space-y-6">
-              {recommendations.length === 0 && !isLoading && (
-                <Card className="bg-slate-800/50 border-slate-700">
-                  <CardContent className="flex items-center justify-center h-48 md:h-64">
-                    <div className="text-center p-4">
-                      <Brain className="h-10 w-10 md:h-12 md:w-12 text-amber-400 mx-auto mb-4" />
-                      <h3 className="text-lg md:text-xl font-semibold text-white mb-2">Ready to Find Your Property?</h3>
-                      <p className="text-gray-400 text-sm md:text-base">Fill in your investment profile and let our AI do the magic!</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              {recommendations.map((property) => (
-                <Card key={property.id} className="bg-slate-800/50 border-slate-700 hover:border-amber-600/50 transition-all duration-300">
-                  <div className="relative">
-                    <img
-                      src={property.image}
-                      alt={property.title}
-                      className="w-full h-40 md:h-48 object-cover rounded-t-lg"
-                    />
-                    <Badge className="absolute top-3 left-3 bg-amber-600 text-black text-xs md:text-sm">
-                      {property.matchScore}% Match
-                    </Badge>
-                    <div className="absolute top-3 right-3 flex items-center bg-black/80 text-amber-400 px-2 py-1 rounded text-xs">
-                      <Star className="h-3 w-3 mr-1 fill-current" />
-                      AI Pick
-                    </div>
-                  </div>
-                  <CardContent className="p-4 md:p-6">
-                    <div className="space-y-3 md:space-y-4">
-                      <div>
-                        <h3 className="text-lg md:text-xl font-semibold text-white mb-1">{property.title}</h3>
-                        <div className="flex items-center text-gray-400 mb-2">
-                          <MapPin className="h-4 w-4 mr-1" />
-                          <span className="text-sm md:text-base">{property.location}</span>
-                        </div>
-                        <p className="text-xs md:text-sm text-amber-400">{property.whyMatched}</p>
+          {/* AI Recommendations - Full Width */}
+          {recommendations.length > 0 && (
+            <div className="space-y-6">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-white mb-2">🎯 AI-Matched Properties</h3>
+                <p className="text-gray-400">Based on your investment criteria</p>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {recommendations.map((property, index) => (
+                  <Card key={index} className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-600/30 hover:border-blue-500/50 transition-all duration-300">
+                    <CardHeader className="pb-3">
+                      <div className="flex justify-between items-start">
+                        <CardTitle className="text-white text-lg">{property.name}</CardTitle>
+                        <Badge className="bg-green-600/20 text-green-400 border-green-600/30">
+                          {property.matchScore}% Match
+                        </Badge>
                       </div>
-
-                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                        <div>
-                          <div className="text-xl md:text-2xl font-bold text-amber-400">
-                            AED {property.price.toLocaleString()}
-                          </div>
-                          <div className="text-xs md:text-sm text-gray-400">
-                            Monthly: AED {property.monthlyRent.toLocaleString()}
-                          </div>
+                      <p className="text-blue-400 flex items-center text-sm">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        {property.location}
+                      </p>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center p-3 bg-slate-800/50 rounded-lg">
+                          <div className="text-xl font-bold text-blue-400">AED {property.price.toLocaleString()}</div>
+                          <div className="text-gray-400 text-xs">Property Price</div>
                         </div>
-                        <div className="text-left sm:text-right">
-                          <div className="text-base md:text-lg font-semibold text-green-400">
-                            {property.roi}% ROI
-                          </div>
-                          <div className="text-xs md:text-sm text-gray-400">Annual Return</div>
+                        <div className="text-center p-3 bg-slate-800/50 rounded-lg">
+                          <div className="text-xl font-bold text-green-400">{property.expectedROI}%</div>
+                          <div className="text-gray-400 text-xs">Expected ROI</div>
                         </div>
                       </div>
-
-                      <div className="flex items-center justify-between text-gray-400 text-sm">
+                      
+                      <div className="flex justify-between items-center text-sm text-gray-300">
                         <div className="flex items-center">
                           <Bed className="h-4 w-4 mr-1" />
                           {property.bedrooms} BR
                         </div>
                         <div className="flex items-center">
                           <Bath className="h-4 w-4 mr-1" />
-                          {property.bathrooms} BA
+                          {property.bathrooms} Bath
                         </div>
                         <div className="flex items-center">
                           <Square className="h-4 w-4 mr-1" />
@@ -314,21 +291,76 @@ const AIInvestmentMatcher = () => {
                         </div>
                       </div>
 
-                      <div className="flex flex-col sm:flex-row gap-2">
-                        <Button className="flex-1 bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 h-10 text-sm font-semibold">
-                          View Details
-                        </Button>
-                        <Button variant="outline" className="flex-1 sm:flex-none border-amber-600 text-amber-400 hover:bg-amber-600 hover:text-black h-10 text-sm">
-                          Get Report
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
+                      <div className="pt-2">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-sm text-gray-400">Why it matches:</span>
+                          <div className="flex">
+                            {[...Array(Math.floor(property.matchScore / 20))].map((_, i) => (
+                              <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                            ))}
+                          </div>
+                        </div>
+                        <ul className="text-xs text-gray-300 space-y-1">
+                          {property.matchReasons.map((reason, i) => (
+                            <li key={i} className="flex items-center">
+                              <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2" />
+                              {reason}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white">
+                        View Details
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              <Card className="bg-slate-800/30 border-slate-700">
+                <CardContent className="p-6">
+                  <div className="text-center">
+                    <h4 className="text-lg font-semibold text-white mb-4">How Our AI Matching Works</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <Brain className="h-6 w-6 text-blue-400" />
+                        </div>
+                        <h5 className="text-white font-medium mb-2">Smart Analysis</h5>
+                        <p className="text-gray-400 text-sm">AI analyzes thousands of properties against your criteria</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <TrendingUp className="h-6 w-6 text-purple-400" />
+                        </div>
+                        <h5 className="text-white font-medium mb-2">Market Insights</h5>
+                        <p className="text-gray-400 text-sm">Real-time market data and growth predictions</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <Star className="h-6 w-6 text-green-400" />
+                        </div>
+                        <h5 className="text-white font-medium mb-2">Perfect Match</h5>
+                        <p className="text-gray-400 text-sm">Scored recommendations tailored to your goals</p>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          </div>
+          )}
+
+          {/* Empty State */}
+          {recommendations.length === 0 && !loading && (
+            <Card className="bg-slate-800/30 border-slate-700 border-dashed">
+              <CardContent className="text-center py-16">
+                <Brain className="h-16 w-16 text-blue-400 mx-auto mb-4 opacity-50" />
+                <p className="text-gray-400 text-lg">Fill out your investment criteria to get AI-powered property recommendations</p>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </section>
