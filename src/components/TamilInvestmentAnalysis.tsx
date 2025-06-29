@@ -3,11 +3,7 @@ import { fetchGeminiAnswer } from "@/utils/geminiApi";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 
-const amenitiesList = [
-  "Swimming Pool", "Balcony", "Storage", "Gym",
-  "Garden", "Elevator", "Parking", "Maid's Room",
-  "Concierge", "Security", "Study Room", "Spa"
-];
+/* Removed amenitiesList and all amenities logic as amenities are no longer part of the form */
 
 const propertyTypes = [
   "Apartment", "Villa", "Townhouse", "Penthouse", "Duplex"
@@ -22,13 +18,7 @@ const TamilInvestmentAnalysis = () => {
     propertyType: "",
     location: "",
     bedrooms: "",
-    bathrooms: "",
-    area: "",
     price: "",
-    yearBuilt: "",
-    floorLevel: "",
-    parkingSpaces: "",
-    amenities: [] as string[],
   });
   const [loading, setLoading] = useState(false); // loading state
   const [phoneError, setPhoneError] = useState("");
@@ -51,14 +41,7 @@ const TamilInvestmentAnalysis = () => {
     }
   };
 
-  const handleAmenity = (amenity: string) => {
-    setForm(prev => ({
-      ...prev,
-      amenities: prev.amenities.includes(amenity)
-        ? prev.amenities.filter(a => a !== amenity)
-        : [...prev.amenities, amenity]
-    }));
-  };
+  // Removed handleAmenity and amenities logic as amenities are no longer part of the form
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,211 +88,226 @@ Phone: ${form.phone}
 Property Type: ${form.propertyType}
 Location: ${form.location}
 Bedrooms: ${form.bedrooms}
-Bathrooms: ${form.bathrooms}
-Area: ${form.area} sq ft
 Price: AED ${form.price}
-Year Built: ${form.yearBuilt}
-Floor Level: ${form.floorLevel}
-Parking Spaces: ${form.parkingSpaces}
-Amenities: ${form.amenities.join(", ")}
 
 --- MARKET DATA ---
 Capital Appreciation: Use this based on location:
-- Jumeirah Village Circle: 13%
+- Jumeirah Village Circle (JVC): 13%
 - Dubai Marina: 11%
 - Business Bay: 8%
 - Downtown Dubai: 8%
-- Jumeirah Lake Towers: 7%
+- Jumeirah Lake Towers (JLT): 7%
+- Palm Jumeirah: 10%
+- Arabian Ranches: 9%
+- Dubai Hills Estate: 10%
+- Al Barsha: 6%
+- Al Furjan: 8%
+- Jumeirah Beach Residence (JBR): 10%
+- DAMAC Hills: 8%
+- Dubai Sports City: 7%
+- Dubai Silicon Oasis: 6%
+- Meydan: 8%
+- Mirdif: 6%
+- International City: 7%
+- The Greens: 7%
+- The Views: 7%
+- Arjan: 8%
+- Dubai Creek Harbour: 10%
+- Town Square: 7%
+- Bluewaters Island: 10%
+- Dubai South: 9%
+- Jumeirah Golf Estates: 9%
+- Discovery Gardens: 7%
+- Motor City: 8%
+- IMPZ (Production City): 9%
+- The Springs: 8%
+- Al Quoz: 6%
+- Al Khail Heights: 7%
 
 Rental Yield Data (avg annual rent and monthly rent by bedroom):
 
 Downtown Dubai:
-- Studio: Annual AED 1,039,198, Monthly AED 86,600
-- 1BR: Annual AED 1,910,998, Monthly AED 159,250
-- 2BR: Annual AED 2,927,997, Monthly AED 244,000
-- 3BR: Annual AED 4,639,727, Monthly AED 386,644
-- 4BR: Annual AED 16,021,799, Monthly AED 1,335,150
+- Studio: Annual AED 80,569, Monthly AED 6,714
+- 1BR: Annual AED 120,039, Monthly AED 10,003
+- 2BR: Annual AED 190,716, Monthly AED 15,893
+- 3BR: Annual AED 275,000, Monthly AED 22,917
+- 4BR: Annual AED 450,000, Monthly AED 37,500
 
 Dubai Marina:
-- Studio: Annual AED 882,600, Monthly AED 73,550
-- 1BR: Annual AED 1,285,199, Monthly AED 107,100
-- 2BR: Annual AED 2,018,938, Monthly AED 168,245
-- 3BR: Annual AED 3,106,199, Monthly AED 258,850
-- 4BR: Annual AED 5,950,200, Monthly AED 495,850
+- Studio: Annual AED 69,716, Monthly AED 5,810
+- 1BR: Annual AED 95,420, Monthly AED 7,952
+- 2BR: Annual AED 141,739, Monthly AED 11,812
+- 3BR: Annual AED 210,000, Monthly AED 17,500
+- 4BR: Annual AED 337,000, Monthly AED 28,083
 
 Business Bay:
-- Studio: Annual AED 963,538, Monthly AED 80,295
-- 1BR: Annual AED 1,301,999, Monthly AED 108,500
-- 2BR: Annual AED 1,872,599, Monthly AED 156,050
-- 3BR: Annual AED 2,564,933, Monthly AED 213,744
-- 4BR: Annual AED 5,494,999, Monthly AED 457,917
+- Studio: Annual AED 68,086, Monthly AED 5,674
+- 1BR: Annual AED 91,901, Monthly AED 7,658
+- 2BR: Annual AED 129,856, Monthly AED 10,821
+- 3BR: Annual AED 190,000, Monthly AED 15,833
+- 4BR: Annual AED 290,000, Monthly AED 24,167
+
+Jumeirah Lake Towers (JLT):
+- Studio: Annual AED 57,726, Monthly AED 4,811
+- 1BR: Annual AED 81,965, Monthly AED 6,830
+- 2BR: Annual AED 119,488, Monthly AED 9,957
+- 3BR: Annual AED 175,000, Monthly AED 14,583
+- 4BR: Annual AED 275,000, Monthly AED 22,917
 
 Palm Jumeirah:
-- Studio: Annual AED 1,380,599, Monthly AED 115,050
-- 1BR: Annual AED 2,255,998, Monthly AED 188,000
-- 2BR: Annual AED 4,577,400, Monthly AED 381,450
-- 3BR: Annual AED 4,547,969, Monthly AED 378,997
-- 4BR: Annual AED 22,120,000, Monthly AED 1,843,333
+- Studio: Annual AED 104,908, Monthly AED 8,742
+- 1BR: Annual AED 153,374, Monthly AED 12,781
+- 2BR: Annual AED 233,420, Monthly AED 19,452
+- 3BR: Annual AED 320,000, Monthly AED 26,667
+- 4BR: Annual AED 550,000, Monthly AED 45,833
 
-Arabian Ranches:
-- Studio: Annual AED 1,908,000, Monthly AED 159,000
-- 1BR: Annual AED 1,908,000, Monthly AED 159,000
-- 2BR: Annual AED 1,908,000, Monthly AED 159,000
-- 3BR: Annual AED 1,908,000, Monthly AED 159,000
-- 4BR: Annual AED 1,908,000, Monthly AED 159,000
+Jumeirah Beach Residence (JBR):
+- Studio: Annual AED 69,716, Monthly AED 5,810
+- 1BR: Annual AED 95,000, Monthly AED 7,917
+- 2BR: Annual AED 140,000, Monthly AED 11,667
+- 3BR: Annual AED 190,000, Monthly AED 15,833
+- 4BR: Annual AED 300,000, Monthly AED 25,000
 
 Dubai Hills Estate:
-- Studio: Annual AED 959,940, Monthly AED 79,995
-- 1BR: Annual AED 1,225,200, Monthly AED 102,100
-- 2BR: Annual AED 1,961,999, Monthly AED 163,500
-- 3BR: Annual AED 3,599,999, Monthly AED 300,000
-- 4BR: Annual AED 1,012,536, Monthly AED 84,378
-
-Al Barsha:
-- Studio: Annual AED 658,500, Monthly AED 54,875
-- 1BR: Annual AED 896,400, Monthly AED 74,700
-- 2BR: Annual AED 1,120,794, Monthly AED 93,400
-- 3BR: Annual AED 1,691,700, Monthly AED 140,975
-- 4BR: Annual AED 770,398, Monthly AED 64,200
-
-Al Furjan:
-- Studio: Annual AED 604,199, Monthly AED 50,350
-- 1BR: Annual AED 1,085,338, Monthly AED 90,445
-- 2BR: Annual AED 1,386,592, Monthly AED 115,549
-- 3BR: Annual AED 1,856,698, Monthly AED 154,725
-- 4BR: Annual AED 1,031,245, Monthly AED 85,937
-
-DAMAC Hills:
-- Studio: Annual AED 622,763, Monthly AED 51,897
-- 1BR: Annual AED 923,345, Monthly AED 76,945
-- 2BR: Annual AED 1,635,748, Monthly AED 136,312
-- 3BR: Annual AED 2,379,998, Monthly AED 198,333
-- 4BR: Annual AED 895,499, Monthly AED 74,625
-
-Dubai Sports City:
-- Studio: Annual AED 559,797, Monthly AED 46,650
-- 1BR: Annual AED 814,796, Monthly AED 67,900
-- 2BR: Annual AED 1,102,798, Monthly AED 91,900
-- 3BR: Annual AED 1,481,247, Monthly AED 123,437
-- 4BR: Annual AED 793,498, Monthly AED 66,125
-
-Dubai Silicon Oasis:
-- Studio: Annual AED 575,400, Monthly AED 47,950
-- 1BR: Annual AED 737,999, Monthly AED 61,500
-- 2BR: Annual AED 1,110,000, Monthly AED 92,500
-- 3BR: Annual AED 1,607,998, Monthly AED 134,000
-- 4BR: Annual AED 703,198, Monthly AED 58,600
-
-Mirdif:
-- Studio: Annual AED 697,500, Monthly AED 58,125
-- 1BR: Annual AED 1,028,486, Monthly AED 85,707
-- 2BR: Annual AED 1,446,000, Monthly AED 120,500
-- 3BR: Annual AED 1,969,846, Monthly AED 164,154
-- 4BR: Annual AED 2,714,998, Monthly AED 226,250
-
-International City:
-- Studio: Annual AED 457,799, Monthly AED 38,150
-- 1BR: Annual AED 695,398, Monthly AED 57,950
-- 2BR: Annual AED 962,998, Monthly AED 80,250
-- 3BR: Annual AED 1,320,000, Monthly AED 110,000
-- 4BR: Annual AED 506,400, Monthly AED 42,200
-
-The Greens:
-- Studio: Annual AED 866,695, Monthly AED 72,225
-- 1BR: Annual AED 1,223,400, Monthly AED 101,950
-- 2BR: Annual AED 1,807,199, Monthly AED 150,600
-- 3BR: Annual AED 2,676,000, Monthly AED 223,000
-- 4BR: Annual AED 1,256,400, Monthly AED 104,700
-
-The Views:
-- Studio: Annual AED 921,540, Monthly AED 76,795
-- 1BR: Annual AED 1,318,500, Monthly AED 109,875
-- 2BR: Annual AED 2,103,299, Monthly AED 175,275
-- 3BR: Annual AED 3,179,999, Monthly AED 265,000
-- 4BR: Annual AED 1,587,600, Monthly AED 132,300
-
-Arjan:
-- Studio: Annual AED 635,399, Monthly AED 52,950
-- 1BR: Annual AED 862,799, Monthly AED 71,900
-- 2BR: Annual AED 1,285,194, Monthly AED 107,100
-- 3BR: Annual AED 1,862,998, Monthly AED 155,250
-- 4BR: Annual AED 901,193, Monthly AED 75,099
+- Studio: Annual AED 56,819, Monthly AED 4,735
+- 1BR: Annual AED 91,899, Monthly AED 7,658
+- 2BR: Annual AED 146,361, Monthly AED 12,197
+- 3BR: Annual AED 225,000, Monthly AED 18,750
+- 4BR: Annual AED 325,000, Monthly AED 27,083
 
 Dubai Creek Harbour:
-- Studio: Annual AED 1,440,000, Monthly AED 120,000
-- 1BR: Annual AED 1,414,139, Monthly AED 117,845
-- 2BR: Annual AED 2,099,872, Monthly AED 174,989
-- 3BR: Annual AED 3,197,999, Monthly AED 266,500
-- 4BR: Annual AED 6,600,000, Monthly AED 550,000
+- 1BR: Annual AED 95,966, Monthly AED 7,997
+- 2BR: Annual AED 147,812, Monthly AED 12,318
+- 3BR: Annual AED 200,000, Monthly AED 16,667
+- 4BR: Annual AED 320,000, Monthly AED 26,667
+
+Jumeirah Village Circle (JVC):
+- Studio: Annual AED 47,562, Monthly AED 3,963
+- 1BR: Annual AED 67,568, Monthly AED 5,631
+- 2BR: Annual AED 95,807, Monthly AED 7,984
+- 3BR: Annual AED 145,000, Monthly AED 12,083
+- 4BR: Annual AED 212,500, Monthly AED 17,708
+
+Al Furjan:
+- Studio: Annual AED 75,000, Monthly AED 6,250
+- 1BR: Annual AED 75,000, Monthly AED 6,250
+- 2BR: Annual AED 75,000, Monthly AED 6,250
+- 4BR: Annual AED 270,000, Monthly AED 22,500
+
+Arabian Ranches:
+- 3BR: Annual AED 210,000, Monthly AED 17,500
+- 4BR: Annual AED 295,000, Monthly AED 24,583
+
+Al Barsha:
+- Studio: Annual AED 55,000, Monthly AED 4,583
+- 1BR: Annual AED 80,000, Monthly AED 6,667
+- 2BR: Annual AED 120,000, Monthly AED 10,000
+- 4BR: Annual AED 255,000, Monthly AED 21,250
+
+DAMAC Hills:
+- 4BR: Annual AED 230,000, Monthly AED 19,167
+
+Dubai Sports City:
+- Studio: Annual AED 39,692, Monthly AED 3,308
+- 1BR: Annual AED 53,717, Monthly AED 4,476
+- 2BR: Annual AED 76,386, Monthly AED 6,365
+- 3BR: Annual AED 110,000, Monthly AED 9,167
+- 4BR: Annual AED 160,000, Monthly AED 13,333
+
+Dubai Silicon Oasis:
+- Studio: Annual AED 55,000, Monthly AED 4,583
+- 1BR: Annual AED 55,000, Monthly AED 4,583
+- 2BR: Annual AED 85,000, Monthly AED 7,083
+
+Meydan:
+- 2BR: Annual AED 100,000, Monthly AED 8,333
+- 4BR: Annual AED 250,000, Monthly AED 20,833
+
+Mirdif:
+- Studio: Annual AED 55,000, Monthly AED 4,583
+- 1BR: Annual AED 55,000, Monthly AED 4,583
+- 2BR: Annual AED 55,000, Monthly AED 4,583
+- 4BR: Annual AED 250,000, Monthly AED 20,833
+
+International City:
+- Studio: Annual AED 30,000, Monthly AED 2,500
+- 1BR: Annual AED 40,000, Monthly AED 3,333
+- 2BR: Annual AED 65,000, Monthly AED 5,417
+
+The Greens:
+- 1BR: Annual AED 90,000, Monthly AED 7,500
+- 2BR: Annual AED 140,000, Monthly AED 11,667
+- 4BR: Annual AED 250,000, Monthly AED 20,833
+
+The Views:
+- 1BR: Annual AED 90,000, Monthly AED 7,500
+- 2BR: Annual AED 140,000, Monthly AED 11,667
+- 4BR: Annual AED 250,000, Monthly AED 20,833
+
+Arjan:
+- Studio: Annual AED 55,000, Monthly AED 4,583
+- 1BR: Annual AED 55,000, Monthly AED 4,583
+- 2BR: Annual AED 100,000, Monthly AED 8,333
+- 4BR: Annual AED 250,000, Monthly AED 20,833
 
 Town Square:
-- Studio: Annual AED 586,199, Monthly AED 48,850
-- 1BR: Annual AED 760,799, Monthly AED 63,400
-- 2BR: Annual AED 1,116,600, Monthly AED 93,050
-- 3BR: Annual AED 1,535,992, Monthly AED 127,999
-- 4BR: Annual AED 898,588, Monthly AED 74,882
+- Studio: Annual AED 42,500, Monthly AED 3,542
+- 1BR: Annual AED 65,000, Monthly AED 5,417
+- 2BR: Annual AED 100,000, Monthly AED 8,333
+- 4BR: Annual AED 240,000, Monthly AED 20,000
 
 Bluewaters Island:
-- Studio: Annual AED 6,636,000, Monthly AED 553,000
-- 1BR: Annual AED 3,519,898, Monthly AED 293,325
-- 2BR: Annual AED 5,143,200, Monthly AED 428,600
-- 3BR: Annual AED 7,152,000, Monthly AED 596,000
-- 4BR: Annual AED 14,233,333, Monthly AED 1,186,111
+- Studio: Annual AED 69,716, Monthly AED 5,810
+- 1BR: Annual AED 95,420, Monthly AED 7,952
+- 2BR: Annual AED 141,739, Monthly AED 11,812
+- 4BR: Annual AED 1,100,000, Monthly AED 91,667
 
 Dubai South:
-- Studio: Annual AED 515,939, Monthly AED 42,995
-- 1BR: Annual AED 713,388, Monthly AED 59,449
-- 2BR: Annual AED 1,005,534, Monthly AED 83,794
-- 3BR: Annual AED 1,408,798, Monthly AED 117,400
-- 4BR: Annual AED 848,968, Monthly AED 70,747
+- 1BR: Annual AED 30,000, Monthly AED 2,500
+- 4BR: Annual AED 240,000, Monthly AED 20,000
 
 Jumeirah Golf Estates:
-- Studio: Annual AED 1,864,800, Monthly AED 155,400
-- 1BR: Annual AED 1,308,900, Monthly AED 109,075
-- 2BR: Annual AED 1,592,400, Monthly AED 132,700
-- 3BR: Annual AED 2,632,843, Monthly AED 219,404
-- 4BR: Annual AED 2,161,332, Monthly AED 180,111
+- 4BR: Annual AED 350,000, Monthly AED 29,167
 
 Discovery Gardens:
-- Studio: Annual AED 635,399, Monthly AED 52,950
-- 1BR: Annual AED 850,799, Monthly AED 70,900
-- 2BR: Annual AED 1,269,600, Monthly AED 105,800
-- 3BR: Annual AED 638,400, Monthly AED 53,200
-- 4BR: Annual AED 638,400, Monthly AED 53,200
+- Studio: Annual AED 30,000, Monthly AED 2,500
+- 1BR: Annual AED 50,000, Monthly AED 4,167
+- 2BR: Annual AED 75,000, Monthly AED 6,250
+- 4BR: Annual AED 250,000, Monthly AED 20,833
 
 Motor City:
-- Studio: Annual AED 731,333, Monthly AED 60,944
-- 1BR: Annual AED 1,012,199, Monthly AED 84,350
-- 2BR: Annual AED 1,676,998, Monthly AED 139,750
-- 3BR: Annual AED 2,698,664, Monthly AED 224,889
-- 4BR: Annual AED 996,000, Monthly AED 83,000
+- Studio: Annual AED 31,500, Monthly AED 2,625
+- 1BR: Annual AED 50,000, Monthly AED 4,167
+- 2BR: Annual AED 80,000, Monthly AED 6,667
+- 4BR: Annual AED 250,000, Monthly AED 20,833
 
 IMPZ (Production City):
-- Studio: Annual AED 563,159, Monthly AED 46,930
-- 1BR: Annual AED 758,394, Monthly AED 63,200
-- 2BR: Annual AED 1,166,999, Monthly AED 97,250
-- 3BR: Annual AED 1,404,000, Monthly AED 117,000
-- 4BR: Annual AED 595,200, Monthly AED 49,600
+- Studio: Annual AED 31,500, Monthly AED 2,625
+- 1BR: Annual AED 50,000, Monthly AED 4,167
+- 2BR: Annual AED 80,000, Monthly AED 6,667
+- 4BR: Annual AED 250,000, Monthly AED 20,833
 
 The Springs:
-- Studio: Annual AED 1,114,795, Monthly AED 92,900
-- 1BR: Annual AED 1,114,795, Monthly AED 92,900
-- 2BR: Annual AED 1,114,795, Monthly AED 92,900
-- 3BR: Annual AED 1,114,795, Monthly AED 92,900
-- 4BR: Annual AED 1,114,795, Monthly AED 92,900
+- 4BR: Annual AED 300,000, Monthly AED 25,000
 
 Al Quoz:
-- Studio: Annual AED 633,467, Monthly AED 52,789
-- 1BR: Annual AED 829,200, Monthly AED 69,100
-- 2BR: Annual AED 2,402,216, Monthly AED 200,185
-- 3BR: Annual AED 1,483,743, Monthly AED 123,645
-- 4BR: Annual AED 633,600, Monthly AED 52,800
+- Studio: Annual AED 55,000, Monthly AED 4,583
+- 1BR: Annual AED 55,000, Monthly AED 4,583
+- 2BR: Annual AED 55,000, Monthly AED 4,583
+- 4BR: Annual AED 250,000, Monthly AED 20,833
+
+Al Khail Heights:
+- 2BR: Annual AED 140,000, Monthly AED 11,667
+- 4BR: Annual AED 275,000, Monthly AED 22,917
+
+
 
 --- INSTRUCTIONS ---
 - Use only the numbers from the dataset above.
 - Do NOT show any other information or explanation.
 - Format your answer with clear section headings as above.
 - Your answer must be in English only.
+- IMPORTANT: Never use values outside the dataset above. If a value is not present, do not estimate or invent it. Only use the provided numbers for all calculations and outputs.
 `;
     try {
       const answer = await fetchGeminiAnswer(prompt);
@@ -327,12 +325,7 @@ Al Quoz:
       <div className="min-h-screen bg-[#0f0f1b] py-10 px-2 flex flex-col items-center">
         {/* Loading overlay */}
         {loading && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
-            <div className="flex flex-col items-center">
-              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-yellow-400 border-solid mb-6"></div>
-              <div className="text-yellow-300 text-xl font-bold">Generating your analysis...</div>
-            </div>
-          </div>
+          <LoadingOverlay />
         )}
         <button
           onClick={() => {
@@ -453,7 +446,7 @@ Al Quoz:
                 name="price"
                 value={
                   form.price
-                    ? Number(form.price.replace(/,/g, "")).toLocaleString("en-IN")
+                    ? Number(form.price.replace(/,/g, "")).toLocaleString("en-US")
                     : ""
                 }
                 onChange={handleChange}
@@ -585,6 +578,40 @@ function SearchableLocationDropdown({
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function LoadingOverlay() {
+  const loadingMessages = [
+    "Generating your analysis...",
+    "Crunching Dubai property data...",
+    "Calculating rental yields...",
+    "Estimating capital appreciation...",
+    "Building your wealth forecast...",
+    "AI is working on your results...",
+    "Almost there, preparing insights...",
+    "Finding the best investment numbers...",
+    "Analyzing market trends...",
+    "Finalizing your personalized report..."
+  ];
+  const [msgIdx, setMsgIdx] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setMsgIdx((prev) => (prev + 1) % loadingMessages.length);
+    }, 1800);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+      <div className="flex flex-col items-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-yellow-400 border-solid mb-6"></div>
+        <div className="text-yellow-300 text-xl font-bold" style={{minHeight: 40}}>
+          {loadingMessages[msgIdx]}
+        </div>
+      </div>
     </div>
   );
 }

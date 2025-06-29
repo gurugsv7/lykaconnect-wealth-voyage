@@ -25,9 +25,46 @@ const TamilInvestmentResults = () => {
   // Slider state
   const [years, setYears] = useState(6);
 
-  // Mock data for chart and cards
-  const initialValue = 100000;
-  const appreciationRate = 0.08;
+  // Get user input price and location
+  const initialValue = form?.price ? parseFloat(form.price.toString().replace(/,/g, "")) : 100000;
+
+  // Capital appreciation rates per location
+  const appreciationRates: Record<string, number> = {
+    "Jumeirah Village Circle (JVC)": 0.13,
+    "Dubai Marina": 0.11,
+    "Business Bay": 0.08,
+    "Downtown Dubai": 0.08,
+    "Jumeirah Lake Towers (JLT)": 0.07,
+    "Palm Jumeirah": 0.10,
+    "Arabian Ranches": 0.09,
+    "Dubai Hills Estate": 0.10,
+    "Al Barsha": 0.06,
+    "Al Furjan": 0.08,
+    "Jumeirah Beach Residence (JBR)": 0.10,
+    "DAMAC Hills": 0.08,
+    "Dubai Sports City": 0.07,
+    "Dubai Silicon Oasis": 0.06,
+    "Meydan": 0.08,
+    "Mirdif": 0.06,
+    "International City": 0.07,
+    "The Greens": 0.07,
+    "The Views": 0.07,
+    "Arjan": 0.08,
+    "Dubai Creek Harbour": 0.10,
+    "Town Square": 0.07,
+    "Bluewaters Island": 0.10,
+    "Dubai South": 0.09,
+    "Jumeirah Golf Estates": 0.09,
+    "Discovery Gardens": 0.07,
+    "Motor City": 0.08,
+    "IMPZ (Production City)": 0.09,
+    "The Springs": 0.08,
+    "Al Quoz": 0.06,
+    "Al Khail Heights": 0.07,
+  };
+  // Use user's selected location for appreciation rate, fallback to 8%
+  const appreciationRate =
+    appreciationRates[form?.location?.trim()] ?? 0.08;
 
   // Extract Annual Rent from aiResult
   let annualRent = 30000; // fallback default
@@ -46,7 +83,7 @@ const TamilInvestmentResults = () => {
   // Always show 10 years on the X axis
   const allWealthData = Array.from({ length: 10 }, (_, i) => ({
     year: i + 1,
-    value: Math.round(initialValue * Math.pow(1 + appreciationRate, i)),
+    value: Math.round(initialValue * Math.pow(1 + appreciationRate, i + 1)),
   }));
   // Data for the animated yellow line (up to selected year)
   const activeWealthData = allWealthData.slice(0, years);
@@ -356,9 +393,9 @@ const TamilInvestmentResults = () => {
             <div className="text-[#FFD300] text-lg font-bold px-6 pt-6 pb-2">Capital Appreciation</div>
             <div className="px-6 pb-6 pt-2 text-base text-[#fff] flex flex-col gap-2">
               <ul className="list-disc list-inside text-[#fffbe6] space-y-1">
-                <li>Appreciation Rate: <span className="font-semibold text-[#FFD300]">8% / year</span></li>
-                <li>Value in {years} yrs: <span className="font-semibold text-[#FFD300]">AED {Math.round(appreciatedValue).toLocaleString()}</span></li>
-                <li>Total Gain: <span className="font-semibold text-[#FFD300]">AED {Math.round(totalGain).toLocaleString()}</span></li>
+                <li>Appreciation Rate: <span className="font-semibold text-[#FFD300]">{(appreciationRate * 100).toFixed(2)}% / year</span></li>
+                <li>Value in {years} yrs: <span className="font-semibold text-[#FFD300]">AED {allWealthData[years-1]?.value?.toLocaleString()}</span></li>
+                <li>Total Gain: <span className="font-semibold text-[#FFD300]">AED {(allWealthData[years-1]?.value - initialValue).toLocaleString()}</span></li>
               </ul>
             </div>
           </div>
