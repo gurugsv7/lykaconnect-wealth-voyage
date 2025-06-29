@@ -98,7 +98,24 @@ const AIFeatures = () => {
 
     let scrollHandler: any;
     if (isMobile && showAll) {
-      scrollHandler = () => setShowAll(false);
+      scrollHandler = () => {
+        // Find the next section after #tools
+        const toolsSection = document.getElementById("tools");
+        if (!toolsSection) return;
+        // Assume the next sibling section is the next section
+        let nextSection = toolsSection.nextElementSibling as HTMLElement | null;
+        // If not found, fallback to a section with a known id (customize as needed)
+        if (!nextSection) {
+          nextSection = document.getElementById("blog") as HTMLElement | null;
+        }
+        if (nextSection) {
+          const rect = nextSection.getBoundingClientRect();
+          // If the top of the next section is at or above the top of the viewport
+          if (rect.top <= 0) {
+            setShowAll(false);
+          }
+        }
+      };
       window.addEventListener("scroll", scrollHandler, { passive: true });
     }
     return () => {

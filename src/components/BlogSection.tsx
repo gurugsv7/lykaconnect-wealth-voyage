@@ -48,7 +48,22 @@ const BlogSection = () => {
 
     let scrollHandler: any;
     if (isMobile && showMore) {
-      scrollHandler = () => setShowMore(false);
+      scrollHandler = () => {
+        // Find the next section after #blog
+        const blogSection = document.getElementById("blog");
+        if (!blogSection) return;
+        let nextSection = blogSection.nextElementSibling as HTMLElement | null;
+        // Fallback: try to find a known section id (customize as needed)
+        if (!nextSection) {
+          nextSection = document.getElementById("footer") as HTMLElement | null;
+        }
+        if (nextSection) {
+          const rect = nextSection.getBoundingClientRect();
+          if (rect.top <= 0) {
+            setShowMore(false);
+          }
+        }
+      };
       window.addEventListener("scroll", scrollHandler, { passive: true });
     }
     return () => {
