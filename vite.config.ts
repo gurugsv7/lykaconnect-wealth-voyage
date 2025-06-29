@@ -21,3 +21,9 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
+
+// To fix favicon.ico 404:
+// 1. Place your favicon.ico file in the "public" folder at:
+//    c:\Users\gurug\OneDrive\Desktop\web apps\lykaconnect-wealth-voyage\public\favicon.ico
+// 2. No code change is needed if favicon.ico is present in the public folder.
+// Vite will automatically serve /favicon.ico from /public.
