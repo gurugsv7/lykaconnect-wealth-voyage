@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -43,7 +45,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               className="bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 text-lg px-8 py-4"
-              onClick={() => window.location.href = '/property-listings'}
+              onClick={() => navigate('/properties')}
             >
               Search Listings
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -52,7 +54,7 @@ const HeroSection = () => {
               size="lg"
               variant="outline"
               className="border-amber-600 text-amber-400 hover:bg-amber-600 hover:text-black text-lg px-8 py-4"
-              onClick={() => window.location.href = '/tamil-investment-analysis'}
+              onClick={() => navigate('/tamil-investment-analysis')}
             >
               <ArrowRight className="mr-2 h-5 w-5" />
               Millionaire Countdown
