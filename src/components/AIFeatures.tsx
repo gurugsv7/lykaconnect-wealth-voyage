@@ -67,22 +67,7 @@ const features = [
     ],
     button: "Find Properties",
   },
-  {
-    icon: (
-      <div className="w-8 h-8 rounded-md bg-yellow-400 flex items-center justify-center">
-        <span className="text-black text-2xl font-bold">🟡</span>
-      </div>
-    ),
-    title: "Premium Property Listings",
-    desc: "Curated selection of luxury properties across Dubai’s prime locations. From Marina apartments to Emirates Hills villas with detailed investment analysis.",
-    bullets: [
-      "Luxury apartments & villas",
-      "Prime Dubai locations",
-      "Comprehensive property details",
-      "Investment potential ratings",
-    ],
-    button: "Browse Properties",
-  },
+  // Premium Property Listings hidden as per user request
 ];
 
 import { useState, useEffect } from "react";
