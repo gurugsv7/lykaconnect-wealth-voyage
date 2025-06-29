@@ -5,7 +5,18 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, User, ArrowRight, TrendingUp } from "lucide-react";
 
 const BlogSection = () => {
+  // Reorder so the third blog is first
   const blogPosts = [
+    {
+      id: 3,
+      title: "AI vs Traditional: Property Investment Analysis Comparison",
+      excerpt: "How AI-powered analysis outperforms traditional methods in property selection...",
+      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop",
+      category: "Technology",
+      author: "Tech Team",
+      date: "Nov 20, 2025",
+      readTime: "6 min read"
+    },
     {
       id: 1,
       title: "Dubai Real Estate Market Outlook 2024: AI Predictions",
@@ -25,16 +36,6 @@ const BlogSection = () => {
       author: "Investment Advisory",
       date: "Nov 28, 2025",
       readTime: "7 min read"
-    },
-    {
-      id: 3,
-      title: "AI vs Traditional: Property Investment Analysis Comparison",
-      excerpt: "How AI-powered analysis outperforms traditional methods in property selection...",
-      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop",
-      category: "Technology",
-      author: "Tech Team",
-      date: "Nov 20, 2025",
-      readTime: "6 min read"
     }
   ];
 
@@ -74,7 +75,7 @@ const BlogSection = () => {
 
   let visiblePosts = blogPosts;
   if (isMobile && !showMore) {
-    visiblePosts = [blogPosts[2]];
+    visiblePosts = [blogPosts[0]];
   } else if (isMobile && showMore) {
     visiblePosts = blogPosts;
   }
