@@ -1,0 +1,839 @@
+{
+  "Downtown Dubai": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 1039198,
+      "avg_monthly_rent": 86600
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1910998,
+      "avg_monthly_rent": 159250
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 2927997,
+      "avg_monthly_rent": 244000
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 4639727,
+      "avg_monthly_rent": 386644
+    },
+    "4BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 16021799,
+      "avg_monthly_rent": 1335150
+    }
+  },
+  "Jumeirah Village Circle": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "1BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "2BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "3BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    }
+  },
+  "Dubai Marina": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 882600,
+      "avg_monthly_rent": 73550
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1285199,
+      "avg_monthly_rent": 107100
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 2018938,
+      "avg_monthly_rent": 168245
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 3106199,
+      "avg_monthly_rent": 258850
+    },
+    "4BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 5950200,
+      "avg_monthly_rent": 495850
+    }
+  },
+  "Business Bay": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 963538,
+      "avg_monthly_rent": 80295
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1301999,
+      "avg_monthly_rent": 108500
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1872599,
+      "avg_monthly_rent": 156050
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 2564933,
+      "avg_monthly_rent": 213744
+    },
+    "4BR": {
+      "sample_count": 12,
+      "avg_annual_rent": 5494999,
+      "avg_monthly_rent": 457917
+    }
+  },
+  "Jumeirah Lake Towers": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "1BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "2BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "3BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    }
+  },
+  "Palm Jumeirah": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 1380599,
+      "avg_monthly_rent": 115050
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 2255998,
+      "avg_monthly_rent": 188000
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 4577400,
+      "avg_monthly_rent": 381450
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 4547969,
+      "avg_monthly_rent": 378997
+    },
+    "4BR": {
+      "sample_count": 18,
+      "avg_annual_rent": 22120000,
+      "avg_monthly_rent": 1843333
+    }
+  },
+  "Arabian Ranches": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 1908000,
+      "avg_monthly_rent": 159000
+    },
+    "1BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1908000,
+      "avg_monthly_rent": 159000
+    },
+    "2BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1908000,
+      "avg_monthly_rent": 159000
+    },
+    "3BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1908000,
+      "avg_monthly_rent": 159000
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1908000,
+      "avg_monthly_rent": 159000
+    }
+  },
+  "Dubai Hills Estate": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 959940,
+      "avg_monthly_rent": 79995
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1225200,
+      "avg_monthly_rent": 102100
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1961999,
+      "avg_monthly_rent": 163500
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 3599999,
+      "avg_monthly_rent": 300000
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1012536,
+      "avg_monthly_rent": 84378
+    }
+  },
+  "Al Barsha": {
+    "Studio": {
+      "sample_count": 16,
+      "avg_annual_rent": 658500,
+      "avg_monthly_rent": 54875
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 896400,
+      "avg_monthly_rent": 74700
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1120794,
+      "avg_monthly_rent": 93400
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1691700,
+      "avg_monthly_rent": 140975
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 770398,
+      "avg_monthly_rent": 64200
+    }
+  },
+  "Al Furjan": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 604199,
+      "avg_monthly_rent": 50350
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1085338,
+      "avg_monthly_rent": 90445
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1386592,
+      "avg_monthly_rent": 115549
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1856698,
+      "avg_monthly_rent": 154725
+    },
+    "4BR": {
+      "sample_count": 16,
+      "avg_annual_rent": 1031245,
+      "avg_monthly_rent": 85937
+    }
+  },
+  "Jumeirah Beach Residence": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "1BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "2BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "3BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    }
+  },
+  "DAMAC Hills": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 622763,
+      "avg_monthly_rent": 51897
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 923345,
+      "avg_monthly_rent": 76945
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1635748,
+      "avg_monthly_rent": 136312
+    },
+    "3BR": {
+      "sample_count": 18,
+      "avg_annual_rent": 2379998,
+      "avg_monthly_rent": 198333
+    },
+    "4BR": {
+      "sample_count": 16,
+      "avg_annual_rent": 895499,
+      "avg_monthly_rent": 74625
+    }
+  },
+  "Dubai Sports City": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 559797,
+      "avg_monthly_rent": 46650
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 814796,
+      "avg_monthly_rent": 67900
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1102798,
+      "avg_monthly_rent": 91900
+    },
+    "3BR": {
+      "sample_count": 16,
+      "avg_annual_rent": 1481247,
+      "avg_monthly_rent": 123437
+    },
+    "4BR": {
+      "sample_count": 16,
+      "avg_annual_rent": 793498,
+      "avg_monthly_rent": 66125
+    }
+  },
+  "Dubai Silicon Oasis": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 575400,
+      "avg_monthly_rent": 47950
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 737999,
+      "avg_monthly_rent": 61500
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1110000,
+      "avg_monthly_rent": 92500
+    },
+    "3BR": {
+      "sample_count": 12,
+      "avg_annual_rent": 1607998,
+      "avg_monthly_rent": 134000
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 703198,
+      "avg_monthly_rent": 58600
+    }
+  },
+  "Meydan": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "1BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "2BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "3BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    }
+  },
+  "Mirdif": {
+    "Studio": {
+      "sample_count": 8,
+      "avg_annual_rent": 697500,
+      "avg_monthly_rent": 58125
+    },
+    "1BR": {
+      "sample_count": 14,
+      "avg_annual_rent": 1028486,
+      "avg_monthly_rent": 85707
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1446000,
+      "avg_monthly_rent": 120500
+    },
+    "3BR": {
+      "sample_count": 13,
+      "avg_annual_rent": 1969846,
+      "avg_monthly_rent": 164154
+    },
+    "4BR": {
+      "sample_count": 8,
+      "avg_annual_rent": 2714998,
+      "avg_monthly_rent": 226250
+    }
+  },
+  "International City": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 457799,
+      "avg_monthly_rent": 38150
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 695398,
+      "avg_monthly_rent": 57950
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 962998,
+      "avg_monthly_rent": 80250
+    },
+    "3BR": {
+      "sample_count": 12,
+      "avg_annual_rent": 1320000,
+      "avg_monthly_rent": 110000
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 506400,
+      "avg_monthly_rent": 42200
+    }
+  },
+  "The Greens": {
+    "Studio": {
+      "sample_count": 15,
+      "avg_annual_rent": 866695,
+      "avg_monthly_rent": 72225
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1223400,
+      "avg_monthly_rent": 101950
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1807199,
+      "avg_monthly_rent": 150600
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 2676000,
+      "avg_monthly_rent": 223000
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1256400,
+      "avg_monthly_rent": 104700
+    }
+  },
+  "The Views": {
+    "Studio": {
+      "sample_count": 10,
+      "avg_annual_rent": 921540,
+      "avg_monthly_rent": 76795
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1318500,
+      "avg_monthly_rent": 109875
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 2103299,
+      "avg_monthly_rent": 175275
+    },
+    "3BR": {
+      "sample_count": 11,
+      "avg_annual_rent": 3179999,
+      "avg_monthly_rent": 265000
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1587600,
+      "avg_monthly_rent": 132300
+    }
+  },
+  "Arjan": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 635399,
+      "avg_monthly_rent": 52950
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 862799,
+      "avg_monthly_rent": 71900
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1285194,
+      "avg_monthly_rent": 107100
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1862998,
+      "avg_monthly_rent": 155250
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 901193,
+      "avg_monthly_rent": 75099
+    }
+  },
+  "Dubai Creek Harbour": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 1440000,
+      "avg_monthly_rent": 120000
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1414139,
+      "avg_monthly_rent": 117845
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 2099872,
+      "avg_monthly_rent": 174989
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 3197999,
+      "avg_monthly_rent": 266500
+    },
+    "4BR": {
+      "sample_count": 7,
+      "avg_annual_rent": 6600000,
+      "avg_monthly_rent": 550000
+    }
+  },
+  "Town Square": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 586199,
+      "avg_monthly_rent": 48850
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 760799,
+      "avg_monthly_rent": 63400
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1116600,
+      "avg_monthly_rent": 93050
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1535992,
+      "avg_monthly_rent": 127999
+    },
+    "4BR": {
+      "sample_count": 17,
+      "avg_annual_rent": 898588,
+      "avg_monthly_rent": 74882
+    }
+  },
+  "Bluewaters Island": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 6636000,
+      "avg_monthly_rent": 553000
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 3519898,
+      "avg_monthly_rent": 293325
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 5143200,
+      "avg_monthly_rent": 428600
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 7152000,
+      "avg_monthly_rent": 596000
+    },
+    "4BR": {
+      "sample_count": 18,
+      "avg_annual_rent": 14233333,
+      "avg_monthly_rent": 1186111
+    }
+  },
+  "Dubai South": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 515939,
+      "avg_monthly_rent": 42995
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 713388,
+      "avg_monthly_rent": 59449
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1005534,
+      "avg_monthly_rent": 83794
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1408798,
+      "avg_monthly_rent": 117400
+    },
+    "4BR": {
+      "sample_count": 16,
+      "avg_annual_rent": 848968,
+      "avg_monthly_rent": 70747
+    }
+  },
+  "Jumeirah Golf Estates": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 1864800,
+      "avg_monthly_rent": 155400
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1308900,
+      "avg_monthly_rent": 109075
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1592400,
+      "avg_monthly_rent": 132700
+    },
+    "3BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 2632843,
+      "avg_monthly_rent": 219404
+    },
+    "4BR": {
+      "sample_count": 18,
+      "avg_annual_rent": 2161332,
+      "avg_monthly_rent": 180111
+    }
+  },
+  "Discovery Gardens": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 635399,
+      "avg_monthly_rent": 52950
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 850799,
+      "avg_monthly_rent": 70900
+    },
+    "2BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1269600,
+      "avg_monthly_rent": 105800
+    },
+    "3BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 638400,
+      "avg_monthly_rent": 53200
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 638400,
+      "avg_monthly_rent": 53200
+    }
+  },
+  "Motor City": {
+    "Studio": {
+      "sample_count": 9,
+      "avg_annual_rent": 731333,
+      "avg_monthly_rent": 60944
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1012199,
+      "avg_monthly_rent": 84350
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1676998,
+      "avg_monthly_rent": 139750
+    },
+    "3BR": {
+      "sample_count": 9,
+      "avg_annual_rent": 2698664,
+      "avg_monthly_rent": 224889
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 996000,
+      "avg_monthly_rent": 83000
+    }
+  },
+  "IMPZ": {
+    "Studio": {
+      "sample_count": 20,
+      "avg_annual_rent": 563159,
+      "avg_monthly_rent": 46930
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 758394,
+      "avg_monthly_rent": 63200
+    },
+    "2BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 1166999,
+      "avg_monthly_rent": 97250
+    },
+    "3BR": {
+      "sample_count": 6,
+      "avg_annual_rent": 1404000,
+      "avg_monthly_rent": 117000
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 595200,
+      "avg_monthly_rent": 49600
+    }
+  },
+  "The Springs": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 1114795,
+      "avg_monthly_rent": 92900
+    },
+    "1BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1114795,
+      "avg_monthly_rent": 92900
+    },
+    "2BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1114795,
+      "avg_monthly_rent": 92900
+    },
+    "3BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1114795,
+      "avg_monthly_rent": 92900
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 1114795,
+      "avg_monthly_rent": 92900
+    }
+  },
+  "Al Quoz": {
+    "Studio": {
+      "sample_count": 19,
+      "avg_annual_rent": 633467,
+      "avg_monthly_rent": 52789
+    },
+    "1BR": {
+      "sample_count": 20,
+      "avg_annual_rent": 829200,
+      "avg_monthly_rent": 69100
+    },
+    "2BR": {
+      "sample_count": 8,
+      "avg_annual_rent": 2402216,
+      "avg_monthly_rent": 200185
+    },
+    "3BR": {
+      "sample_count": 18,
+      "avg_annual_rent": 1483743,
+      "avg_monthly_rent": 123645
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 633600,
+      "avg_monthly_rent": 52800
+    }
+  },
+  "Al Khail Heights": {
+    "Studio": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "1BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "2BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "3BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    },
+    "4BR": {
+      "sample_count": 5,
+      "avg_annual_rent": 39734395,
+      "avg_monthly_rent": 3311200
+    }
+  }
+}

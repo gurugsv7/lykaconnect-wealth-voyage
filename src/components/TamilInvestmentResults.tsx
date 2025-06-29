@@ -133,12 +133,14 @@ const TamilInvestmentResults = () => {
         )}
 
         {/* Line Chart Section */}
-        <div className="bg-[#18192a] border-2 border-[#FFD700] rounded-2xl px-3 sm:px-8 py-4 sm:py-8 mb-4 shadow-lg mt-6">
-          <div className="text-lg sm:text-2xl font-bold text-[#FFD700] mb-4 sm:mb-6 text-center tracking-wide uppercase">Wealth Growth Over Time</div>
-          <div className="w-full flex justify-center items-center"
+        <div className="bg-[#18192a] border-2 border-[#FFD700] rounded-2xl px-2 py-4 mb-4 shadow-lg mt-6 max-w-full">
+          <div className="text-lg sm:text-2xl font-bold text-[#FFD700] mb-4 text-center tracking-wide uppercase">
+            Wealth Growth Over Time
+          </div>
+          <div className="w-full flex justify-center items-center px-1 sm:px-4"
             style={{
-              height: "min(250px, 60vw)",
-              maxHeight: 500,
+              height: "min(260px, 70vw)",
+              maxHeight: 340,
               minHeight: 180,
             }}
           >
@@ -146,28 +148,28 @@ const TamilInvestmentResults = () => {
               <LineChart
                 data={allWealthData}
                 margin={{
-                  top: 30,
-                  right: 30,
-                  left: 30,
-                  bottom: 30,
+                  top: 24,
+                  right: 16,
+                  left: 16,
+                  bottom: 24,
                 }}
               >
-                <CartesianGrid stroke="#FFD70055" strokeDasharray="6 6" />
+                <CartesianGrid stroke="#FFD70033" strokeDasharray="4 4" />
                 <XAxis
                   dataKey="year"
                   stroke={GOLD}
                   tick={{
-                    fill: "#fffbe6",
-                    fontWeight: 700,
-                    fontSize: window.innerWidth < 640 ? 12 : 16,
+                    fill: "#FFD700",
+                    fontWeight: 900,
+                    fontSize: 14,
                   }}
                   label={{
-                    value: "YEAR",
+                    value: "Years",
                     position: "insideBottom",
-                    fill: GOLD,
+                    fill: "#FFD700",
                     fontWeight: 900,
-                    fontSize: window.innerWidth < 640 ? 14 : 18,
-                    dy: 20,
+                    fontSize: 16,
+                    dy: 18,
                     textAnchor: "middle",
                   }}
                   domain={[1, 10]}
@@ -177,26 +179,26 @@ const TamilInvestmentResults = () => {
                   tickLine={false}
                   axisLine={{ stroke: GOLD }}
                   allowDataOverflow={false}
-                  padding={{ left: 10, right: 10 }}
+                  padding={{ left: 8, right: 8 }}
                   interval={0}
                   minTickGap={0}
                 />
                 <YAxis
                   stroke={GOLD}
                   tick={{
-                    fill: GOLD,
+                    fill: "#FFD700",
                     fontWeight: 900,
-                    fontSize: window.innerWidth < 640 ? 12 : 16,
+                    fontSize: 13,
                   }}
                   label={{
-                    value: "PROPERTY VALUE",
+                    value: "Property Value (AED)",
                     angle: -90,
                     position: "insideLeft",
-                    fill: GOLD,
+                    fill: "#FFD700",
                     fontWeight: 900,
-                    fontSize: window.innerWidth < 640 ? 14 : 18,
-                    dx: -30,
-                    dy: 30,
+                    fontSize: 15,
+                    dx: -24,
+                    dy: 24,
                     textAnchor: "middle",
                   }}
                   tickLine={false}
@@ -226,65 +228,58 @@ const TamilInvestmentResults = () => {
                     })
                   }
                   allowDataOverflow={false}
-                  padding={{ top: 20, bottom: 40 }}
+                  padding={{ top: 18, bottom: 32 }}
                 />
                 <Tooltip
-                  contentStyle={{
-                    background: "#18192a",
-                    borderColor: GOLD,
-                    borderRadius: 12,
-                    color: GOLD,
-                    boxShadow: "0 4px 24px #FFD70033",
+                  content={({ active, payload, label }) => {
+                    if (!active || !payload || !payload.length) return null;
+                    const year = payload[0].payload.year;
+                    const value = payload[0].payload.value;
+                    return (
+                      <div
+                        className="rounded-xl bg-[#18192a] border-2 border-[#FFD700] px-4 py-3 text-center shadow-lg"
+                        style={{
+                          minWidth: 120,
+                          color: "#FFD700",
+                          fontWeight: 900,
+                          fontSize: 18,
+                          zIndex: 50,
+                          margin: "0 auto",
+                        }}
+                      >
+                        <div style={{ fontSize: 16, fontWeight: 700 }}>
+                          Year {year}: AED {value.toLocaleString("en-IN")}
+                        </div>
+                      </div>
+                    );
                   }}
-                  labelStyle={{
-                    color: GOLD,
-                    fontWeight: 700,
-                    fontSize: window.innerWidth < 640 ? 12 : 16,
+                  wrapperStyle={{
+                    pointerEvents: "auto",
+                    left: "50%",
+                    transform: "translateX(-50%)",
                   }}
-                  itemStyle={{
-                    color: "#fffbe6",
-                    fontWeight: 700,
-                    fontSize: window.innerWidth < 640 ? 12 : 16,
-                  }}
-                  formatter={(value: number) => `AED ${value.toLocaleString()}`}
-                  cursor={{ stroke: GOLD, strokeWidth: 2, strokeDasharray: "4 4" }}
+                  cursor={{ stroke: GOLD, strokeWidth: 2, strokeDasharray: "3 5" }}
+                  isAnimationActive={true}
                 />
-                {years < 10 && (
-                  <Line
-                    type="natural"
-                    dataKey="value"
-                    data={allWealthData.slice(years - 1, 10)}
-                    stroke={FADED_LINE}
-                    strokeWidth={3}
-                    dot={false}
-                    isAnimationActive={false}
-                    strokeDasharray="6 6"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    style={{
-                      filter: "drop-shadow(0 0 8px #FFD70033)",
-                    }}
-                  />
-                )}
                 <Line
-                  type="natural"
+                  type="monotone"
                   dataKey="value"
-                  data={activeWealthData}
                   stroke={GOLD}
                   strokeWidth={3}
                   dot={false}
                   isAnimationActive={true}
-                  animationDuration={600}
-                  activeDot={false}
+                  animationDuration={700}
+                  strokeDasharray="5 6"
                   strokeLinejoin="round"
                   strokeLinecap="round"
                   style={{
-                    filter: "drop-shadow(0 0 12px #FFD70088)",
+                    filter: "drop-shadow(0 0 10px #FFD70088)",
                   }}
                 />
+                {/* Highlight active year dot */}
                 {years > 0 && (
                   <Line
-                    type="natural"
+                    type="monotone"
                     dataKey="value"
                     data={activeWealthData}
                     stroke="none"
@@ -294,15 +289,15 @@ const TamilInvestmentResults = () => {
                           <circle
                             cx={props.cx}
                             cy={props.cy}
-                            r={8}
+                            r={9}
                             fill="#FFD700"
                             filter="drop-shadow(0 0 12px #FFD70088)"
                           />
                           <text
                             x={props.cx}
-                            y={props.cy - 12}
+                            y={props.cy - 16}
                             textAnchor="middle"
-                            fontSize={window.innerWidth < 640 ? 12 : 18}
+                            fontSize={13}
                             fontWeight="bold"
                             fill="#FFD700"
                             stroke="#18192a"
@@ -318,10 +313,10 @@ const TamilInvestmentResults = () => {
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <div className="flex flex-col items-center mt-2 sm:mt-4">
-            <label htmlFor="yearRange" className="text-xs sm:text-lg font-semibold mb-1 flex items-center text-white">
-              <span>Years:</span>
-              <span className="ml-2 text-[#FFD300] text-base sm:text-xl font-bold">{years}</span>
+          <div className="flex flex-col items-center mt-4 px-2">
+            <label htmlFor="yearRange" className="text-sm font-semibold mb-2 flex items-center text-white">
+              <span>Year:</span>
+              <span className="ml-2 text-[#FFD700] text-lg font-bold">{years}</span>
             </label>
             <input
               id="yearRange"
@@ -330,10 +325,11 @@ const TamilInvestmentResults = () => {
               max={10}
               value={years}
               onChange={e => setYears(Number(e.target.value))}
-              className="w-full accent-[#FFD300] h-2 rounded-lg outline-none"
+              className="w-full accent-[#FFD700] h-3 rounded-lg outline-none"
               style={{
-                maxWidth: 400,
-                background: "linear-gradient(90deg, #FFD300 60%, #fffbe6 100%)",
+                maxWidth: 420,
+                background: "linear-gradient(90deg, #FFD700 60%, #fffbe6 100%)",
+                touchAction: "pan-x",
               }}
             />
           </div>

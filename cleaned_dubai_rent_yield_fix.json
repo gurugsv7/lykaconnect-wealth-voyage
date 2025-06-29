@@ -1,0 +1,137 @@
+{
+  "Jumeirah Village Circle": {
+    "Studio": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "1BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "2BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "3BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "4BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    }
+  },
+  "Jumeirah Lake Towers": {
+    "Studio": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "1BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "2BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "3BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "4BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    }
+  },
+  "Jumeirah Beach Residence": {
+    "Studio": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "1BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "2BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "3BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "4BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    }
+  },
+  "Meydan": {
+    "Studio": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "1BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "2BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "3BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "4BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    }
+  },
+  "Al Khail Heights": {
+    "Studio": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "1BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "2BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "3BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    },
+    "4BR": {
+      "sample_count": 0,
+      "avg_monthly_rent": 0,
+      "avg_annual_rent": 0
+    }
+  }
+}
