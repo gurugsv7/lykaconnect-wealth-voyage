@@ -260,7 +260,7 @@ const TamilInvestmentResults = () => {
                   }
                   tickFormatter={val =>
                     "AED " +
-                    val.toLocaleString("en-IN", {
+                    val.toLocaleString("en-US", {
                       maximumFractionDigits: 0,
                     })
                   }
@@ -285,7 +285,7 @@ const TamilInvestmentResults = () => {
                         }}
                       >
                         <div style={{ fontSize: 16, fontWeight: 700 }}>
-                          Year {year}: AED {value.toLocaleString("en-IN")}
+                          Year {year}: AED {value.toLocaleString("en-US")}
                         </div>
                       </div>
                     );
@@ -340,7 +340,7 @@ const TamilInvestmentResults = () => {
                             stroke="#18192a"
                             strokeWidth="0.5"
                           >
-                            AED {props.payload.value.toLocaleString()}
+                            AED {props.payload.value.toLocaleString("en-US")}
                           </text>
                         </g>
                       ) : null

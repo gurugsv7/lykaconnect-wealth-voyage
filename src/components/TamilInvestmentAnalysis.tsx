@@ -600,7 +600,7 @@ function LoadingOverlay() {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setMsgIdx((prev) => (prev + 1) % loadingMessages.length);
-    }, 1800);
+    }, 3500); // Slower: 3.5 seconds per message
     return () => clearInterval(interval);
   }, []);
 
