@@ -9,4 +9,3 @@
     "deploy": "gh-pages -d build"
   }
 }
-</write_to_file>
