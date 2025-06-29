@@ -25,7 +25,7 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter basename="/lykaconnect-wealth-voyage">
+    <BrowserRouter basename="/">
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Index />} />
