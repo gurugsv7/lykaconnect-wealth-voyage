@@ -55,7 +55,7 @@ const HeroSection = () => {
               onClick={() => window.location.href = '/tamil-investment-analysis'}
             >
               <ArrowRight className="mr-2 h-5 w-5" />
-              Find Out When You'll Be a Millionaire
+              Millionaire Countdown
             </Button>
           </div>
 
