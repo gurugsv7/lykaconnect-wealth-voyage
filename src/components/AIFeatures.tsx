@@ -132,11 +132,11 @@ const AIFeatures = () => {
             Complete Investment Intelligence Platform
           </h2>
           <p className="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto">
-            Five powerful AI-driven tools to maximize your Dubai real estate
+           Two powerful AI-driven tools to maximize your Dubai real estate
             investment success
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6">
+        <div className={`grid ${visibleFeatures.length === 2 ? "grid-cols-1 sm:grid-cols-2 justify-center" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"} gap-6 md:gap-6 justify-items-center`}>
           {visibleFeatures.map((f, i) => (
             <div
               key={i}
