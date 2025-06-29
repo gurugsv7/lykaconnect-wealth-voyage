@@ -37,7 +37,7 @@ const ClientDashboard = () => {
         <div className="max-w-7xl mx-auto">
           {/* Portfolio Overview */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm text-gray-400">Total Portfolio Value</CardTitle>
               </CardHeader>
@@ -52,7 +52,7 @@ const ClientDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm text-gray-400">Monthly Income</CardTitle>
               </CardHeader>
@@ -66,7 +66,7 @@ const ClientDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm text-gray-400">Average ROI</CardTitle>
               </CardHeader>
@@ -80,7 +80,7 @@ const ClientDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm text-gray-400">Millionaire Progress</CardTitle>
               </CardHeader>
@@ -96,7 +96,7 @@ const ClientDashboard = () => {
 
           {/* Property Breakdown */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <PieChart className="mr-2 h-5 w-5 text-amber-400" />
@@ -124,7 +124,7 @@ const ClientDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-slate-800/50">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Calculator className="mr-2 h-5 w-5 text-amber-400" />

@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Allow chatboticon.png in src
+!src/chatboticon.png
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,0 +1,87 @@
+{
+  "Jumeirah Village Circle": {
+    "Studio": {
+      "sample_count": 10,
+      "avg_annual_rent": 644383,
+      "avg_monthly_rent": 53699
+    },
+    "1BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 925198,
+      "avg_monthly_rent": 77100
+    },
+    "2BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1360798,
+      "avg_monthly_rent": 113400
+    }
+  },
+  "Dubai Marina": {
+    "Studio": {
+      "sample_count": 10,
+      "avg_annual_rent": 886800,
+      "avg_monthly_rent": 73900
+    },
+    "1BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1097998,
+      "avg_monthly_rent": 91500
+    },
+    "2BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1874400,
+      "avg_monthly_rent": 156200
+    }
+  },
+  "Business Bay": {
+    "Studio": {
+      "sample_count": 10,
+      "avg_annual_rent": 847199,
+      "avg_monthly_rent": 70600
+    },
+    "1BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1204800,
+      "avg_monthly_rent": 100400
+    },
+    "2BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1702799,
+      "avg_monthly_rent": 141900
+    }
+  },
+  "Downtown Dubai": {
+    "Studio": {
+      "sample_count": 10,
+      "avg_annual_rent": 1128000,
+      "avg_monthly_rent": 94000
+    },
+    "1BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1623463,
+      "avg_monthly_rent": 135289
+    },
+    "2BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 2970000,
+      "avg_monthly_rent": 247500
+    }
+  },
+  "Jumeirah Lake Towers": {
+    "Studio": {
+      "sample_count": 10,
+      "avg_annual_rent": 860399,
+      "avg_monthly_rent": 71700
+    },
+    "1BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1215599,
+      "avg_monthly_rent": 101300
+    },
+    "2BR": {
+      "sample_count": 10,
+      "avg_annual_rent": 1547998,
+      "avg_monthly_rent": 129000
+    }
+  }
+}

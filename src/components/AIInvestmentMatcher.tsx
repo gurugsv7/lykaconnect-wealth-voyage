@@ -9,8 +9,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Brain, TrendingUp, MapPin, Bed, Bath, Square, Star, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
+import { fetchGeminiAnswer } from "@/utils/geminiApi";
 
 const AIInvestmentMatcher = () => {
+  const navigate = useNavigate();
   const [propertyType, setPropertyType] = useState('');
   const [location, setLocation] = useState('');
   const [minBudget, setMinBudget] = useState('');
@@ -20,7 +23,7 @@ const AIInvestmentMatcher = () => {
   const [maxArea, setMaxArea] = useState('');
   const [amenities, setAmenities] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [recommendations, setRecommendations] = useState([]);
+  const [aiResult, setAiResult] = useState<string | null>(null);
   const { toast } = useToast();
 
   const propertyTypes = ['Apartment', 'Villa', 'Townhouse', 'Land', 'Commercial'];
@@ -39,62 +42,51 @@ const AIInvestmentMatcher = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setAiResult(null);
 
-    // Simulate AI-powered property matching
-    setTimeout(() => {
-      const matchedProperties = [
-        {
-          name: 'Luxury Apartment in Dubai Marina',
-          location: 'Dubai Marina',
-          price: 2500000,
-          expectedROI: 7.5,
-          bedrooms: '2',
-          bathrooms: '3',
-          area: 1500,
-          amenities: ['Pool', 'Gym', 'Balcony'],
-          matchScore: 92,
-          matchReasons: ['Matches your preferred location', 'High ROI potential', 'Includes desired amenities'],
-        },
-        {
-          name: 'Stunning Villa in Palm Jumeirah',
-          location: 'Palm Jumeirah',
-          price: 8000000,
-          expectedROI: 6.8,
-          bedrooms: '4',
-          bathrooms: '5',
-          area: 4000,
-          amenities: ['Pool', 'Beach Access', 'Security'],
-          matchScore: 88,
-          matchReasons: ['Matches your property type preference', 'Located in a prime area', 'Offers high-end amenities'],
-        },
-        {
-          name: 'Modern Townhouse in Arabian Ranches',
-          location: 'Arabian Ranches',
-          price: 3200000,
-          expectedROI: 7.2,
-          bedrooms: '3',
-          bathrooms: '4',
-          area: 2200,
-          amenities: ['Park View', 'Security', 'Parking'],
-          matchScore: 85,
-          matchReasons: ['Matches your budget range', 'Family-friendly community', 'Good investment potential'],
-        },
-      ];
+    // Construct the prompt for Gemini AI
+    const prompt = `
+You are a Dubai property investment AI. Given the following criteria, recommend 3 properties with name, location, price, expected ROI, and a brief reason for each match:
+Property Type: ${propertyType}
+Location: ${location}
+Budget: AED ${minBudget} - AED ${maxBudget}
+Bedrooms: ${bedrooms}
+Area: ${minArea} - ${maxArea} sq ft
+Amenities: ${amenities.join(", ")}
+Respond as a list of property recommendations.`;
 
-      setRecommendations(matchedProperties);
-      setLoading(false);
-      toast({
-        title: "AI Recommendations Ready!",
-        description: "Check out the properties our AI matched for you.",
-      })
-    }, 2500);
+    try {
+      const answer = await fetchGeminiAnswer(prompt);
+      setAiResult(answer);
+    } catch (err) {
+      setAiResult("Sorry, there was an error fetching your recommendations.");
+    }
+    setLoading(false);
+    toast({
+      title: "AI Recommendations Ready!",
+      description: "Check out the properties our AI matched for you.",
+    })
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-950 via-black to-slate-900">
+    <section className="py-20 bg-gradient-to-br from-slate-950 via-black to-slate-900 relative">
+      {/* Back to Home Button */}
+      <Button
+        variant="ghost"
+        className="absolute top-6 left-6 z-10 bg-black/40 text-blue-300 hover:bg-black/70"
+        onClick={() => {
+          navigate("/#tools");
+          setTimeout(() => {
+            const el = document.getElementById("tools");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }, 100);
+        }}
+      >
+        ← Back to Home
+      </Button>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <Badge className="bg-blue-600/20 text-blue-400 border-blue-600/30 mb-4">
+          <Badge className="bg-blue-600/20 text-blue-400 mb-4">
             AI-Powered Matching
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -242,118 +234,19 @@ const AIInvestmentMatcher = () => {
           </Card>
 
           {/* AI Recommendations - Full Width */}
-          {recommendations.length > 0 && (
-            <div className="space-y-6">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-white mb-2">🎯 AI-Matched Properties</h3>
-                <p className="text-gray-400">Based on your investment criteria</p>
-              </div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {recommendations.map((property, index) => (
-                  <Card key={index} className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border-blue-600/30 hover:border-blue-500/50 transition-all duration-300">
-                    <CardHeader className="pb-3">
-                      <div className="flex justify-between items-start">
-                        <CardTitle className="text-white text-lg">{property.name}</CardTitle>
-                        <Badge className="bg-green-600/20 text-green-400 border-green-600/30">
-                          {property.matchScore}% Match
-                        </Badge>
-                      </div>
-                      <p className="text-blue-400 flex items-center text-sm">
-                        <MapPin className="h-4 w-4 mr-1" />
-                        {property.location}
-                      </p>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="text-center p-3 bg-slate-800/50 rounded-lg">
-                          <div className="text-xl font-bold text-blue-400">AED {property.price.toLocaleString()}</div>
-                          <div className="text-gray-400 text-xs">Property Price</div>
-                        </div>
-                        <div className="text-center p-3 bg-slate-800/50 rounded-lg">
-                          <div className="text-xl font-bold text-green-400">{property.expectedROI}%</div>
-                          <div className="text-gray-400 text-xs">Expected ROI</div>
-                        </div>
-                      </div>
-                      
-                      <div className="flex justify-between items-center text-sm text-gray-300">
-                        <div className="flex items-center">
-                          <Bed className="h-4 w-4 mr-1" />
-                          {property.bedrooms} BR
-                        </div>
-                        <div className="flex items-center">
-                          <Bath className="h-4 w-4 mr-1" />
-                          {property.bathrooms} Bath
-                        </div>
-                        <div className="flex items-center">
-                          <Square className="h-4 w-4 mr-1" />
-                          {property.area} sq ft
-                        </div>
-                      </div>
-
-                      <div className="pt-2">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm text-gray-400">Why it matches:</span>
-                          <div className="flex">
-                            {[...Array(Math.floor(property.matchScore / 20))].map((_, i) => (
-                              <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                            ))}
-                          </div>
-                        </div>
-                        <ul className="text-xs text-gray-300 space-y-1">
-                          {property.matchReasons.map((reason, i) => (
-                            <li key={i} className="flex items-center">
-                              <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2" />
-                              {reason}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white">
-                        View Details
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              <Card className="bg-slate-800/30 border-slate-700">
-                <CardContent className="p-6">
-                  <div className="text-center">
-                    <h4 className="text-lg font-semibold text-white mb-4">How Our AI Matching Works</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                          <Brain className="h-6 w-6 text-blue-400" />
-                        </div>
-                        <h5 className="text-white font-medium mb-2">Smart Analysis</h5>
-                        <p className="text-gray-400 text-sm">AI analyzes thousands of properties against your criteria</p>
-                      </div>
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                          <TrendingUp className="h-6 w-6 text-purple-400" />
-                        </div>
-                        <h5 className="text-white font-medium mb-2">Market Insights</h5>
-                        <p className="text-gray-400 text-sm">Real-time market data and growth predictions</p>
-                      </div>
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                          <Star className="h-6 w-6 text-green-400" />
-                        </div>
-                        <h5 className="text-white font-medium mb-2">Perfect Match</h5>
-                        <p className="text-gray-400 text-sm">Scored recommendations tailored to your goals</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+          {aiResult && (
+            <Card className="bg-slate-800/30 border-slate-700">
+              <CardContent className="p-6">
+                <div className="text-center">
+                  <h4 className="text-lg font-semibold text-white mb-4">Gemini AI Recommendations</h4>
+                  <div className="text-yellow-300 whitespace-pre-line">{aiResult}</div>
+                </div>
+              </CardContent>
+            </Card>
           )}
 
           {/* Empty State */}
-          {recommendations.length === 0 && !loading && (
+          {!aiResult && !loading && (
             <Card className="bg-slate-800/30 border-slate-700 border-dashed">
               <CardContent className="text-center py-16">
                 <Brain className="h-16 w-16 text-blue-400 mx-auto mb-4 opacity-50" />

@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -6,7 +5,7 @@ import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from "luc
 
 const Footer = () => {
   return (
-    <footer className="bg-black border-t border-amber-600/20">
+    <footer className="bg-black">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
@@ -40,28 +39,18 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-white font-semibold mb-6">Services</h3>
+            <h3 className="text-white font-semibold mb-6">Features</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">Property Investment</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">AI Market Analysis</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">Portfolio Management</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">Tamil Millionaire Journey</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">ROI Calculator</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">24/7 AI Support</a></li>
+              <li><a href="/tamil-investment-analysis" className="text-gray-400 hover:text-amber-400 transition-colors">Tamil Investment Analysis</a></li>
+              <li><a href="/capital-appreciation-estimator" className="text-gray-400 hover:text-amber-400 transition-colors">Capital Appreciation Estimator</a></li>
+              <li><a href="/property-listings" className="text-gray-400 hover:text-amber-400 transition-colors">Premium Property Listings</a></li>
+              <li><a href="/blog" className="text-gray-400 hover:text-amber-400 transition-colors">Blog</a></li>
             </ul>
           </div>
 
           {/* Resources */}
           <div>
-            <h3 className="text-white font-semibold mb-6">Resources</h3>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">Investment Guides</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">Market Reports</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">Success Stories</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">Property Trends</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">FAQ</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-amber-400 transition-colors">Contact Support</a></li>
-            </ul>
+            {/* Resources section removed as requested */}
           </div>
 
           {/* Newsletter */}

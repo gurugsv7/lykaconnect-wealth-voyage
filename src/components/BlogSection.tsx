@@ -1,4 +1,4 @@
-
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,20 +10,20 @@ const BlogSection = () => {
       id: 1,
       title: "Dubai Real Estate Market Outlook 2024: AI Predictions",
       excerpt: "Our AI analysis reveals key trends shaping Dubai's property market in 2024...",
-      image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", // Burj Khalifa and Dubai skyline
       category: "Market Analysis",
       author: "Lykaconnect Research Team",
-      date: "Dec 15, 2024",
+      date: "Dec 15, 2025",
       readTime: "5 min read"
     },
     {
       id: 2,
       title: "The Tamil Millionaire Success Stories: Real Client Journeys",
       excerpt: "Discover how our clients achieved millionaire status through strategic Dubai investments...",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80", // Burj Al Arab
       category: "Success Stories",
       author: "Investment Advisory",
-      date: "Nov 28, 2024",
+      date: "Nov 28, 2025",
       readTime: "7 min read"
     },
     {
@@ -33,10 +33,36 @@ const BlogSection = () => {
       image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop",
       category: "Technology",
       author: "Tech Team",
-      date: "Nov 20, 2024",
+      date: "Nov 20, 2025",
       readTime: "6 min read"
     }
   ];
+
+  const [showMore, setShowMore] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    let scrollHandler: any;
+    if (isMobile && showMore) {
+      scrollHandler = () => setShowMore(false);
+      window.addEventListener("scroll", scrollHandler, { passive: true });
+    }
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      if (scrollHandler) window.removeEventListener("scroll", scrollHandler);
+    };
+  }, [isMobile, showMore]);
+
+  let visiblePosts = blogPosts;
+  if (isMobile && !showMore) {
+    visiblePosts = [blogPosts[2]];
+  } else if (isMobile && showMore) {
+    visiblePosts = blogPosts;
+  }
 
   return (
     <section id="blog" className="py-20 bg-gradient-to-br from-slate-900 to-black">
@@ -54,8 +80,8 @@ const BlogSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {blogPosts.map((post) => (
-            <Card key={post.id} className="bg-slate-800/50 border-slate-700 hover:border-amber-600/50 transition-all duration-300 overflow-hidden group">
+          {visiblePosts.map((post) => (
+            <Card key={post.id} className="bg-slate-800/50 /*border-slate-700*/ hover:border-amber-600/50 transition-all duration-300 overflow-hidden group">
               <div className="relative">
                 <img
                   src={post.image}
@@ -98,37 +124,43 @@ const BlogSection = () => {
             </Card>
           ))}
         </div>
+        {isMobile && !showMore && (
+          <div className="flex justify-center mb-8">
+            <Button
+              className="bg-[#FFD300] text-black font-bold rounded-lg px-8 py-2 shadow-md hover:bg-yellow-300"
+              onClick={() => setShowMore(true)}
+            >
+              Show More
+            </Button>
+          </div>
+        )}
 
         {/* Featured Section */}
-        <Card className="bg-gradient-to-r from-amber-900/20 to-amber-800/20 border-amber-600/30 mb-12">
-          <CardContent className="p-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="flex items-center mb-4">
-                  <TrendingUp className="h-6 w-6 text-amber-400 mr-2" />
-                  <Badge className="bg-amber-600 text-black">Trending Now</Badge>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  Weekly Market Report: AI-Generated Insights
-                </h3>
-                <p className="text-gray-300 mb-4">
-                  Get personalized market analysis delivered to your inbox every week, 
-                  powered by our advanced AI algorithms.
-                </p>
+        <Card className="mb-12 bg-[#1f2937] bg-opacity-90 backdrop-blur-lg border border-yellow-500/20 rounded-lg shadow-lg max-w-[90vw] w-full mx-auto" style={{maxHeight: 300}}>
+          <CardContent className="p-4 sm:p-6 flex flex-col items-center sm:items-start justify-center h-full">
+            <div className="flex flex-col items-center sm:items-start w-full">
+              <div className="flex items-center mb-2">
+                <TrendingUp className="h-5 w-5 text-yellow-400 mr-2" />
+                <span className="px-3 py-1 rounded-full border border-yellow-400/60 bg-yellow-400/10 text-yellow-300 text-xs font-semibold tracking-wide">Trending</span>
               </div>
-              <Button className="bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700">
+              <h3 className="text-lg sm:text-xl font-bold text-yellow-400 mb-1 text-center sm:text-left">
+                Weekly Market Report: AI-Generated Insights
+              </h3>
+              <p className="text-sm sm:text-base text-gray-300 mb-3 text-center sm:text-left">
+                Get personalized market analysis delivered to your inbox every week, powered by our advanced AI algorithms.
+              </p>
+              <Button
+                size="sm"
+                className="w-full sm:w-auto bg-gradient-to-r from-[#facc15] to-[#f59e0b] text-black font-bold rounded-lg px-6 py-2 mt-2 shadow-md hover:from-yellow-400 hover:to-yellow-500"
+                style={{ fontSize: "1rem" }}
+              >
                 Subscribe Now
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        <div className="text-center">
-          <Button size="lg" variant="outline" className="border-amber-600 text-amber-400 hover:bg-amber-600 hover:text-black">
-            View All Articles
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
+        {/* View All Articles button removed */}
       </div>
     </section>
   );

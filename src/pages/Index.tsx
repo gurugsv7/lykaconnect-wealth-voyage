@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,12 +6,10 @@ import { ArrowRight, MapPin, TrendingUp, Calculator, MessageSquare, Star, Filter
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AIFeatures from "@/components/AIFeatures";
-import TamilMillionaireJourney from "@/components/TamilMillionaireJourney";
+// import TamilMillionaireJourney from "@/components/TamilMillionaireJourney";
 import PropertyListings from "@/components/PropertyListings";
 import AIInvestmentMatcher from "@/components/AIInvestmentMatcher";
-import ClientDashboard from "@/components/ClientDashboard";
 import BlogSection from "@/components/BlogSection";
-import Footer from "@/components/Footer";
 import AIChatbot from "@/components/AIChatbot";
 
 const Index = () => {
@@ -28,25 +25,16 @@ const Index = () => {
       <AIFeatures />
       
       {/* Tamil Millionaire Journey */}
-      <TamilMillionaireJourney />
-      
-      {/* AI Investment Matcher */}
-      <AIInvestmentMatcher />
+      {/* <TamilMillionaireJourney /> */}
       
       {/* Property Listings */}
-      <PropertyListings />
-      
-      {/* Client Dashboard Preview */}
-      <ClientDashboard />
-      
+      {/* <PropertyListings /> */}
+
       {/* Blog Section */}
       <BlogSection />
       
-      {/* Footer */}
-      <Footer />
-      
       {/* AI Chatbot */}
-      <AIChatbot />
+      {/* <AIChatbot /> */}
     </div>
   );
 };

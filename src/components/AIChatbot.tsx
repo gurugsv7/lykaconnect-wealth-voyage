@@ -1,10 +1,9 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageSquare, X, Send, Bot, User } from "lucide-react";
+import { X, Send, Bot, User } from "lucide-react";
 
 const AIChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,19 +61,30 @@ const AIChatbot = () => {
 
   return (
     <>
-      {/* Chat Button */}
+      {/* Chat Button + Bubble */}
       {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 shadow-lg"
-        >
-          <MessageSquare className="h-6 w-6" />
-        </Button>
+        <div className="fixed bottom-6 right-0 z-50 flex flex-row-reverse items-end gap-2 sm:static">
+          <Button
+            onClick={() => setIsOpen(true)}
+            className="w-36 h-36 rounded-full bg-transparent shadow-none flex items-center justify-center p-0 hover:bg-transparent focus:bg-transparent active:bg-transparent"
+          >
+            <img
+              src="/src/chatboticon.png"
+              alt="Chatbot"
+              className="w-32 h-32"
+              style={{ display: "block", margin: "0 auto" }}
+            />
+          </Button>
+          <div className="mb-10 bg-gradient-to-r from-amber-400 to-amber-600 text-black px-4 py-3 rounded-2xl shadow-xl flex flex-col items-start animate-fade-in border border-amber-500 max-w-xs">
+            <span className="font-semibold leading-tight">Hi, I'm LykaBot!</span>
+            <span className="hidden sm:inline text-sm leading-tight">Your Dubai real estate AI assistant.</span>
+          </div>
+        </div>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <Card className="fixed bottom-6 right-6 z-50 w-96 h-[500px] bg-slate-800 border-slate-700 shadow-2xl">
+        <Card className="fixed bottom-6 right-6 z-50 w-96 h-[500px] bg-slate-800 shadow-2xl">
           <CardHeader className="bg-gradient-to-r from-amber-400 to-amber-600 text-black p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
