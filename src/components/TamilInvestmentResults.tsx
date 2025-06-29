@@ -241,7 +241,7 @@ const TamilInvestmentResults = () => {
                 margin={{
                   top: 24,
                   right: 16,
-                  left: 48,
+                  left: 32,
                   bottom: 24,
                 }}
               >
@@ -276,6 +276,7 @@ const TamilInvestmentResults = () => {
                 />
                 <YAxis
                   stroke={GOLD}
+                  width={48}
                   tick={{
                     fill: "#FFD700",
                     fontWeight: 900,
@@ -288,7 +289,7 @@ const TamilInvestmentResults = () => {
                     fill: "#FFD700",
                     fontWeight: 900,
                     fontSize: 15,
-                    dx: -38,
+                    dx: -80,
                     dy: 64,
                     textAnchor: "middle",
                   }}
