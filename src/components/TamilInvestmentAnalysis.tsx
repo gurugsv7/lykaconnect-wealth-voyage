@@ -20,6 +20,7 @@ const TamilInvestmentAnalysis = () => {
     bedrooms: "",
     price: "",
   });
+  const [countryCode, setCountryCode] = useState("+971");
   const [loading, setLoading] = useState(false); // loading state
   const [phoneError, setPhoneError] = useState("");
 
@@ -49,7 +50,7 @@ const TamilInvestmentAnalysis = () => {
     setPhoneError("");
     // Save email and phone to localStorage
     localStorage.setItem("lykaconnect_email", form.email);
-    localStorage.setItem("lykaconnect_phone", form.phone);
+    localStorage.setItem("lykaconnect_phone", countryCode + form.phone);
     setLoading(true); // start loading
     const prompt = `
 You are a Dubai property investment AI. Given the following property details and market data, answer ONLY these points:
@@ -84,7 +85,7 @@ A short, warm message for the user, summarizing the above in English only.
 --- PROPERTY DETAILS ---
 Name: ${form.fullName}
 Email: ${form.email}
-Phone: ${form.phone}
+Phone: ${countryCode}${form.phone}
 Property Type: ${form.propertyType}
 Location: ${form.location}
 Bedrooms: ${form.bedrooms}
@@ -343,7 +344,7 @@ Al Khail Heights:
         {/* Title and subtitle above border, centered */}
         <div className="w-full max-w-[1000px] mx-auto mb-6 text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-[#FFD300] mb-2 tracking-wide uppercase" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
-            Investment Analysis
+            Tamil Millionaire Journey
           </h1>
           <p className="text-gray-300 text-lg">
             Specialized rental income prediction with community-specific insights
@@ -383,16 +384,28 @@ Al Khail Heights:
             {/* Phone Number */}
             <div className="mb-5">
               <label className="block text-gray-300 mb-2">Phone Number</label>
-              <input
-                type="tel"
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-                className="w-full bg-[#111827] text-white rounded-[10px] border border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
-                placeholder="Phone number"
-                autoComplete="off"
-                required
-              />
+              <div className="flex">
+                <select
+                  value={countryCode}
+                  onChange={e => setCountryCode(e.target.value)}
+                  className="bg-[#23233a] text-white border border-[#23233a] rounded-l-[10px] px-3 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                  style={{ minWidth: 90 }}
+                >
+                  <option value="+971">+971</option>
+                  <option value="+91">+91</option>
+                </select>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  className="w-full bg-[#111827] text-white rounded-r-[10px] border-t border-b border-r border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                  placeholder="Phone number"
+                  autoComplete="off"
+                  required
+                  style={{ borderLeft: "none" }}
+                />
+              </div>
               {phoneError && (
                 <div className="text-red-500 text-sm mt-1">{phoneError}</div>
               )}

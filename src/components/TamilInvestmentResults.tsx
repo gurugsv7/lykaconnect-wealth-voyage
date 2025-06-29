@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const GOLD = "#FFD300";
@@ -24,6 +25,38 @@ const TamilInvestmentResults = () => {
 
   // Slider state
   const [years, setYears] = useState(6);
+
+  // Currency state and conversion rates
+  type Currency = "AED" | "USD" | "INR";
+  const [currency, setCurrency] = useState<Currency>("AED");
+  const conversionRates: Record<Currency, number> = {
+    AED: 1,
+    USD: 0.272,
+    INR: 22.36,
+  };
+  const currencySymbols: Record<Currency, string> = {
+    AED: "AED",
+    USD: "$",
+    INR: "₹",
+  };
+  // Format numbers per currency
+  function formatCurrency(value: number, curr: Currency = currency) {
+    let formatted: string;
+    if (curr === "AED") {
+      formatted = `${currencySymbols[curr]} ${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+    } else if (curr === "USD") {
+      formatted = `${currencySymbols[curr]}${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+    } else if (curr === "INR") {
+      // Indian numbering system
+      formatted = `${currencySymbols[curr]}${value.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
+    } else {
+      formatted = value.toString();
+    }
+    return formatted;
+  }
+  function convert(value: number, curr: Currency = currency) {
+    return Math.round(value * conversionRates[curr]);
+  }
 
   // Get user input price and location
   const initialValue = form?.price ? parseFloat(form.price.toString().replace(/,/g, "")) : 100000;
@@ -81,12 +114,30 @@ const TamilInvestmentResults = () => {
   const roi = ((totalGain + totalRent) / initialValue) * 100;
 
   // Always show 10 years on the X axis
-  const allWealthData = Array.from({ length: 10 }, (_, i) => ({
-    year: i + 1,
-    value: Math.round(initialValue * Math.pow(1 + appreciationRate, i + 1)),
-  }));
+  // Calculate property value, cumulative rent, and total wealth for each year
+  const allWealthData = Array.from({ length: 10 }, (_, i) => {
+    const year = i + 1;
+    const propertyValue = Math.round(initialValue * Math.pow(1 + appreciationRate, year));
+    const cumulativeRent = annualRent * year;
+    const totalWealth = propertyValue + cumulativeRent;
+    return {
+      year,
+      value: propertyValue,
+      cumulativeRent,
+      totalWealth,
+    };
+  });
   // Data for the animated yellow line (up to selected year)
   const activeWealthData = allWealthData.slice(0, years);
+
+  // Find the first year when total wealth >= 3.67 million
+  const millionaireTarget = 3670000;
+  const millionaireYearObj = allWealthData.find(y => y.totalWealth >= millionaireTarget);
+  const millionaireYear = millionaireYearObj ? millionaireYearObj.year : null;
+  const millionaireWealth = millionaireYearObj ? millionaireYearObj.totalWealth : null;
+  // Progress should use the current year's total wealth (as shown in the chart)
+  const currentTotalWealth = allWealthData[years - 1]?.totalWealth ?? 0;
+  const millionaireProgress = Math.min(100, Math.round((currentTotalWealth / millionaireTarget) * 100));
 
   // Extract Millionaire Timeline and AI Investment Summary from aiResult
   let millionaireTimeline = null;
@@ -124,53 +175,56 @@ const TamilInvestmentResults = () => {
 
       {/* Results Header */}
       <div className="w-full max-w-4xl flex flex-col gap-6">
+        {/* Currency Toggle */}
+        <div className="flex flex-row justify-end items-center gap-2 mb-2">
+          <span className="text-[#FFD700] font-bold text-lg">Currency:</span>
+          <Select value={currency} onValueChange={v => setCurrency(v as Currency)}>
+            <SelectTrigger className="w-28 bg-[#23243a] border-[#FFD700] text-[#FFD700] font-bold rounded-lg">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="bg-[#23243a] border-[#FFD700] text-[#FFD700]">
+              <SelectItem value="AED">AED</SelectItem>
+              <SelectItem value="USD">USD</SelectItem>
+              <SelectItem value="INR">INR</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <div className="w-full text-center mb-6">
           <h1 className="text-3xl md:text-4xl font-bold text-[#FFD300] mb-2 tracking-wide uppercase" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
             Investment Results
           </h1>
         </div>
         {/* Millionaire Timeline */}
-        {millionaireTimeline && (
-          <Card className="mb-2 bg-[#18192a] border-2 border-[#FFD700] rounded-2xl shadow w-full">
-            <CardContent className="p-8">
-              <div className="text-2xl font-bold text-[#FFD700] mb-2">Millionaire Timeline</div>
-              <div className="text-lg text-[#fffbe6] mb-4" style={{ lineHeight: 1.7 }}>{millionaireTimeline.replace(/^.*Millionaire Timeline\s*/i, "").replace(/\*/g, "")}</div>
-              {/* Progress bar */}
-              {(() => {
-                const millionMatch = millionaireTimeline.match(/AED\s*([\d.,]+)/i);
-                const target = 3670000;
-                const current = millionMatch ? parseFloat(millionMatch[1].replace(/,/g, "")) : 0;
-                const progress = Math.min(100, Math.round((current / target) * 100));
-                return (
-                  <>
-                    <div className="w-full bg-[#23243a] rounded-lg h-6 flex items-center mb-2 border border-[#FFD700]">
-                      <div
-                        className="h-6 rounded-lg transition-all duration-700"
-                        style={{
-                          width: `${progress}%`,
-                          background: "linear-gradient(90deg, #FFD700 60%, #fffbe6 100%)",
-                          minWidth: 40,
-                        }}
-                      />
-                      <span className="ml-3 text-[#FFD700] font-bold">{progress}%</span>
-                    </div>
-                    <div className="text-sm text-[#FFD700] mt-1 mb-3">Progress toward AED 3.67 million</div>
-                    <Button
-                      className="bg-[#FFD700] hover:bg-yellow-400 text-black font-bold px-6 py-2 rounded-lg shadow transition-all"
-                      style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}
-                      onClick={() => navigate("/tamil-investment-analysis")}
-                    >
-                      Start Millionaire Countdown
-                    </Button>
-                  </>
-                );
-              })()}
-            </CardContent>
-          </Card>
-        )}
+        <Card className="mb-2 bg-[#18192a] border-2 border-[#FFD700] rounded-2xl shadow w-full">
+          <CardContent className="p-8">
+            <div className="text-2xl font-bold text-[#FFD700] mb-2">Millionaire Timeline</div>
+            <div className="text-lg text-[#fffbe6] mb-4" style={{ lineHeight: 1.7 }}>
+              {convert(allWealthData[0].totalWealth) >= convert(millionaireTarget) ? (
+                <span>
+                  <span className="font-bold text-[#FFD700]">You're already a millionaire!</span>
+                  <br />
+                  Starting wealth: <span className="text-[#FFD700] font-semibold">{formatCurrency(convert(allWealthData[0].totalWealth))}</span>
+                </span>
+              ) : millionaireYear ? (
+                <>
+                  You will reach <span className="font-bold text-[#FFD700]">{formatCurrency(convert(millionaireTarget))}</span> in total wealth (property value + cumulative rent) in <span className="font-bold text-[#FFD700]">Year {millionaireYear}</span>.
+                  <br />
+                  <span className="text-[#FFD700] font-semibold">Projected Wealth: {formatCurrency(convert(millionaireWealth ?? 0))}</span>
+                </>
+              ) : (
+                <>
+                  You will not reach {formatCurrency(convert(millionaireTarget))} in total wealth within 10 years.
+                  <br />
+                  <span className="text-[#FFD700] font-semibold">Projected Wealth after 10 years: {formatCurrency(convert(allWealthData[allWealthData.length - 1].totalWealth))}</span>
+                </>
+              )}
+            </div>
+            
+          </CardContent>
+        </Card>
 
         {/* Line Chart Section */}
-        <div className="bg-[#18192a] border-2 border-[#FFD700] rounded-2xl px-2 py-4 mb-4 shadow-lg mt-6 max-w-full">
+        <div className="bg-[#18192a] border-2 border-[#FFD700] rounded-2xl px-2 py-4 mb-4 shadow-lg mt-6 max-w-full" style={{ paddingLeft: 24 }}>
           <div className="text-lg sm:text-2xl font-bold text-[#FFD700] mb-4 text-center tracking-wide uppercase">
             Wealth Growth Over Time
           </div>
@@ -187,7 +241,7 @@ const TamilInvestmentResults = () => {
                 margin={{
                   top: 24,
                   right: 16,
-                  left: 16,
+                  left: 48,
                   bottom: 24,
                 }}
               >
@@ -234,8 +288,8 @@ const TamilInvestmentResults = () => {
                     fill: "#FFD700",
                     fontWeight: 900,
                     fontSize: 15,
-                    dx: -24,
-                    dy: 24,
+                    dx: -38,
+                    dy: 64,
                     textAnchor: "middle",
                   }}
                   tickLine={false}
@@ -259,13 +313,11 @@ const TamilInvestmentResults = () => {
                     })()
                   }
                   tickFormatter={val =>
-                    "AED " +
-                    val.toLocaleString("en-US", {
-                      maximumFractionDigits: 0,
-                    })
+                    formatCurrency(convert(val))
                   }
                   allowDataOverflow={false}
                   padding={{ top: 18, bottom: 32 }}
+                  tickMargin={12}
                 />
                 <Tooltip
                   content={({ active, payload, label }) => {
@@ -285,7 +337,7 @@ const TamilInvestmentResults = () => {
                         }}
                       >
                         <div style={{ fontSize: 16, fontWeight: 700 }}>
-                          Year {year}: AED {value.toLocaleString("en-US")}
+                          Year {year}: {formatCurrency(convert(value))}
                         </div>
                       </div>
                     );
@@ -340,7 +392,7 @@ const TamilInvestmentResults = () => {
                             stroke="#18192a"
                             strokeWidth="0.5"
                           >
-                            AED {props.payload.value.toLocaleString("en-US")}
+                            {formatCurrency(convert(props.payload.value))}
                           </text>
                         </g>
                       ) : null
@@ -382,9 +434,9 @@ const TamilInvestmentResults = () => {
             <div className="text-[#FFD300] text-lg font-bold px-6 pt-6 pb-2">Projected Rental Income</div>
             <div className="px-6 pb-6 pt-2 text-base text-[#fff] flex flex-col gap-2">
               <ul className="list-disc list-inside text-[#fffbe6] space-y-1">
-                <li>Monthly Rent: <span className="font-semibold text-[#FFD300]">AED {monthlyRent.toLocaleString()}</span></li>
-                <li>Annual Rent: <span className="font-semibold text-[#FFD300]">AED {annualRent.toLocaleString()}</span></li>
-                <li>Total Rent ({years} yrs): <span className="font-semibold text-[#FFD300]">AED {totalRent.toLocaleString()}</span></li>
+                <li>Monthly Rent: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(monthlyRent))}</span></li>
+                <li>Annual Rent: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(annualRent))}</span></li>
+                <li>Total Rent ({years} yrs): <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(totalRent))}</span></li>
               </ul>
             </div>
           </div>
@@ -394,8 +446,8 @@ const TamilInvestmentResults = () => {
             <div className="px-6 pb-6 pt-2 text-base text-[#fff] flex flex-col gap-2">
               <ul className="list-disc list-inside text-[#fffbe6] space-y-1">
                 <li>Appreciation Rate: <span className="font-semibold text-[#FFD300]">{(appreciationRate * 100).toFixed(2)}% / year</span></li>
-                <li>Value in {years} yrs: <span className="font-semibold text-[#FFD300]">AED {allWealthData[years-1]?.value?.toLocaleString()}</span></li>
-                <li>Total Gain: <span className="font-semibold text-[#FFD300]">AED {(allWealthData[years-1]?.value - initialValue).toLocaleString()}</span></li>
+                <li>Value in {years} yrs: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(allWealthData[years-1]?.value ?? 0))}</span></li>
+                <li>Total Gain: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert((allWealthData[years-1]?.value ?? 0) - initialValue))}</span></li>
               </ul>
             </div>
           </div>
@@ -405,7 +457,7 @@ const TamilInvestmentResults = () => {
             <div className="px-6 pb-6 pt-2 text-base text-[#fff] flex flex-col gap-2">
               <ul className="list-disc list-inside text-[#fffbe6] space-y-1">
                 <li>Overall ROI: <span className="font-semibold text-[#FFD300]">{roi.toFixed(2)}%</span></li>
-                <li>Total Expected Return: <span className="font-semibold text-[#FFD300]">AED {Math.round(totalGain + totalRent).toLocaleString()}</span></li>
+                <li>Total Expected Return: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(Math.round(totalGain + totalRent)))}</span></li>
               </ul>
             </div>
           </div>

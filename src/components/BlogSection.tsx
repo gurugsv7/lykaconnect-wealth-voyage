@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, User, ArrowRight, TrendingUp } from "lucide-react";
+import { Calendar, User, ArrowRight, TrendingUp, X } from "lucide-react";
 
 const BlogSection = () => {
   // Reorder so the third blog is first
@@ -41,6 +41,12 @@ const BlogSection = () => {
 
   const [showMore, setShowMore] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Popup state for subscribe
+  const [showSubscribe, setShowSubscribe] = useState(false);
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
@@ -169,6 +175,7 @@ const BlogSection = () => {
                 size="sm"
                 className="w-full sm:w-auto bg-gradient-to-r from-[#facc15] to-[#f59e0b] text-black font-bold rounded-lg px-6 py-2 mt-2 shadow-md hover:from-yellow-400 hover:to-yellow-500"
                 style={{ fontSize: "1rem" }}
+                onClick={() => setShowSubscribe(true)}
               >
                 Subscribe Now
               </Button>
@@ -178,6 +185,71 @@ const BlogSection = () => {
 
         {/* View All Articles button removed */}
       </div>
+      {/* Subscribe Popup */}
+      {showSubscribe && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="relative bg-[#18192a] border-2 border-yellow-400 rounded-2xl shadow-xl p-8 w-full max-w-md mx-auto flex flex-col items-center">
+            <button
+              className="absolute top-3 right-3 text-yellow-400 hover:text-yellow-300"
+              onClick={() => {
+                setShowSubscribe(false);
+                setSubscribed(false);
+                setEmail("");
+                setEmailError("");
+              }}
+              aria-label="Close"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            {!subscribed ? (
+              <>
+                <h2 className="text-2xl font-bold text-yellow-400 mb-2 text-center">Subscribe to Weekly Trends</h2>
+                <p className="text-gray-300 mb-4 text-center">
+                  Get the latest AI-powered market insights delivered to your inbox.
+                </p>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full bg-[#111827] text-white rounded-lg border border-[#FFD700] px-4 py-3 mb-2 focus:outline-none focus:border-yellow-400 transition-all"
+                  autoFocus
+                />
+                {emailError && <div className="text-red-400 text-sm mb-2">{emailError}</div>}
+                <Button
+                  className="w-full bg-gradient-to-r from-[#FFD300] to-[#FFA500] text-black font-bold rounded-lg px-6 py-2 mt-2 shadow-md hover:from-yellow-400 hover:to-yellow-500"
+                  onClick={() => {
+                    // Simple email validation
+                    if (!email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+                      setEmailError("Please enter a valid email address.");
+                      return;
+                    }
+                    setSubscribed(true);
+                  }}
+                >
+                  Subscribe
+                </Button>
+              </>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-8">
+                <div className="text-3xl mb-2 text-yellow-400 font-bold">Thanks for Subscribing</div>
+                <div className="text-gray-300 text-lg text-center">You'll receive weekly market insights in your inbox.</div>
+                <Button
+                  className="mt-6 bg-gradient-to-r from-[#FFD300] to-[#FFA500] text-black font-bold rounded-lg px-8 py-2 shadow-md hover:from-yellow-400 hover:to-yellow-500"
+                  onClick={() => {
+                    setShowSubscribe(false);
+                    setSubscribed(false);
+                    setEmail("");
+                    setEmailError("");
+                  }}
+                >
+                  Close
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 };

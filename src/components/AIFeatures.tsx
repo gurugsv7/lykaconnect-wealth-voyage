@@ -8,7 +8,7 @@ const features = [
         <span className="text-black text-2xl font-bold">🟨</span>
       </div>
     ),
-    title: "Tamil Investment Analysis",
+    title: "Tamil Millionaire Journey",
     desc: "Specialized rental income predictions with community-specific insights for Tamil investors. Get detailed market analysis and investment scoring for any Dubai property.",
     bullets: [
       "Monthly & Annual rental projections",
@@ -216,7 +216,7 @@ const AIFeatures = () => {
                 >
                   {f.button}
                 </Button>
-              ) : f.title === "Tamil Investment Analysis" ? (
+              ) : f.title === "Tamil Millionaire Journey" ? (
                 <Button
                   className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
                   style={{
