@@ -117,7 +117,14 @@ const TamilInvestmentResults = () => {
                       />
                       <span className="ml-3 text-[#FFD700] font-bold">{progress}%</span>
                     </div>
-                    <div className="text-sm text-[#FFD700] mt-1">Progress toward AED 3.67 million</div>
+                    <div className="text-sm text-[#FFD700] mt-1 mb-3">Progress toward AED 3.67 million</div>
+                    <Button
+                      className="bg-[#FFD700] hover:bg-yellow-400 text-black font-bold px-6 py-2 rounded-lg shadow transition-all"
+                      style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}
+                      onClick={() => navigate("/tamil-investment-analysis")}
+                    >
+                      Start Millionaire Countdown
+                    </Button>
                   </>
                 );
               })()}
