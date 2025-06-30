@@ -25,12 +25,6 @@ const Header = () => {
             <a href="#tools" className="text-gray-300 hover:text-amber-400 transition-colors">AI Tools</a>
             <a href="#dashboard" className="text-gray-300 hover:text-amber-400 transition-colors">Dashboard</a>
             <a href="#blog" className="text-gray-300 hover:text-amber-400 transition-colors">Insights</a>
-            <Button variant="outline" className="border-amber-600 text-amber-400 hover:bg-amber-600 hover:text-black">
-              Talk to Advisor
-            </Button>
-            <Button className="bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700">
-              List Your Property
-            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -50,12 +44,6 @@ const Header = () => {
               <a href="#tools" className="text-gray-300 hover:text-amber-400 transition-colors">AI Tools</a>
               <a href="#dashboard" className="text-gray-300 hover:text-amber-400 transition-colors">Dashboard</a>
               <a href="#blog" className="text-gray-300 hover:text-amber-400 transition-colors">Insights</a>
-              <Button variant="outline" className="border-amber-600 text-amber-400 hover:bg-amber-600 hover:text-black w-full">
-                Talk to Advisor
-              </Button>
-              <Button className="bg-gradient-to-r from-amber-400 to-amber-600 text-black hover:from-amber-500 hover:to-amber-700 w-full">
-                List Your Property
-              </Button>
             </nav>
           </div>
         )}
@@ -65,4 +53,3 @@ const Header = () => {
 };
 
 export default Header;
-
