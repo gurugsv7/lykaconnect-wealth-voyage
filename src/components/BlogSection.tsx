@@ -14,7 +14,7 @@ const BlogSection = () => {
       image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop",
       category: "Technology",
       author: "Tech Team",
-      date: "Nov 20, 2025",
+      date: "June 20, 2025",
       readTime: "6 min read"
     },
     {
@@ -24,7 +24,7 @@ const BlogSection = () => {
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", // Burj Khalifa and Dubai skyline
       category: "Market Analysis",
       author: "Lykaconnect Research Team",
-      date: "Dec 15, 2025",
+      date: "April 15, 2025",
       readTime: "5 min read"
     },
     {
@@ -34,7 +34,7 @@ const BlogSection = () => {
       image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80", // Burj Al Arab
       category: "Success Stories",
       author: "Investment Advisory",
-      date: "Nov 28, 2025",
+      date: "Nov 28, 2023",
       readTime: "7 min read"
     }
   ];
