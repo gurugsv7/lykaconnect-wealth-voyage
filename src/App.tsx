@@ -6,13 +6,15 @@ import AIWealthForecast from "./pages/AIWealthForecast";
 import TamilInvestmentAnalysis from "./components/TamilInvestmentAnalysis";
 import TamilInvestmentResults from "./components/TamilInvestmentResults";
 import AIFeatures from "./components/AIFeatures";
-import AIInvestmentMatcher from "./components/AIInvestmentMatcher";
 import PortfolioOptimizer from "./components/PortfolioOptimizer";
 import CapitalAppreciationEstimator from "./components/CapitalAppreciationEstimator";
 import CapitalAppreciationResults from "./components/CapitalAppreciationResults";
 import BlogSection from "./components/BlogSection";
-import PropertyListings from "./components/PropertyListings";
-import AIChatbot from "./components/AIChatbot";
+import RealEstateRiskCalculator from "./components/RealEstateRiskCalculator";
+import RealEstateRiskResults from "./components/RealEstateRiskResults";
+import UAEInvestorVisaInfo from "./components/UAEInvestorVisaInfo";
+import MortgageEMICalculator from "./components/MortgageEMICalculator";
+import MortgageEMIResults from "./components/MortgageEMIResults";
 import Footer from "./components/Footer";
 
 function ScrollToTop() {
@@ -34,13 +36,15 @@ function App() {
         <Route path="/tamil-investment-analysis" element={<TamilInvestmentAnalysis />} />
         <Route path="/tamil-investment-results" element={<TamilInvestmentResults />} />
         <Route path="/ai-features" element={<AIFeatures />} />
-        <Route path="/ai-investment-matcher" element={<AIInvestmentMatcher />} />
         <Route path="/portfolio-optimizer" element={<PortfolioOptimizer />} />
         <Route path="/capital-appreciation-estimator" element={<CapitalAppreciationEstimator />} />
         <Route path="/capital-appreciation-results" element={<CapitalAppreciationResults />} />
         <Route path="/blog" element={<BlogSection />} />
-        <Route path="/property-listings" element={<PropertyListings />} />
-        <Route path="/ai-chatbot" element={<AIChatbot />} />
+        <Route path="/real-estate-risk-calculator" element={<RealEstateRiskCalculator />} />
+        <Route path="/real-estate-risk-results" element={<RealEstateRiskResults />} />
+        <Route path="/uae-investor-visa" element={<UAEInvestorVisaInfo />} />
+        <Route path="/mortgage-emi-calculator" element={<MortgageEMICalculator />} />
+        <Route path="/mortgage-emi-results" element={<MortgageEMIResults />} />
         {/* Add other routes as needed */}
       </Routes>
       <Footer />

@@ -7,10 +7,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import AIFeatures from "@/components/AIFeatures";
 // import TamilMillionaireJourney from "@/components/TamilMillionaireJourney";
-import PropertyListings from "@/components/PropertyListings";
-import AIInvestmentMatcher from "@/components/AIInvestmentMatcher";
 import BlogSection from "@/components/BlogSection";
-import AIChatbot from "@/components/AIChatbot";
 
 const Index = () => {
   return (
@@ -27,14 +24,9 @@ const Index = () => {
       {/* Tamil Millionaire Journey */}
       {/* <TamilMillionaireJourney /> */}
       
-      {/* Property Listings */}
-      {/* <PropertyListings /> */}
-
       {/* Blog Section */}
       <BlogSection />
-      
-      {/* AI Chatbot */}
-      {/* <AIChatbot /> */}
+
     </div>
   );
 };

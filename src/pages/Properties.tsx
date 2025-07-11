@@ -1,5 +1,4 @@
 // filepath: c:\Users\gurug\OneDrive\Desktop\web apps\lykaconnect-wealth-voyage\src\pages\Properties.tsx
-import PropertyListings from "@/components/PropertyListings";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -28,7 +27,7 @@ const Properties = () => {
       >
         ← Back to Home
       </button>
-      <PropertyListings />
+      {/* PropertyListings component was removed */}
     </div>
   );
 };

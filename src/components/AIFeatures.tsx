@@ -18,7 +18,23 @@ const features = [
     ],
     button: "Analyze Property Income",
   },
-  
+  {
+    icon: (
+      <div className="w-8 h-8 rounded-md bg-yellow-400 flex items-center justify-center">
+        <span className="text-black text-2xl font-bold">💰</span>
+      </div>
+    ),
+    title: "Mortgage & EMI Calculator",
+    desc: "Smart mortgage and EMI estimator with risk analysis. Get a personalized mortgage plan, EMI breakdown, and amortization table based on your resident status and down payment.",
+    bullets: [
+      "EMI & total interest breakdown",
+      "Resident/non-resident toggle",
+      "Donut chart & amortization table",
+      "Dynamic risk disclaimer"
+    ],
+    button: "Calculate Mortgage EMI",
+    route: "/mortgage-emi-calculator"
+  },
   {
     icon: (
       <div className="w-8 h-8 rounded-md bg-yellow-400 flex items-center justify-center">
@@ -34,6 +50,23 @@ const features = [
       "Risk scenario modeling",
     ],
     button: "Predict Property Value",
+  },
+  {
+    icon: (
+      <div className="w-8 h-8 rounded-md bg-yellow-400 flex items-center justify-center">
+        <span className="text-black text-2xl font-bold">💡</span>
+      </div>
+    ),
+    title: "Investment Risk Estimator",
+    desc: "Estimate potential returns for low and high risk strategies. Get smart suggestions and see UAE visa eligibility based on your investment.",
+    bullets: [
+      "Low & high risk return estimates",
+      "Smart budget suggestions",
+      "Visa eligibility highlights",
+      "Clear, mobile-friendly UI"
+    ],
+    button: "Calculate Investment Risk",
+    route: "/real-estate-risk-calculator"
   },
   {
     icon: (
@@ -183,6 +216,17 @@ const AIFeatures = () => {
                 >
                   {f.button}
                 </Button>
+              ) : f.title === "Mortgage & EMI Calculator" ? (
+                <Button
+                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
+                  style={{
+                    boxShadow: "0 2px 8px 0 #FFD30033",
+                    fontFamily: "'Inter', 'Poppins', sans-serif",
+                  }}
+                  onClick={() => navigate("/mortgage-emi-calculator")}
+                >
+                  {f.button}
+                </Button>
               ) : f.title === "Capital Appreciation Estimator" ? (
                 <Button
                   className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
@@ -191,6 +235,17 @@ const AIFeatures = () => {
                     fontFamily: "'Inter', 'Poppins', sans-serif",
                   }}
                   onClick={() => navigate("/capital-appreciation-estimator")}
+                >
+                  {f.button}
+                </Button>
+              ) : f.title === "Investment Risk Estimator" ? (
+                <Button
+                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
+                  style={{
+                    boxShadow: "0 2px 8px 0 #FFD30033",
+                    fontFamily: "'Inter', 'Poppins', sans-serif",
+                  }}
+                  onClick={() => navigate("/real-estate-risk-calculator")}
                 >
                   {f.button}
                 </Button>
