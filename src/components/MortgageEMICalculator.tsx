@@ -50,6 +50,11 @@ const MortgageEMICalculator = () => {
     processingFee: "",
     age: "",
     currency: "AED",
+    personalLoan: false,
+    creditCardDues: false,
+    investNow: "",
+    seriousBuyer: false,
+    interest: "",
   });
 
   // Interest rate auto-calculation
@@ -95,6 +100,29 @@ const MortgageEMICalculator = () => {
       });
     }
     const risk = getRiskLevel(downPct, parseFloat(form.monthlyIncome), form.resident);
+
+    // Backend-only rule checks
+    const disclaimers: string[] = [];
+    // EMI-to-income ratio
+    if (emi > 0 && parseFloat(form.monthlyIncome) > 0 && emi > parseFloat(form.monthlyIncome) * 0.4) {
+      disclaimers.push("🔴 Your EMI exceeds 40% of income — high financial risk.");
+    }
+    // Tenure cap due to age
+    if (eligibleTenure < maxTenure) {
+      disclaimers.push(`🟠 Loan tenure capped due to age. Max possible: ${eligibleTenure} years.`);
+    }
+    // Minimum income for property price
+    const minIncomeRequired = price * 0.004; // Example: 0.4% of property price per month
+    if (parseFloat(form.monthlyIncome) < minIncomeRequired) {
+      disclaimers.push("🔴 Minimum income not met for property price — try lower budget or longer tenure.");
+    }
+    // Personal loan/credit card risk
+    if (form.personalLoan || form.creditCardDues) {
+      disclaimers.push("🔴 High risk due to existing personal loans or credit card debt.");
+    }
+    // Final approval disclaimer
+    disclaimers.push("🔴 Final approval subject to credit profile verification by banks.");
+
     navigate("/mortgage-emi-results", {
       state: {
         emi,
@@ -113,99 +141,168 @@ const MortgageEMICalculator = () => {
         businessOwner: form.businessOwner,
         age: form.age,
         monthlyIncome: form.monthlyIncome,
+        disclaimers,
       },
     });
   };
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-start bg-gradient-to-br from-[#0f0f1b] to-[#121826] py-6 px-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
-      {/* Header Section */}
+      {/* Headline + Intro */}
       <div className="w-full max-w-md mx-auto text-center mt-8 mb-6">
-        <h2 className="text-2xl font-bold text-yellow-300 mb-2">Smart Mortgage & EMI Estimator</h2>
+        <h2 className="text-2xl font-bold text-yellow-300 mb-2">Let’s personalize your Dubai property plan 🏡</h2>
         <p className="text-base text-gray-300 font-medium">
-          Personalized loan insights based on your resident status, income, and purchase type
+          We’ll instantly show your mortgage eligibility, upfront cost, EMI, and best-fit options — based on real rules.
         </p>
       </div>
-      {/* Calculator Card */}
+      {/* Input Form (Card-Based, One Scroll) */}
       <form
         onSubmit={handleCalculate}
-        className="w-full max-w-md mx-auto rounded-2xl border border-yellow-400 bg-gradient-to-br from-[#181825] to-[#23233a] p-6 shadow-xl mb-6"
-        style={{ borderWidth: 1, borderRadius: 16 }}
+        className="w-full max-w-md mx-auto flex flex-col gap-4"
+        style={{ borderRadius: 16 }}
       >
-        {/* Age Input */}
-        <div className="mb-4">
-          <Label htmlFor="age" className="block text-yellow-300 font-medium mb-1">Age</Label>
-          <Input id="age" name="age" type="number" min={18} max={65} placeholder="e.g., 40" className="rounded-lg bg-[#181825] border border-yellow-400 text-white px-4 py-2" value={form.age || ""} onChange={e => setForm({ ...form, age: e.target.value })} required />
+        {/* Property Value */}
+        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex flex-col gap-2 px-4 py-4">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl text-yellow-300">💰</span>
+            <div className="flex-1">
+              <Label htmlFor="propertyPrice" className="block text-white font-semibold mb-1">Property Value (AED)</Label>
+              <Input id="propertyPrice" name="propertyPrice" type="number" min={0} placeholder="How much is the property you’re looking to buy?" className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-4 py-2 w-full" value={form.propertyPrice} onChange={e => setForm({ ...form, propertyPrice: e.target.value })} required />
+            </div>
+          </div>
+          {/* Optional Serious Buyer Toggle */}
+          <div className="flex items-center gap-3 mt-2">
+            <span className="text-xl text-yellow-300">🟢</span>
+            <Label htmlFor="investNow" className="text-white font-semibold">I have X amount ready to invest now</Label>
+            <Input id="investNow" name="investNow" type="text" placeholder="e.g., 2 Cr INR" className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-2 py-1 w-32" value={form.investNow} onChange={e => setForm({ ...form, investNow: e.target.value, seriousBuyer: !!e.target.value })} />
+          </div>
+          {/* Down Payment & Upfront Charges Card */}
+          {form.propertyPrice && (
+            <div className="w-full mt-4 rounded-xl bg-[#23233a] shadow-md px-4 py-3 flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-lg text-yellow-300">✅</span>
+                <span className="text-white font-semibold">
+                  Required Minimum Down Payment:{" "}
+                  <span className="text-yellow-300 font-bold">
+                    {form.resident === "Resident"
+                      ? `${(parseFloat(form.propertyPrice) * 0.2).toLocaleString(undefined, { maximumFractionDigits: 0 })} AED (20%)`
+                      : `${(parseFloat(form.propertyPrice) * 0.5).toLocaleString(undefined, { maximumFractionDigits: 0 })} AED (50%)`}
+                  </span>
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg text-yellow-300">💸</span>
+                <span className="text-white font-semibold">
+                  Upfront Charges (Govt + Broker + Fees):{" "}
+                  <span className="text-yellow-300 font-bold">
+                    {`${(parseFloat(form.propertyPrice) * 0.12).toLocaleString(undefined, { maximumFractionDigits: 0 })}–${(parseFloat(form.propertyPrice) * 0.16).toLocaleString(undefined, { maximumFractionDigits: 0 })} AED (12–16%)`}
+                  </span>
+                </span>
+              </div>
+            </div>
+          )}
         </div>
-        {/* Currency Toggle */}
-        <div className="mb-4 flex items-center gap-4">
-          <Label className="text-yellow-300 font-medium">Currency</Label>
-          <Button type="button" className={`rounded-full px-4 py-2 font-bold shadow-md transition-all ${form.currency === "AED" ? "bg-yellow-400 text-black" : "bg-gray-700 text-yellow-300"}`} onClick={() => setForm({ ...form, currency: "AED" })}>AED</Button>
-          <Button type="button" className={`rounded-full px-4 py-2 font-bold shadow-md transition-all ${form.currency === "INR" ? "bg-yellow-400 text-black" : "bg-gray-700 text-yellow-300"}`} onClick={() => setForm({ ...form, currency: "INR" })}>INR</Button>
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="propertyPrice" className="block text-yellow-300 font-medium mb-1">Property Price ({form.currency || "AED"})</Label>
-          <Input id="propertyPrice" name="propertyPrice" type="number" min={0} placeholder={form.currency === "INR" ? "e.g., 2,20,00,000" : "e.g., 2000000"} className="rounded-lg bg-[#181825] border border-yellow-400 text-white px-4 py-2" value={form.propertyPrice} onChange={e => setForm({ ...form, propertyPrice: e.target.value })} required />
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="downPayment" className="block text-yellow-300 font-medium mb-1">Down Payment ({form.currency || "AED"})</Label>
-          <Input id="downPayment" name="downPayment" type="number" min={0} placeholder={form.currency === "INR" ? "e.g., 1,10,00,000" : "e.g., 400000"} className="rounded-lg bg-[#181825] border border-yellow-400 text-white px-4 py-2" value={form.downPayment} onChange={e => setForm({ ...form, downPayment: e.target.value })} required />
-        </div>
-        <div className="mb-4 flex items-center justify-between">
-          <Label className="text-yellow-300 font-medium">Resident Status</Label>
-          <div className="flex items-center gap-2">
-            <span className={form.resident === "Resident" ? "text-yellow-300 font-bold" : "text-gray-400"}>Resident</span>
-            <Switch checked={form.resident === "NRI"} onCheckedChange={checked => setForm({ ...form, resident: checked ? "NRI" : "Resident", businessOwner: false })} className="data-[state=checked]:bg-yellow-400" />
-            <span className={form.resident === "NRI" ? "text-yellow-300 font-bold" : "text-gray-400"}>Non-Resident</span>
+        {/* Age */}
+        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
+          <span className="text-2xl text-yellow-300">🧍‍♂️</span>
+          <div className="flex-1">
+            <Label htmlFor="age" className="block text-white font-semibold mb-1">Your Age</Label>
+            <Input id="age" name="age" type="number" min={21} max={70} placeholder="Enter your age (21–70)" className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-4 py-2 w-full" value={form.age || ""} onChange={e => setForm({ ...form, age: e.target.value })} required />
           </div>
         </div>
-        <div className="mb-4">
-          <Label htmlFor="monthlyIncome" className="block text-yellow-300 font-medium mb-1">Monthly Income ({form.currency || "AED"})</Label>
-          <Input id="monthlyIncome" name="monthlyIncome" type="number" min={0} placeholder={form.currency === "INR" ? "e.g., 1,00,000" : "e.g., 25000"} className="rounded-lg bg-[#181825] border border-yellow-400 text-white px-4 py-2" value={form.monthlyIncome} onChange={e => setForm({ ...form, monthlyIncome: e.target.value })} required />
+        {/* Resident/NRI Toggle */}
+        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
+          <span className="text-2xl text-yellow-300">{form.resident === "Resident" ? "🏢" : "✈️"}</span>
+          <div className="flex-1 flex items-center gap-4">
+            <Label className="text-white font-semibold">Are you a Resident or NRI?</Label>
+            <Switch checked={form.resident === "NRI"} onCheckedChange={checked => setForm({ ...form, resident: checked ? "NRI" : "Resident", businessOwner: false })} className="data-[state=checked]:bg-yellow-400" />
+            <span className={form.resident === "Resident" ? "text-yellow-300 font-bold" : "text-gray-400"}>Resident</span>
+            <span className={form.resident === "NRI" ? "text-yellow-300 font-bold" : "text-gray-400"}>NRI</span>
+          </div>
         </div>
+        {/* Monthly Income with Currency Toggle */}
+        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
+          <span className="text-2xl text-yellow-300">🏦</span>
+          <div className="flex-1">
+            <Label htmlFor="monthlyIncome" className="block text-white font-semibold mb-1">Monthly Income</Label>
+            <div className="flex gap-2">
+              <Input id="monthlyIncome" name="monthlyIncome" type="number" min={0} placeholder="Enter your monthly income" className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-4 py-2 w-full" value={form.monthlyIncome} onChange={e => setForm({ ...form, monthlyIncome: e.target.value })} required />
+              <Button type="button" className={`rounded-full px-4 py-2 font-bold shadow-md transition-all ${form.currency === "AED" ? "bg-yellow-400 text-black" : "bg-gray-700 text-yellow-300"}`} onClick={() => setForm({ ...form, currency: "AED" })}>AED</Button>
+              <Button type="button" className={`rounded-full px-4 py-2 font-bold shadow-md transition-all ${form.currency === "INR" ? "bg-yellow-400 text-black" : "bg-gray-700 text-yellow-300"}`} onClick={() => setForm({ ...form, currency: "INR" })}>INR</Button>
+            </div>
+          </div>
+        </div>
+        {/* Interest Rate Range Display */}
+        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
+          <span className="text-2xl text-yellow-300">📈</span>
+          <div className="flex-1">
+            <Label htmlFor="interest" className="block text-white font-semibold mb-1">
+              Interest Rate (%)
+              <span className="ml-2 text-yellow-300 font-medium">
+                {form.resident === "Resident" ? "3.2–4.3%" : "4.5–5%"}
+              </span>
+            </Label>
+            <Input
+              id="interest"
+              name="interest"
+              type="number"
+              step="0.01"
+              min={0}
+              className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-4 py-2 w-full"
+              value={form.interest ?? interest}
+              onChange={e => setForm({ ...form, interest: e.target.value })}
+              placeholder={form.resident === "Resident" ? "3.2–4.3%" : "4.5–5%"}
+            />
+          </div>
+        </div>
+        {/* Business Owner Toggle (NRI only) */}
         {form.resident === "NRI" && (
-          <div className="mb-4 flex items-center gap-2">
-            <Switch checked={form.businessOwner} onCheckedChange={checked => setForm({ ...form, businessOwner: checked })} className="data-[state=checked]:bg-yellow-400" />
-            <Label className="text-yellow-300 font-medium">Business Owner (Self-Employed)</Label>
+          <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
+            <span className="text-2xl text-yellow-300">📉</span>
+            <div className="flex-1 flex items-center gap-4">
+              <Label className="text-white font-semibold">Are you a Business Owner?</Label>
+              <Switch checked={form.businessOwner} onCheckedChange={checked => setForm({ ...form, businessOwner: checked })} className="data-[state=checked]:bg-yellow-400" />
+              <span className={form.businessOwner ? "text-yellow-300 font-bold" : "text-gray-400"}>Yes</span>
+              <span className={!form.businessOwner ? "text-yellow-300 font-bold" : "text-gray-400"}>No</span>
+            </div>
           </div>
         )}
-        <div className="mb-4">
-          <Label htmlFor="processingFee" className="block text-yellow-300 font-medium mb-1">Processing Fee % (optional)</Label>
-          <Input id="processingFee" name="processingFee" type="number" step="0.01" min={0} placeholder="e.g., 1" className="rounded-lg bg-[#181825] border border-yellow-400 text-white px-4 py-2" value={form.processingFee} onChange={e => setForm({ ...form, processingFee: e.target.value })} />
+        {/* Personal Loan Toggle */}
+        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
+          <span className="text-2xl text-yellow-300">💳</span>
+          <div className="flex-1 flex items-center gap-4">
+            <Label className="text-white font-semibold">Do you have any active personal loans?</Label>
+            <Switch checked={form.personalLoan || false} onCheckedChange={checked => setForm({ ...form, personalLoan: checked })} className="data-[state=checked]:bg-yellow-400" />
+            <span className={form.personalLoan ? "text-yellow-300 font-bold" : "text-gray-400"}>Yes</span>
+            <span className={!form.personalLoan ? "text-yellow-300 font-bold" : "text-gray-400"}>No</span>
+          </div>
         </div>
-        <div className="mb-2">
-          <Label className="block text-yellow-300 font-medium mb-1">Interest Rate (%)</Label>
-          <Input id="interest" name="interest" type="number" step="0.01" min={0} className="rounded-lg bg-[#181825] border border-yellow-400 text-white px-4 py-2" value={interest} readOnly />
+        {/* Credit Card Dues Toggle */}
+        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
+          <span className="text-2xl text-yellow-300">🧾</span>
+          <div className="flex-1 flex items-center gap-4">
+            <Label className="text-white font-semibold">Do you use credit card with EMIs or dues?</Label>
+            <Switch checked={form.creditCardDues || false} onCheckedChange={checked => setForm({ ...form, creditCardDues: checked })} className="data-[state=checked]:bg-yellow-400" />
+            <span className={form.creditCardDues ? "text-yellow-300 font-bold" : "text-gray-400"}>Yes</span>
+            <span className={!form.creditCardDues ? "text-yellow-300 font-bold" : "text-gray-400"}>No</span>
+          </div>
         </div>
-        {/* Dynamic Disclaimers */}
-        <div className="mb-4">
-          {(() => {
-            const age = form.age ? Number(form.age) : 0;
-            const income = form.monthlyIncome ? Number(form.monthlyIncome) : 0;
-            const principal = price - (form.downPayment ? Number(form.downPayment) : 0);
-            const rate = interest / 12 / 100;
-            const months = form.tenure ? Math.min(Number(form.tenure), maxTenure) * 12 : 60;
-            const emi = principal > 0 && months > 0 && rate > 0 ? calculateEMI(principal, rate, months) : 0;
-            let minIncome = form.resident === "Resident" ? minSalary.Resident : (form.businessOwner ? minSalary.NRI_Business : minSalary.NRI);
-            let messages = [];
-            if (income < minIncome) {
-              messages.push(<div key="income" className="text-red-400 font-bold mb-1">Not eligible: Minimum monthly income is {minIncome.toLocaleString()} {form.currency}</div>);
+        {/* Sticky CTA Button */}
+        <div className="sticky bottom-0 w-full z-10">
+          <Button
+            type="submit"
+            className="w-full px-8 py-4 rounded-full font-bold text-base bg-gradient-to-r from-yellow-400 to-yellow-300 text-black shadow-lg hover:shadow-yellow-300/40 transition-all"
+            style={{ boxShadow: "0 2px 16px 0 #FFD30033" }}
+            disabled={
+              !form.propertyPrice ||
+              !form.age ||
+              !form.monthlyIncome ||
+              (form.resident === "NRI" && typeof form.businessOwner === "undefined")
             }
-            if (age > 65) {
-              messages.push(<div key="age" className="text-red-400 font-bold mb-1">Ineligible due to age (must be ≤ 65)</div>);
-            }
-            if (emi > income * 0.4) {
-              messages.push(<div key="afford" className="text-yellow-300 font-bold mb-1">Warning: EMI exceeds 40% of monthly income</div>);
-            }
-            if (form.resident === "NRI") {
-              messages.push(<div key="nri" className="text-yellow-300 font-medium mb-1">Note: Loan offers vary by bank for non-residents</div>);
-            }
-            return messages.length > 0 ? messages : null;
-          })()}
+          >
+            📊 Show My Mortgage Plan
+          </Button>
         </div>
-        <Button type="submit" className="w-full mt-4 px-8 py-3 rounded-full font-bold text-base bg-gradient-to-r from-yellow-400 to-yellow-300 text-black shadow-md hover:shadow-yellow-300/40 transition-all" style={{ boxShadow: "0 2px 16px 0 #FFD30033" }}>
-          Calculate
-        </Button>
       </form>
     </div>
   );
