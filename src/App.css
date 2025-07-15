@@ -1,3 +1,18 @@
+:root {
+  --primary: #6C1D59;
+  --primary-foreground: #FFFFFF;
+  --accent: #EAD6EA;
+  --accent-foreground: #6C1D59;
+  --icon: #D5A5C8;
+  --heading: #1A1A1A;
+  --body: #6A6A6A;
+  --cta-gradient: linear-gradient(90deg, #6C1D59 0%, #B96BAF 100%);
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+  --muted: #F3E0E9;
+  --muted-foreground: #6A6A6A;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;

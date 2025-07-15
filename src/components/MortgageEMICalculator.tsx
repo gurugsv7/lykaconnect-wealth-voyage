@@ -142,6 +142,7 @@ const MortgageEMICalculator = () => {
         age: form.age,
         monthlyIncome: form.monthlyIncome,
         disclaimers,
+        propertyValue: price,
       },
     });
   };

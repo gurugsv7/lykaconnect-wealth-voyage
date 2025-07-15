@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { ChartContainer } from "@/components/ui/chart";
+import * as Recharts from "recharts";
 
 const MortgageEMIResults = () => {
   const location = useLocation();
@@ -142,11 +144,213 @@ const MortgageEMIResults = () => {
     );
   }
 
-  // ...existing results rendering code...
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-[#181825] to-[#23233a] py-12 px-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
-      {/* Back to Home Button in Results */}
-      {/* ...rest of original code... */}
+    <div className="min-h-screen w-full flex flex-col items-center justify-start bg-black py-0 px-0" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+      {/* Top Section (Header) */}
+      <div className="w-full max-w-2xl mx-auto flex flex-col gap-0">
+        <div className="flex items-center justify-between pt-6 pb-2 px-4">
+          <Button
+            variant="ghost"
+            className="text-yellow-400 bg-transparent hover:bg-transparent px-0 py-0 text-base font-bold"
+            style={{ boxShadow: "none", minWidth: 0 }}
+            onClick={() => navigate("/")}
+          >
+            ← Back to Home
+          </Button>
+        </div>
+        {/* Important Notice Card (always first if present) */}
+        {result.disclaimers && result.disclaimers.length > 0 && (
+          <div
+            className="mb-4"
+            style={{
+              background: "#2C0D0D",
+              border: "2px solid #FF4444",
+              borderRadius: 10,
+              padding: 16,
+            }}
+          >
+            <div className="text-base font-bold mb-2 flex items-center gap-2" style={{ color: "#FF4444", fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+              <span>⚠️</span> Important Notice
+            </div>
+            <ul className="list-disc ml-6" style={{ color: "#FFD700", fontFamily: "'Inter', 'Poppins', sans-serif", fontWeight: 500 }}>
+              {result.disclaimers.map((d: string, idx: number) => (
+                <li key={idx}>{d}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {/* Section 1: Mortgage Overview */}
+        <div
+          className="mb-4"
+          style={{
+            background: "#000",
+            border: "2px solid #FFD700",
+            borderRadius: 10,
+            padding: 16,
+          }}
+        >
+          <div className="flex items-center gap-2 mb-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            <span role="img" aria-label="house" style={{ fontSize: 22 }}>🏠</span>
+            <span className="font-bold text-[#FFD700]" style={{ fontSize: 18 }}>Max Eligible Mortgage:</span>
+            <span className="font-bold text-[#FFD700]" style={{ fontSize: 18, marginLeft: "auto" }}>
+              AED {result.propertyValue?.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+            </span>
+          </div>
+          <div className="flex items-center gap-2 mb-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            <span role="img" aria-label="down payment" style={{ fontSize: 22 }}>💰</span>
+            <span className="font-bold text-[#FFD700]" style={{ fontSize: 18 }}>Required Down Payment:</span>
+            <span className="font-bold text-[#FFD700]" style={{ fontSize: 18, marginLeft: "auto" }}>
+              AED {result.down?.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+            </span>
+          </div>
+          <div className="flex items-center gap-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            <span role="img" aria-label="upfront" style={{ fontSize: 22 }}>💵</span>
+            <span className="font-bold text-[#FFD700]" style={{ fontSize: 18 }}>Total Upfront Cash Needed:</span>
+            <span className="font-bold text-[#FFD700]" style={{ fontSize: 18, marginLeft: "auto" }}>
+              {result.propertyValue
+                ? `AED ${(result.propertyValue * 0.12).toLocaleString(undefined, { maximumFractionDigits: 0 })} – AED ${(result.propertyValue * 0.16).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+                : "AED 0"}
+            </span>
+          </div>
+        </div>
+        {/* Section 2: Loan Terms */}
+        <div
+          className="mb-4"
+          style={{
+            background: "#000",
+            border: "2px solid #FFD700",
+            borderRadius: 10,
+            padding: 16,
+          }}
+        >
+          <div className="text-lg font-bold text-[#FFD700] mb-2 flex items-center gap-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            <span role="img" aria-label="calendar">🗓️</span> Loan Terms
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <span role="img" aria-label="tenure">📅</span>
+              <span className="text-white font-semibold" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>Eligible Loan Tenure:</span>
+              <span className="font-bold text-[#FFD700] ml-auto">{result.eligibleTenure} years</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span role="img" aria-label="emi">💳</span>
+              <span className="text-white font-semibold" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>Monthly EMI:</span>
+              <span className="font-bold text-[#FFD700] ml-auto">AED {result.emi?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span role="img" aria-label="interest">📊</span>
+              <span className="text-white font-semibold" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>Total Interest Payable:</span>
+              <span className="font-bold text-[#FFD700] ml-auto">AED {result.totalInterest?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span role="img" aria-label="repayment">🧾</span>
+              <span className="text-white font-semibold" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>Total Loan Repayment:</span>
+              <span className="font-bold text-[#FFD700] ml-auto">AED {result.totalPayable?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            </div>
+          </div>
+        </div>
+        {/* Section 3: Repayment Breakdown Chart */}
+        <div
+          className="mb-4"
+          style={{
+            background: "#000",
+            border: "2px solid #FFD700",
+            borderRadius: 10,
+            padding: 16,
+          }}
+        >
+          <div className="text-lg font-bold text-[#FFD700] mb-2 flex items-center gap-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            <span role="img" aria-label="pie chart">📊</span> Repayment Breakdown
+          </div>
+          <div className="w-full flex flex-col items-center justify-center mb-2">
+<ChartContainer
+  config={{
+    Principal: { label: "Principal", color: "#FFD700" },
+    Interest: { label: "Interest", color: "#444" },
+    Fees: { label: "Processing Fee", color: "#888" },
+  }}
+  className="w-full max-w-xs mx-auto"
+>
+  <Recharts.PieChart width={320} height={240}>
+    <Recharts.Pie
+      data={[
+        { name: "Principal", value: result.principal || 0, fill: "#FFD700" },
+        { name: "Interest", value: result.totalInterest || 0, fill: "#444" },
+        { name: "Fees", value: result.procFee || 0, fill: "#888" },
+      ]}
+      dataKey="value"
+      nameKey="name"
+      cx="50%"
+      cy="65%"
+      outerRadius={85}
+      paddingAngle={2}
+      labelLine
+      label={({ name, percent, x, y }) =>
+        percent > 0
+          ? (
+            <text
+              x={x}
+              y={y}
+              fill={name === "Principal" ? "#FFD700" : "#fff"}
+              fontWeight="bold"
+              fontSize={14}
+              textAnchor="middle"
+              dominantBaseline="central"
+            >
+              {`${name} ${(percent * 100).toFixed(0)}%`}
+            </text>
+          )
+          : null
+      }
+    >
+      <Recharts.Cell fill="#FFD700" />
+      <Recharts.Cell fill="#444" />
+      <Recharts.Cell fill="#888" />
+    </Recharts.Pie>
+    <Recharts.Tooltip />
+    <Recharts.Legend />
+  </Recharts.PieChart>
+</ChartContainer>
+          </div>
+        </div>
+        {/* Amortization Accordion */}
+        <div className="bg-black rounded-2xl px-6 pt-4 pb-8 flex flex-col gap-4 shadow-lg mt-6">
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="amortization">
+              <AccordionTrigger className="text-yellow-400 font-bold text-lg">📊 View Amortization Schedule</AccordionTrigger>
+              <AccordionContent>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full text-xs text-white">
+                    <thead>
+                      <tr>
+                        <th className="px-2 py-1 border-b border-yellow-400">Month</th>
+                        <th className="px-2 py-1 border-b border-yellow-400">Principal</th>
+                        <th className="px-2 py-1 border-b border-yellow-400">Interest</th>
+                        <th className="px-2 py-1 border-b border-yellow-400">Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {result.amortization && result.amortization.slice(0, 24).map((row: any, idx: number) => (
+                        <tr key={idx}>
+                          <td className="px-2 py-1 border-b border-gray-700">{row.month}</td>
+                          <td className="px-2 py-1 border-b border-gray-700">{row.principal.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+                          <td className="px-2 py-1 border-b border-gray-700">{row.interest.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+                          <td className="px-2 py-1 border-b border-gray-700">{row.balance.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+                        </tr>
+                      ))}
+                      {result.amortization && result.amortization.length > 24 && (
+                        <tr>
+                          <td colSpan={4} className="text-center text-yellow-300 py-2">...showing first 24 months</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </div>
     </div>
   );
 };

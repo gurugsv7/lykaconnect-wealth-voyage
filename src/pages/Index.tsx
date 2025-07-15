@@ -11,22 +11,29 @@ import BlogSection from "@/components/BlogSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-black to-slate-900 text-white">
+    <div
+      className="min-h-screen"
+      style={{
+        background: "var(--background)",
+        color: "var(--body)",
+        minHeight: "100vh",
+        fontFamily: "'Poppins', 'Inter', sans-serif",
+      }}
+    >
       {/* Header */}
       <Header />
-      
+
       {/* Hero Section */}
       <HeroSection />
-      
+
       {/* AI Features */}
       <AIFeatures />
-      
+
       {/* Tamil Millionaire Journey */}
       {/* <TamilMillionaireJourney /> */}
-      
+
       {/* Blog Section */}
       <BlogSection />
-
     </div>
   );
 };

@@ -27,28 +27,38 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter basename="/">
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/properties" element={<Properties />} />
-        <Route path="/ai-wealth-forecast" element={<AIWealthForecast />} />
-        <Route path="/tamil-investment-analysis" element={<TamilInvestmentAnalysis />} />
-        <Route path="/tamil-investment-results" element={<TamilInvestmentResults />} />
-        <Route path="/ai-features" element={<AIFeatures />} />
-        <Route path="/portfolio-optimizer" element={<PortfolioOptimizer />} />
-        <Route path="/capital-appreciation-estimator" element={<CapitalAppreciationEstimator />} />
-        <Route path="/capital-appreciation-results" element={<CapitalAppreciationResults />} />
-        <Route path="/blog" element={<BlogSection />} />
-        <Route path="/real-estate-risk-calculator" element={<RealEstateRiskCalculator />} />
-        <Route path="/real-estate-risk-results" element={<RealEstateRiskResults />} />
-        <Route path="/uae-investor-visa" element={<UAEInvestorVisaInfo />} />
-        <Route path="/mortgage-emi-calculator" element={<MortgageEMICalculator />} />
-        <Route path="/mortgage-emi-results" element={<MortgageEMIResults />} />
-        {/* Add other routes as needed */}
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <div
+      style={{
+        background: "var(--background)",
+        color: "var(--body)",
+        minHeight: "100vh",
+        fontFamily: "'Poppins', 'Inter', sans-serif",
+      }}
+      className="bg-[var(--background)] text-[var(--body)] min-h-screen"
+    >
+      <BrowserRouter basename="/">
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/properties" element={<Properties />} />
+          <Route path="/ai-wealth-forecast" element={<AIWealthForecast />} />
+          <Route path="/tamil-investment-analysis" element={<TamilInvestmentAnalysis />} />
+          <Route path="/tamil-investment-results" element={<TamilInvestmentResults />} />
+          <Route path="/ai-features" element={<AIFeatures />} />
+          <Route path="/portfolio-optimizer" element={<PortfolioOptimizer />} />
+          <Route path="/capital-appreciation-estimator" element={<CapitalAppreciationEstimator />} />
+          <Route path="/capital-appreciation-results" element={<CapitalAppreciationResults />} />
+          <Route path="/blog" element={<BlogSection />} />
+          <Route path="/real-estate-risk-calculator" element={<RealEstateRiskCalculator />} />
+          <Route path="/real-estate-risk-results" element={<RealEstateRiskResults />} />
+          <Route path="/uae-investor-visa" element={<UAEInvestorVisaInfo />} />
+          <Route path="/mortgage-emi-calculator" element={<MortgageEMICalculator />} />
+          <Route path="/mortgage-emi-results" element={<MortgageEMIResults />} />
+          {/* Add other routes as needed */}
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 
