@@ -146,7 +146,7 @@ const MortgageEMIResults = () => {
 
   return (
     <div
-      className="min-h-screen w-full flex flex-col items-center justify-start py-0 px-0"
+      className="h-screen w-full flex flex-col items-center justify-start py-0 px-0 overflow-y-auto pb-24"
       style={{
         background: "linear-gradient(135deg, #f9f7fa 0%, #f4f0f7 100%)",
         fontFamily: "'Inter', 'Poppins', sans-serif",

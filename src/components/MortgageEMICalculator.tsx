@@ -149,7 +149,7 @@ const MortgageEMICalculator = () => {
 
   return (
 <div
-      className="min-h-screen h-screen w-full flex flex-col items-center justify-start py-6 px-2 overflow-y-auto"
+      className="min-h-screen w-full flex flex-col items-center justify-start py-6 px-2"
       style={{
         background: "linear-gradient(135deg, #f9f7fa 0%, #f4f0f7 100%)",
         fontFamily: "'Inter', 'Poppins', sans-serif",
@@ -174,12 +174,13 @@ const MortgageEMICalculator = () => {
         </p>
       </div>
       {/* Input Form (Card-Based, One Scroll) */}
-      <form
-        onSubmit={handleCalculate}
-        className="w-full max-w-md mx-auto flex flex-col gap-4"
-        style={{ borderRadius: 16 }}
-      >
-        {/* Property Value */}
+      <div className="w-full max-w-md mx-auto" style={{ minHeight: "400px" }}>
+        <form
+          onSubmit={handleCalculate}
+          className="flex flex-col gap-4 pb-24"
+          style={{ borderRadius: 16 }}
+        >
+          {/* Property Value */}
         <div
           className="w-full rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex flex-col gap-2 px-4 py-4"
           style={{
@@ -288,6 +289,22 @@ const MortgageEMICalculator = () => {
             </Label>
           </div>
         </div>
+        {/* CTA Button directly below Interest Rate */}
+        <div className="w-full">
+          <Button
+            type="submit"
+            className="w-full px-8 py-4 rounded-full font-bold text-base bg-gradient-to-r from-[#E0A935] to-[#720D4C] text-white shadow-lg hover:bg-[#e6c75a] hover:text-[#1F1F1F] transition-all mt-4"
+            style={{ boxShadow: "0 2px 16px 0 #E0A93533" }}
+            disabled={
+              !form.propertyPrice ||
+              !form.age ||
+              !form.monthlyIncome ||
+              (form.resident === "NRI" && typeof form.businessOwner === "undefined")
+            }
+          >
+            📊 Show My Mortgage Plan
+          </Button>
+        </div>
         {/* Business Owner Toggle (NRI only) */}
         {form.resident === "NRI" && (
           <div
@@ -307,23 +324,8 @@ const MortgageEMICalculator = () => {
           </div>
         )}
         {/* Removed Personal Loan and EMI toggles */}
-        {/* Sticky CTA Button */}
-        <div className="sticky bottom-0 w-full z-10">
-          <Button
-            type="submit"
-            className="w-full px-8 py-4 rounded-full font-bold text-base bg-gradient-to-r from-[#E0A935] to-[#720D4C] text-white shadow-lg hover:bg-[#e6c75a] hover:text-[#1F1F1F] transition-all"
-            style={{ boxShadow: "0 2px 16px 0 #E0A93533" }}
-            disabled={
-              !form.propertyPrice ||
-              !form.age ||
-              !form.monthlyIncome ||
-              (form.resident === "NRI" && typeof form.businessOwner === "undefined")
-            }
-          >
-            📊 Show My Mortgage Plan
-          </Button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
