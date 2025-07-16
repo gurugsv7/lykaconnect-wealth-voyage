@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { fetchGeminiAnswer } from "@/utils/geminiApi";
 import { useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
 
 /* Removed amenitiesList and all amenities logic as amenities are no longer part of the form */
 
@@ -322,8 +321,13 @@ Al Khail Heights:
 
   return (
     <>
-      <Header />
-      <div className="min-h-screen bg-[#0f0f1b] py-10 px-2 flex flex-col items-center">
+      <div
+        className="min-h-screen py-10 px-2 flex flex-col items-center"
+        style={{
+          background: "linear-gradient(135deg, #f9f7fa 0%, #f4f0f7 100%)",
+          fontFamily: "'Inter', 'Poppins', sans-serif",
+        }}
+      >
         {/* Loading overlay */}
         {loading && (
           <LoadingOverlay />
@@ -343,17 +347,26 @@ Al Khail Heights:
         </button>
         {/* Title and subtitle above border, centered */}
         <div className="w-full max-w-[1000px] mx-auto mb-6 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#FFD300] mb-2 tracking-wide uppercase" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+          <h1
+            className="text-4xl md:text-5xl font-bold mb-2 tracking-wide"
+            style={{
+              color: "#720D4C",
+              fontFamily: "'Inter', 'Poppins', sans-serif",
+              letterSpacing: "-0.01em",
+              textShadow: "0 2px 6px #E0A93533",
+            }}
+          >
             Tamil Millionaire Journey
           </h1>
-          <p className="text-gray-300 text-lg">
+          <p className="text-lg" style={{ color: "#1F1F1F" }}>
             Specialized rental income prediction with community-specific insights
           </p>
         </div>
         <div
-          className="w-full max-w-[1000px] bg-[#18192a] rounded-[20px] border border-yellow-400 p-8 md:p-10 mx-auto"
+          className="w-full max-w-[1000px] bg-white rounded-[20px] border-2 border-[#E0A935] p-8 md:p-10 mx-auto shadow-lg"
           style={{
-            boxShadow: "0 4px 24px 0 rgba(20,20,40,0.25), 0 0 0 1px #23233a inset"
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
           }}
         >
           <form onSubmit={handleSubmit} autoComplete="off">
@@ -365,7 +378,7 @@ Al Khail Heights:
                 name="fullName"
                 value={form.fullName}
                 onChange={handleChange}
-                className="w-full bg-[#111827] text-white rounded-[10px] border border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                className="w-full bg-white text-[#18192a] rounded-[10px] border border-[#E0A935] px-4 py-3 focus:outline-none focus:border-[#720D4C] transition-all"
                 placeholder="Enter your name"
               />
             </div>
@@ -377,7 +390,7 @@ Al Khail Heights:
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                className="w-full bg-[#111827] text-white rounded-[10px] border border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                className="w-full bg-white text-[#18192a] rounded-[10px] border border-[#E0A935] px-4 py-3 focus:outline-none focus:border-[#720D4C] transition-all"
                 placeholder="Enter your email"
               />
             </div>
@@ -388,7 +401,7 @@ Al Khail Heights:
                 <select
                   value={countryCode}
                   onChange={e => setCountryCode(e.target.value)}
-                  className="bg-[#23233a] text-white border border-[#23233a] rounded-l-[10px] px-3 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                  className="bg-white text-[#18192a] border border-[#E0A935] rounded-l-[10px] px-3 py-3 focus:outline-none focus:border-[#720D4C] transition-all"
                   style={{ minWidth: 90 }}
                 >
                   <option value="+971">+971</option>
@@ -399,7 +412,7 @@ Al Khail Heights:
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  className="w-full bg-[#111827] text-white rounded-r-[10px] border-t border-b border-r border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                  className="w-full bg-white text-[#18192a] rounded-r-[10px] border-t border-b border-r border-[#E0A935] px-4 py-3 focus:outline-none focus:border-[#720D4C] transition-all"
                   placeholder="Phone number"
                   autoComplete="off"
                   required
@@ -417,7 +430,7 @@ Al Khail Heights:
                 name="propertyType"
                 value={form.propertyType}
                 onChange={handleChange}
-                className="w-full bg-[#111827] text-white rounded-[10px] border border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                className="w-full bg-white text-[#18192a] rounded-[10px] border border-[#E0A935] px-4 py-3 focus:outline-none focus:border-[#720D4C] transition-all"
               >
                 <option value="">Select type</option>
                 {propertyTypes.map(type => (
@@ -440,7 +453,7 @@ Al Khail Heights:
                 name="bedrooms"
                 value={form.bedrooms}
                 onChange={handleChange}
-                className="w-full bg-[#111827] text-white rounded-[10px] border border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                className="w-full bg-white text-[#18192a] rounded-[10px] border border-[#E0A935] px-4 py-3 focus:outline-none focus:border-[#720D4C] transition-all"
               >
                 <option value="">Select</option>
                 <option value="Studio">Studio</option>
@@ -465,7 +478,7 @@ Al Khail Heights:
                 onChange={handleChange}
                 inputMode="numeric"
                 min={0}
-                className="w-full bg-[#111827] text-white rounded-[10px] border border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+                className="w-full bg-white text-[#18192a] rounded-[10px] border border-[#E0A935] px-4 py-3 focus:outline-none focus:border-[#720D4C] transition-all"
                 placeholder="Property purchase price"
                 autoComplete="off"
               />
@@ -474,8 +487,11 @@ Al Khail Heights:
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="w-full md:w-auto px-10 py-3 bg-gradient-to-r from-[#FFD300] to-[#FFA500] text-black font-bold rounded-full shadow-md hover:shadow-yellow-300/40 transition-all text-lg"
-                style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}
+                className="w-full md:w-auto px-10 py-3 bg-gradient-to-r from-[#E0A935] to-[#720D4C] text-white font-bold rounded-full shadow-md hover:bg-[#e6c75a] hover:text-[#1F1F1F] transition-all text-lg"
+                style={{
+                  fontFamily: "'Inter', 'Poppins', sans-serif",
+                  boxShadow: "0 2px 8px 0 #E0A93533",
+                }}
               >
                 Generate Income Analysis
               </button>
@@ -566,19 +582,19 @@ function SearchableLocationDropdown({
           onChange(e.target.value);
         }}
         placeholder="Type to search location..."
-        className="w-full bg-[#111827] text-white rounded-[10px] border border-[#23233a] px-4 py-3 focus:outline-none focus:border-yellow-400 transition-all"
+        className="w-full bg-white text-[#18192a] rounded-[10px] border border-[#E0A935] px-4 py-3 focus:outline-none focus:border-[#720D4C] transition-all"
         autoComplete="off"
       />
       {open && (
-        <div className="absolute z-20 left-0 right-0 bg-[#18192a] border border-yellow-400 rounded-[10px] mt-1 max-h-56 overflow-y-auto shadow-lg">
+        <div className="absolute z-20 left-0 right-0 bg-white border border-[#E0A935] rounded-[10px] mt-1 max-h-56 overflow-y-auto shadow-lg">
           {filtered.length === 0 && (
             <div className="px-4 py-2 text-gray-400">No matches</div>
           )}
           {filtered.map(loc => (
             <div
               key={loc}
-              className={`px-4 py-2 cursor-pointer hover:bg-yellow-400 hover:text-black transition-all ${
-                value === loc ? "bg-yellow-400 text-black" : "text-white"
+              className={`px-4 py-2 cursor-pointer hover:bg-[#E0A935] hover:text-[#720D4C] transition-all ${
+                value === loc ? "bg-[#E0A935] text-[#720D4C]" : "text-[#18192a]"
               }`}
               onMouseDown={() => {
                 onChange(loc);

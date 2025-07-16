@@ -15,7 +15,9 @@ import RealEstateRiskResults from "./components/RealEstateRiskResults";
 import UAEInvestorVisaInfo from "./components/UAEInvestorVisaInfo";
 import MortgageEMICalculator from "./components/MortgageEMICalculator";
 import MortgageEMIResults from "./components/MortgageEMIResults";
-import Footer from "./components/Footer";
+import BottomNavBar from "./components/BottomNavBar";
+import Archives from "./pages/Archives";
+import Contact from "./pages/Contact";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -49,6 +51,8 @@ function App() {
           <Route path="/capital-appreciation-estimator" element={<CapitalAppreciationEstimator />} />
           <Route path="/capital-appreciation-results" element={<CapitalAppreciationResults />} />
           <Route path="/blog" element={<BlogSection />} />
+          <Route path="/archives" element={<Archives />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/real-estate-risk-calculator" element={<RealEstateRiskCalculator />} />
           <Route path="/real-estate-risk-results" element={<RealEstateRiskResults />} />
           <Route path="/uae-investor-visa" element={<UAEInvestorVisaInfo />} />
@@ -56,7 +60,7 @@ function App() {
           <Route path="/mortgage-emi-results" element={<MortgageEMIResults />} />
           {/* Add other routes as needed */}
         </Routes>
-        <Footer />
+        <BottomNavBar />
       </BrowserRouter>
     </div>
   );

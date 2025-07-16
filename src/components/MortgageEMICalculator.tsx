@@ -148,11 +148,28 @@ const MortgageEMICalculator = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-start bg-gradient-to-br from-[#0f0f1b] to-[#121826] py-6 px-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+    <div
+      className="min-h-screen w-full flex flex-col items-center justify-start py-6 px-2"
+      style={{
+        background: "linear-gradient(135deg, #f9f7fa 0%, #f4f0f7 100%)",
+        fontFamily: "'Inter', 'Poppins', sans-serif",
+      }}
+    >
       {/* Headline + Intro */}
-      <div className="w-full max-w-md mx-auto text-center mt-8 mb-6">
-        <h2 className="text-2xl font-bold text-yellow-300 mb-2">Let’s personalize your Dubai property plan 🏡</h2>
-        <p className="text-base text-gray-300 font-medium">
+      <div className="w-full max-w-md mx-auto text-center mt-4 mb-4 flex flex-col items-center">
+        <h2
+          className="text-3xl md:text-4xl font-bold mb-2 flex justify-center items-center gap-2 leading-tight"
+          style={{
+            color: "#720D4C",
+            fontFamily: "'Inter', 'Poppins', sans-serif",
+            letterSpacing: "-0.01em",
+            marginTop: "0.5rem",
+            textShadow: "0 2px 6px #E0A93533",
+          }}
+        >
+          Let’s personalize your Dubai property plan 🏡
+        </h2>
+        <p className="text-base md:text-lg font-medium max-w-xl mx-auto mb-2 leading-snug" style={{ color: "#1F1F1F", fontWeight: 400 }}>
           We’ll instantly show your mortgage eligibility, upfront cost, EMI, and best-fit options — based on real rules.
         </p>
       </div>
@@ -163,28 +180,30 @@ const MortgageEMICalculator = () => {
         style={{ borderRadius: 16 }}
       >
         {/* Property Value */}
-        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex flex-col gap-2 px-4 py-4">
+        <div
+          className="w-full rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex flex-col gap-2 px-4 py-4"
+          style={{
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+          }}
+        >
           <div className="flex items-center gap-3">
-            <span className="text-2xl text-yellow-300">💰</span>
+            <span className="text-2xl" style={{ color: "#E0A935" }}>💰</span>
             <div className="flex-1">
-              <Label htmlFor="propertyPrice" className="block text-white font-semibold mb-1">Property Value (AED)</Label>
-              <Input id="propertyPrice" name="propertyPrice" type="number" min={0} placeholder="How much is the property you’re looking to buy?" className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-4 py-2 w-full" value={form.propertyPrice} onChange={e => setForm({ ...form, propertyPrice: e.target.value })} required />
+              <Label htmlFor="propertyPrice" className="block font-semibold mb-1" style={{ color: "#720D4C" }}>Property Value (AED)</Label>
+              <Input id="propertyPrice" name="propertyPrice" type="number" min={0} placeholder="How much is the property you’re looking to buy?" className="rounded-lg bg-white border border-[#E0A935] text-[#18192a] px-4 py-2 w-full focus:outline-none focus:border-[#720D4C] transition-all" value={form.propertyPrice} onChange={e => setForm({ ...form, propertyPrice: e.target.value })} required />
             </div>
           </div>
           {/* Optional Serious Buyer Toggle */}
-          <div className="flex items-center gap-3 mt-2">
-            <span className="text-xl text-yellow-300">🟢</span>
-            <Label htmlFor="investNow" className="text-white font-semibold">I have X amount ready to invest now</Label>
-            <Input id="investNow" name="investNow" type="text" placeholder="e.g., 2 Cr INR" className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-2 py-1 w-32" value={form.investNow} onChange={e => setForm({ ...form, investNow: e.target.value, seriousBuyer: !!e.target.value })} />
-          </div>
+          {/* Removed "I have X amount" input */}
           {/* Down Payment & Upfront Charges Card */}
           {form.propertyPrice && (
-            <div className="w-full mt-4 rounded-xl bg-[#23233a] shadow-md px-4 py-3 flex flex-col gap-2">
+            <div className="w-full mt-4 rounded-xl bg-[#f9f7fa] shadow-md px-4 py-3 flex flex-col gap-2 border border-[#E0A935]">
               <div className="flex items-center gap-2">
-                <span className="text-lg text-yellow-300">✅</span>
-                <span className="text-white font-semibold">
+                <span className="text-lg" style={{ color: "#E0A935" }}>✅</span>
+                <span className="font-semibold" style={{ color: "#720D4C" }}>
                   Required Minimum Down Payment:{" "}
-                  <span className="text-yellow-300 font-bold">
+                  <span className="font-bold" style={{ color: "#E0A935" }}>
                     {form.resident === "Resident"
                       ? `${(parseFloat(form.propertyPrice) * 0.2).toLocaleString(undefined, { maximumFractionDigits: 0 })} AED (20%)`
                       : `${(parseFloat(form.propertyPrice) * 0.5).toLocaleString(undefined, { maximumFractionDigits: 0 })} AED (50%)`}
@@ -192,10 +211,10 @@ const MortgageEMICalculator = () => {
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-lg text-yellow-300">💸</span>
-                <span className="text-white font-semibold">
+                <span className="text-lg" style={{ color: "#E0A935" }}>💸</span>
+                <span className="font-semibold" style={{ color: "#720D4C" }}>
                   Upfront Charges (Govt + Broker + Fees):{" "}
-                  <span className="text-yellow-300 font-bold">
+                  <span className="font-bold" style={{ color: "#E0A935" }}>
                     {`${(parseFloat(form.propertyPrice) * 0.12).toLocaleString(undefined, { maximumFractionDigits: 0 })}–${(parseFloat(form.propertyPrice) * 0.16).toLocaleString(undefined, { maximumFractionDigits: 0 })} AED (12–16%)`}
                   </span>
                 </span>
@@ -204,96 +223,96 @@ const MortgageEMICalculator = () => {
           )}
         </div>
         {/* Age */}
-        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
-          <span className="text-2xl text-yellow-300">🧍‍♂️</span>
+        <div
+          className="w-full rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex items-center gap-3 px-4 py-4"
+          style={{
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+          }}
+        >
+          <span className="text-2xl" style={{ color: "#E0A935" }}>🧍‍♂️</span>
           <div className="flex-1">
-            <Label htmlFor="age" className="block text-white font-semibold mb-1">Your Age</Label>
-            <Input id="age" name="age" type="number" min={21} max={70} placeholder="Enter your age (21–70)" className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-4 py-2 w-full" value={form.age || ""} onChange={e => setForm({ ...form, age: e.target.value })} required />
+            <Label htmlFor="age" className="block font-semibold mb-1" style={{ color: "#720D4C" }}>Your Age</Label>
+            <Input id="age" name="age" type="number" min={21} max={70} placeholder="Enter your age (21–70)" className="rounded-lg bg-white border border-[#E0A935] text-[#18192a] px-4 py-2 w-full focus:outline-none focus:border-[#720D4C] transition-all" value={form.age || ""} onChange={e => setForm({ ...form, age: e.target.value })} required />
           </div>
         </div>
         {/* Resident/NRI Toggle */}
-        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
-          <span className="text-2xl text-yellow-300">{form.resident === "Resident" ? "🏢" : "✈️"}</span>
+        <div
+          className="w-full rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex items-center gap-3 px-4 py-4"
+          style={{
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+          }}
+        >
+          <span className="text-2xl" style={{ color: "#E0A935" }}>{form.resident === "Resident" ? "🏢" : "✈️"}</span>
           <div className="flex-1 flex items-center gap-4">
-            <Label className="text-white font-semibold">Are you a Resident or NRI?</Label>
-            <Switch checked={form.resident === "NRI"} onCheckedChange={checked => setForm({ ...form, resident: checked ? "NRI" : "Resident", businessOwner: false })} className="data-[state=checked]:bg-yellow-400" />
-            <span className={form.resident === "Resident" ? "text-yellow-300 font-bold" : "text-gray-400"}>Resident</span>
-            <span className={form.resident === "NRI" ? "text-yellow-300 font-bold" : "text-gray-400"}>NRI</span>
+            <Label className="font-semibold" style={{ color: "#720D4C" }}>Are you a Resident or NRI?</Label>
+            <Switch checked={form.resident === "NRI"} onCheckedChange={checked => setForm({ ...form, resident: checked ? "NRI" : "Resident", businessOwner: false })} className="data-[state=checked]:bg-[#E0A935]" />
+            <span className={form.resident === "Resident" ? "font-bold" : ""} style={{ color: form.resident === "Resident" ? "#E0A935" : "#888" }}>Resident</span>
+            <span className={form.resident === "NRI" ? "font-bold" : ""} style={{ color: form.resident === "NRI" ? "#E0A935" : "#888" }}>NRI</span>
           </div>
         </div>
         {/* Monthly Income with Currency Toggle */}
-        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
-          <span className="text-2xl text-yellow-300">🏦</span>
+        <div
+          className="w-full rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex items-center gap-3 px-4 py-4"
+          style={{
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+          }}
+        >
+          <span className="text-2xl" style={{ color: "#E0A935" }}>🏦</span>
           <div className="flex-1">
-            <Label htmlFor="monthlyIncome" className="block text-white font-semibold mb-1">Monthly Income</Label>
+            <Label htmlFor="monthlyIncome" className="block font-semibold mb-1" style={{ color: "#720D4C" }}>Monthly Income</Label>
             <div className="flex gap-2">
-              <Input id="monthlyIncome" name="monthlyIncome" type="number" min={0} placeholder="Enter your monthly income" className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-4 py-2 w-full" value={form.monthlyIncome} onChange={e => setForm({ ...form, monthlyIncome: e.target.value })} required />
-              <Button type="button" className={`rounded-full px-4 py-2 font-bold shadow-md transition-all ${form.currency === "AED" ? "bg-yellow-400 text-black" : "bg-gray-700 text-yellow-300"}`} onClick={() => setForm({ ...form, currency: "AED" })}>AED</Button>
-              <Button type="button" className={`rounded-full px-4 py-2 font-bold shadow-md transition-all ${form.currency === "INR" ? "bg-yellow-400 text-black" : "bg-gray-700 text-yellow-300"}`} onClick={() => setForm({ ...form, currency: "INR" })}>INR</Button>
+              <Input id="monthlyIncome" name="monthlyIncome" type="number" min={0} placeholder="Enter your monthly income" className="rounded-lg bg-white border border-[#E0A935] text-[#18192a] px-4 py-2 w-full focus:outline-none focus:border-[#720D4C] transition-all" value={form.monthlyIncome} onChange={e => setForm({ ...form, monthlyIncome: e.target.value })} required />
+              <Button type="button" className={`rounded-full px-4 py-2 font-bold shadow-md transition-all ${form.currency === "AED" ? "bg-[#E0A935] text-[#720D4C]" : "bg-gray-200 text-[#E0A935]"}`} onClick={() => setForm({ ...form, currency: "AED" })}>AED</Button>
+              <Button type="button" className={`rounded-full px-4 py-2 font-bold shadow-md transition-all ${form.currency === "INR" ? "bg-[#E0A935] text-[#720D4C]" : "bg-gray-200 text-[#E0A935]"}`} onClick={() => setForm({ ...form, currency: "INR" })}>INR</Button>
             </div>
           </div>
         </div>
-        {/* Interest Rate Range Display */}
-        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
-          <span className="text-2xl text-yellow-300">📈</span>
+        {/* Interest Rate Display (Constant) */}
+        <div
+          className="w-full rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex items-center gap-3 px-4 py-4"
+          style={{
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+          }}
+        >
+          <span className="text-2xl" style={{ color: "#E0A935" }}>📈</span>
           <div className="flex-1">
-            <Label htmlFor="interest" className="block text-white font-semibold mb-1">
+            <Label className="block font-semibold mb-1" style={{ color: "#720D4C" }}>
               Interest Rate (%)
-              <span className="ml-2 text-yellow-300 font-medium">
-                {form.resident === "Resident" ? "3.2–4.3%" : "4.5–5%"}
+              <span className="ml-2 font-medium" style={{ color: "#E0A935" }}>
+                {form.resident === "Resident" ? "3.2%" : "4.5%"}
               </span>
             </Label>
-            <Input
-              id="interest"
-              name="interest"
-              type="number"
-              step="0.01"
-              min={0}
-              className="rounded-lg bg-[#23233a] border border-yellow-400 text-white px-4 py-2 w-full"
-              value={form.interest ?? interest}
-              onChange={e => setForm({ ...form, interest: e.target.value })}
-              placeholder={form.resident === "Resident" ? "3.2–4.3%" : "4.5–5%"}
-            />
           </div>
         </div>
         {/* Business Owner Toggle (NRI only) */}
         {form.resident === "NRI" && (
-          <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
-            <span className="text-2xl text-yellow-300">📉</span>
+          <div
+            className="w-full rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex items-center gap-3 px-4 py-4"
+            style={{
+              boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+              border: "1.5px solid #f4e8c7",
+            }}
+          >
+            <span className="text-2xl" style={{ color: "#E0A935" }}>📉</span>
             <div className="flex-1 flex items-center gap-4">
-              <Label className="text-white font-semibold">Are you a Business Owner?</Label>
-              <Switch checked={form.businessOwner} onCheckedChange={checked => setForm({ ...form, businessOwner: checked })} className="data-[state=checked]:bg-yellow-400" />
-              <span className={form.businessOwner ? "text-yellow-300 font-bold" : "text-gray-400"}>Yes</span>
-              <span className={!form.businessOwner ? "text-yellow-300 font-bold" : "text-gray-400"}>No</span>
+              <Label className="font-semibold" style={{ color: "#720D4C" }}>Are you a Business Owner?</Label>
+              <Switch checked={form.businessOwner} onCheckedChange={checked => setForm({ ...form, businessOwner: checked })} className="data-[state=checked]:bg-[#E0A935]" />
+              <span className={form.businessOwner ? "font-bold" : ""} style={{ color: form.businessOwner ? "#E0A935" : "#888" }}>Yes</span>
+              <span className={!form.businessOwner ? "font-bold" : ""} style={{ color: !form.businessOwner ? "#E0A935" : "#888" }}>No</span>
             </div>
           </div>
         )}
-        {/* Personal Loan Toggle */}
-        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
-          <span className="text-2xl text-yellow-300">💳</span>
-          <div className="flex-1 flex items-center gap-4">
-            <Label className="text-white font-semibold">Do you have any active personal loans?</Label>
-            <Switch checked={form.personalLoan || false} onCheckedChange={checked => setForm({ ...form, personalLoan: checked })} className="data-[state=checked]:bg-yellow-400" />
-            <span className={form.personalLoan ? "text-yellow-300 font-bold" : "text-gray-400"}>Yes</span>
-            <span className={!form.personalLoan ? "text-yellow-300 font-bold" : "text-gray-400"}>No</span>
-          </div>
-        </div>
-        {/* Credit Card Dues Toggle */}
-        <div className="w-full rounded-2xl bg-[#181825] shadow-lg flex items-center gap-3 px-4 py-4">
-          <span className="text-2xl text-yellow-300">🧾</span>
-          <div className="flex-1 flex items-center gap-4">
-            <Label className="text-white font-semibold">Do you use credit card with EMIs or dues?</Label>
-            <Switch checked={form.creditCardDues || false} onCheckedChange={checked => setForm({ ...form, creditCardDues: checked })} className="data-[state=checked]:bg-yellow-400" />
-            <span className={form.creditCardDues ? "text-yellow-300 font-bold" : "text-gray-400"}>Yes</span>
-            <span className={!form.creditCardDues ? "text-yellow-300 font-bold" : "text-gray-400"}>No</span>
-          </div>
-        </div>
+        {/* Removed Personal Loan and EMI toggles */}
         {/* Sticky CTA Button */}
         <div className="sticky bottom-0 w-full z-10">
           <Button
             type="submit"
-            className="w-full px-8 py-4 rounded-full font-bold text-base bg-gradient-to-r from-yellow-400 to-yellow-300 text-black shadow-lg hover:shadow-yellow-300/40 transition-all"
-            style={{ boxShadow: "0 2px 16px 0 #FFD30033" }}
+            className="w-full px-8 py-4 rounded-full font-bold text-base bg-gradient-to-r from-[#E0A935] to-[#720D4C] text-white shadow-lg hover:bg-[#e6c75a] hover:text-[#1F1F1F] transition-all"
+            style={{ boxShadow: "0 2px 16px 0 #E0A93533" }}
             disabled={
               !form.propertyPrice ||
               !form.age ||

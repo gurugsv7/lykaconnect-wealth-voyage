@@ -21,7 +21,7 @@ const HomeSection: React.FC = () => {
       {/* White overlay */}
       <div className="absolute inset-0 bg-white/20 z-0 pointer-events-none" />
 
-      {/* Top Content */}
+      {/* Centered Content */}
       <div className="max-w-md mx-auto text-center relative z-10 flex-1 flex flex-col items-center justify-start pt-4">
         {/* Logo */}
         <div className="mb-8">
@@ -36,26 +36,23 @@ const HomeSection: React.FC = () => {
 
         {/* Subtext */}
         <p
-          className="text-base text-[#F5F5F5] mb-6"
+          className="text-base text-[#F5F5F5] mb-3"
           style={{ textShadow: "0 2px 6px rgba(0,0,0,0.4)" }}
         >
           AI-powered Dubai real estate for Indian investors
         </p>
-      </div>
 
-      {/* Bottom Buttons + Filler */}
-      <div className="max-w-md mx-auto w-full relative z-10 space-y-4 text-center">
         {/* Filler Line */}
         <p
-          className="text-lg font-semibold text-[#FFD700] tracking-wide"
-          style={{
-            textShadow: "0 3px 6px rgba(0,0,0,0.5)",
-          }}
+          className="text-xl font-semibold text-[#FFD700] mb-6 tracking-wide"
+          style={{ textShadow: "0 3px 6px rgba(0,0,0,0.5)" }}
         >
           Smarter AI. Better Deals. Proven ROI.
         </p>
+      </div>
 
-        {/* CTA Buttons */}
+      {/* CTA Buttons Anchored Near Bottom */}
+      <div className="max-w-md mx-auto w-full relative z-10 space-y-4">
         <button className="w-full bg-[#720D4C] text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center gap-3 shadow-lg hover:bg-[#5a0a3c] transition-colors">
           <Search size={20} />
           Search Listings

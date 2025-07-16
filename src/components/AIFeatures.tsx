@@ -4,35 +4,27 @@ import { useNavigate } from "react-router-dom";
 const features = [
   {
     icon: (
-      <div className="w-8 h-8 rounded-md bg-yellow-400 flex items-center justify-center">
-        <span className="text-black text-2xl font-bold">🟨</span>
-      </div>
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" fill="#FFF7E0"/>
+        <path d="M11 16.5L15 20.5L21 12.5" stroke="#720D4C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
     ),
     title: "Tamil Millionaire Journey",
-    desc: "Specialized rental income predictions with community-specific insights for Tamil investors. Get detailed market analysis and investment scoring for any Dubai property.",
-    bullets: [
-      "Monthly & Annual rental projections",
-      "Community-specific market insights",
-      "Investment scoring system",
-      "Location analysis & recommendations",
-    ],
-    button: "Analyze Property Income",
+    desc: "AI-powered rental income insights for Tamil investors.",
+    button: "Analyze Income",
+    route: "/tamil-investment-analysis"
   },
   {
     icon: (
-      <div className="w-8 h-8 rounded-md bg-yellow-400 flex items-center justify-center">
-        <span className="text-black text-2xl font-bold">💰</span>
-      </div>
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14" fill="#FFF7E0"/>
+        <rect x="10" y="14" width="12" height="6" rx="2" fill="#E0A935" stroke="#720D4C" strokeWidth="1.5"/>
+        <rect x="12" y="12" width="8" height="4" rx="1" fill="#E0A935" stroke="#720D4C" strokeWidth="1"/>
+      </svg>
     ),
     title: "Mortgage & EMI Calculator",
-    desc: "Smart mortgage and EMI estimator with risk analysis. Get a personalized mortgage plan, EMI breakdown, and amortization table based on your resident status and down payment.",
-    bullets: [
-      "EMI & total interest breakdown",
-      "Resident/non-resident toggle",
-      "Donut chart & amortization table",
-      "Dynamic risk disclaimer"
-    ],
-    button: "Calculate Mortgage EMI",
+    desc: "Instant mortgage & EMI estimates with risk analysis.",
+    button: "Calculate EMI",
     route: "/mortgage-emi-calculator"
   },
   {
@@ -142,179 +134,148 @@ const AIFeatures = () => {
     };
   }, [isMobile, showAll]);
 
-  const filteredFeatures = features.filter(
-    f => f.title !== "Portfolio Optimizer" && f.title !== "Smart Property Matching"
-  );
-  const visibleFeatures = isMobile && !showAll ? [filteredFeatures[0]] : filteredFeatures;
+
+const visibleFeatures = features.filter(
+  f => f.title === "Tamil Millionaire Journey" || f.title === "Mortgage & EMI Calculator"
+);
+
+const extraFeatures = features.filter(
+  f =>
+    f.title !== "Tamil Millionaire Journey" &&
+    f.title !== "Mortgage & EMI Calculator" &&
+    f.title !== "Portfolio Optimizer" &&
+    f.title !== "Smart Property Matching"
+);
 
   return (
     <section
       id="tools"
       className="py-20"
       style={{
-        background: "linear-gradient(135deg, #0f0f1b 0%, #121826 100%)",
+        background: "linear-gradient(135deg, #f9f7fa 0%, #f4f0f7 100%)",
         fontFamily: "'Inter', 'Poppins', sans-serif",
       }}
     >
-      <div className="max-w-[1280px] mx-auto px-4">
-        <div className="text-center mb-16">
+      <div className="max-w-[768px] mx-auto px-4 flex flex-col items-center">
+        <div className="w-full text-center mb-8 flex flex-col items-center">
           <h2
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
-            style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}
+            className="text-3xl md:text-4xl font-bold mb-2 flex justify-center items-center gap-2"
+            style={{
+              fontFamily: "'Inter', 'Poppins', sans-serif",
+              letterSpacing: "-0.01em",
+            }}
           >
-            Complete Investment Intelligence Platform
+            <span style={{ color: "#720D4C" }}>AI-</span>
+            <span
+              className="bg-gradient-to-r from-[#E0A935] to-[#FFD300] bg-clip-text text-transparent"
+              style={{ fontWeight: "bold" }}
+            >
+              FEATURES
+            </span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto">
-           Two powerful AI-driven tools to maximize your Dubai real estate
-            investment success
+          <p className="text-base md:text-lg font-medium max-w-xl mx-auto" style={{ color: "#1F1F1F" }}>
+            Unlock smarter Dubai real estate decisions with AI.
           </p>
         </div>
-        <div className={`grid ${visibleFeatures.length === 2 ? "grid-cols-1 sm:grid-cols-2 justify-center" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"} gap-6 md:gap-6 justify-items-center`}>
+        <div className="w-full flex flex-col sm:flex-row gap-4 justify-center items-stretch mb-4">
           {visibleFeatures.map((f, i) => (
             <div
               key={i}
-              className="flex flex-col h-full bg-[#0f0f1b] rounded-2xl shadow-lg p-6"
+              className={`flex flex-col items-center justify-between rounded-2xl shadow-md px-4 py-5${i <= 1 ? " ml-2 sm:ml-0" : ""}`}
               style={{
-                minHeight: 370,
-                boxShadow:
-                  "0 4px 24px 0 rgba(20,20,40,0.25), 0 0 0 1px #23233a inset",
+                background: "#fff",
+                border: "1.5px solid #E0A935",
+                boxShadow: "0 2px 12px 0 #E0A93522",
+                minWidth: 0,
+                maxWidth: 340,
+                width: "100%",
+                minHeight: 170,
+                height: "auto",
               }}
             >
-              <div className="mb-4">{f.icon}</div>
+              <div className="flex justify-center items-center mb-2">
+                {f.icon}
+              </div>
               <div
-                className="text-yellow-400 font-bold text-lg mb-2"
-                style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}
+                className="font-bold text-base mb-1 text-center"
+                style={{ color: "#720D4C", fontFamily: "'Inter', 'Poppins', sans-serif" }}
               >
                 {f.title}
               </div>
               <div
-                className="text-gray-300 text-sm mb-4"
-                style={{ minHeight: 60 }}
+                className="text-xs mb-3 text-center"
+                style={{ color: "#1F1F1F", maxWidth: "90%", margin: "0 auto", minHeight: "1.5em" }}
               >
                 {f.desc}
               </div>
-              <ul className="mb-6 space-y-1">
-                {f.bullets.map((b, j) => (
-                  <li
-                    key={j}
-                    className="text-gray-200 text-xs flex items-start"
-                  >
-                    <span className="mr-2 mt-0.5 text-yellow-300">•</span>
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              {/* Button navigation logic */}
-              {f.title === "AI Wealth Forecast" ? (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                  onClick={() => navigate("/ai-wealth-forecast")}
-                >
-                  {f.button}
-                </Button>
-              ) : f.title === "Mortgage & EMI Calculator" ? (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                  onClick={() => navigate("/mortgage-emi-calculator")}
-                >
-                  {f.button}
-                </Button>
-              ) : f.title === "Capital Appreciation Estimator" ? (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                  onClick={() => navigate("/capital-appreciation-estimator")}
-                >
-                  {f.button}
-                </Button>
-              ) : f.title === "Investment Risk Estimator" ? (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                  onClick={() => navigate("/real-estate-risk-calculator")}
-                >
-                  {f.button}
-                </Button>
-              ) : f.title === "Smart Property Matching" ? (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                  onClick={() => navigate("/ai-investment-matcher")}
-                >
-                  {f.button}
-                </Button>
-              ) : f.title === "Portfolio Optimizer" ? (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                  onClick={() => navigate("/portfolio-optimizer")}
-                >
-                  {f.button}
-                </Button>
-              ) : f.title === "Tamil Millionaire Journey" ? (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                  onClick={() => navigate("/tamil-investment-analysis")}
-                >
-                  {f.button}
-                </Button>
-              ) : f.title === "Premium Property Listings" ? (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                  onClick={() => navigate("/properties")}
-                >
-                  {f.button}
-                </Button>
-              ) : (
-                <Button
-                  className="mt-auto w-full bg-[#FFD300] text-black font-bold rounded-lg py-2 text-base shadow-md hover:bg-yellow-300 hover:shadow-yellow-200/60 transition-all"
-                  style={{
-                    boxShadow: "0 2px 8px 0 #FFD30033",
-                    fontFamily: "'Inter', 'Poppins', sans-serif",
-                  }}
-                >
-                  {f.button}
-                </Button>
-              )}
+              <Button
+                className="w-full bg-[#E0A935] text-[#720D4C] font-bold rounded-lg py-2 text-sm shadow hover:bg-[#e6c75a] hover:text-[#1F1F1F] transition-all"
+                style={{
+                  boxShadow: "0 2px 8px 0 #E0A93533",
+                  fontFamily: "'Inter', 'Poppins', sans-serif",
+                  marginTop: "auto"
+                }}
+                onClick={() => navigate(f.route)}
+              >
+                {f.button}
+              </Button>
             </div>
           ))}
         </div>
-        {isMobile && !showAll && (
-          <div className="flex justify-center mt-8">
-            <Button
-              className="bg-[#FFD300] text-black font-bold rounded-lg px-8 py-2 shadow-md hover:bg-yellow-300"
-              onClick={() => setShowAll(true)}
-            >
-              Show More
-            </Button>
+        <div className="w-full flex justify-center mt-2">
+          <Button
+            className="bg-[#FFD300] text-[#720D4C] font-bold rounded-lg px-6 py-2 shadow hover:bg-yellow-300"
+            style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}
+            onClick={() => setShowAll((v) => !v)}
+          >
+            {showAll ? "Hide Extra Features" : "Show More Features"}
+          </Button>
+        </div>
+        {showAll && (
+          <div className="w-full flex flex-col sm:flex-row gap-4 justify-center items-stretch mt-4">
+            {extraFeatures.map((f, i) => (
+              <div
+                key={i}
+                className={`flex flex-col items-center justify-between rounded-2xl shadow-md px-4 py-5${i === 0 ? " ml-2 sm:ml-0" : ""}`}
+                style={{
+                  background: "#fff",
+                  border: "1.5px solid #E0A935",
+                  boxShadow: "0 2px 12px 0 #E0A93522",
+                  minWidth: 0,
+                  maxWidth: 340,
+                  width: "100%",
+                  minHeight: 170,
+                  height: "auto",
+                }}
+              >
+                <div className="flex justify-center items-center mb-2">
+                  {f.icon}
+                </div>
+                <div
+                  className="font-bold text-base mb-1 text-center"
+                  style={{ color: "#720D4C", fontFamily: "'Inter', 'Poppins', sans-serif" }}
+                >
+                  {f.title}
+                </div>
+                <div
+                  className="text-xs mb-3 text-center"
+                  style={{ color: "#1F1F1F", maxWidth: "90%", margin: "0 auto", minHeight: "1.5em" }}
+                >
+                  {f.desc}
+                </div>
+                <Button
+                  className="w-full bg-[#E0A935] text-[#720D4C] font-bold rounded-lg py-2 text-sm shadow hover:bg-[#e6c75a] hover:text-[#1F1F1F] transition-all"
+                  style={{
+                    boxShadow: "0 2px 8px 0 #E0A93533",
+                    fontFamily: "'Inter', 'Poppins', sans-serif",
+                    marginTop: "auto"
+                  }}
+                  onClick={() => navigate(f.route)}
+                >
+                  {f.button}
+                </Button>
+              </div>
+            ))}
           </div>
         )}
       </div>

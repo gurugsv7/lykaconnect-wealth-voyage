@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Header from "@/components/Header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
@@ -163,8 +162,13 @@ const TamilInvestmentResults = () => {
 
   return (
     <>
-      <Header />
-      <div className="min-h-screen bg-[#0f0f1b] py-10 px-2 flex flex-col items-center font-sans">
+      <div
+        className="min-h-screen py-10 px-2 flex flex-col items-center font-sans"
+        style={{
+          background: "linear-gradient(135deg, #f9f7fa 0%, #f4f0f7 100%)",
+          fontFamily: "'Inter', 'Poppins', sans-serif",
+        }}
+      >
         <Button
           onClick={() => navigate("/tamil-investment-analysis")}
           className="mb-8 self-start bg-[#FFD300] hover:bg-yellow-400 text-black font-bold px-6 py-2 rounded-lg shadow transition-all"
@@ -190,15 +194,34 @@ const TamilInvestmentResults = () => {
           </Select>
         </div>
         <div className="w-full text-center mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#FFD300] mb-2 tracking-wide uppercase" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+          <h1
+            className="text-4xl md:text-5xl font-bold mb-2 tracking-wide"
+            style={{
+              color: "#720D4C",
+              fontFamily: "'Inter', 'Poppins', sans-serif",
+              letterSpacing: "-0.01em",
+              textShadow: "0 2px 6px #E0A93533",
+            }}
+          >
             Investment Results
           </h1>
         </div>
         {/* Millionaire Timeline */}
-        <Card className="mb-2 bg-[#18192a] border-2 border-[#FFD700] rounded-2xl shadow w-full">
+        <Card
+          className="mb-2 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg w-full"
+          style={{
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+          }}
+        >
           <CardContent className="p-8">
-            <div className="text-2xl font-bold text-[#FFD700] mb-2">Millionaire Timeline</div>
-            <div className="text-lg text-[#fffbe6] mb-4" style={{ lineHeight: 1.7 }}>
+            <div
+              className="text-2xl font-bold mb-2"
+              style={{ color: "#720D4C" }}
+            >
+              Millionaire Timeline
+            </div>
+            <div className="text-lg mb-4" style={{ lineHeight: 1.7, color: "#1F1F1F" }}>
               {convert(allWealthData[0].totalWealth) >= convert(millionaireTarget) ? (
                 <span>
                   <span className="font-bold text-[#FFD700]">You're already a millionaire!</span>
@@ -224,8 +247,18 @@ const TamilInvestmentResults = () => {
         </Card>
 
         {/* Line Chart Section */}
-        <div className="bg-[#18192a] border-2 border-[#FFD700] rounded-2xl px-2 py-4 mb-4 shadow-lg mt-6 max-w-full" style={{ paddingLeft: 24 }}>
-          <div className="text-lg sm:text-2xl font-bold text-[#FFD700] mb-4 text-center tracking-wide uppercase">
+        <div
+          className="bg-white border-2 border-[#E0A935] rounded-2xl px-2 py-4 mb-4 shadow-lg mt-6 max-w-full"
+          style={{
+            paddingLeft: 24,
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+          }}
+        >
+          <div
+            className="text-lg sm:text-2xl font-bold mb-4 text-center tracking-wide uppercase"
+            style={{ color: "#720D4C" }}
+          >
             Wealth Growth Over Time
           </div>
           <div className="w-full flex justify-center items-center px-1 sm:px-4"
@@ -431,34 +464,49 @@ const TamilInvestmentResults = () => {
         {/* Information Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-2">
           {/* Projected Rental Income */}
-          <div className="rounded-2xl bg-[#18192a] border-2 border-[#FFD300] shadow flex flex-col">
-            <div className="text-[#FFD300] text-lg font-bold px-6 pt-6 pb-2">Projected Rental Income</div>
-            <div className="px-6 pb-6 pt-2 text-base text-[#fff] flex flex-col gap-2">
-              <ul className="list-disc list-inside text-[#fffbe6] space-y-1">
-                <li>Monthly Rent: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(monthlyRent))}</span></li>
-                <li>Annual Rent: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(annualRent))}</span></li>
-                <li>Total Rent ({years} yrs): <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(totalRent))}</span></li>
+          <div className="rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex flex-col"
+            style={{
+              boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+              border: "1.5px solid #f4e8c7",
+            }}
+          >
+            <div className="text-lg font-bold px-6 pt-6 pb-2" style={{ color: "#720D4C" }}>Projected Rental Income</div>
+            <div className="px-6 pb-6 pt-2 text-base flex flex-col gap-2" style={{ color: "#1F1F1F" }}>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Monthly Rent: <span className="font-semibold" style={{ color: "#E0A935" }}>{formatCurrency(convert(monthlyRent))}</span></li>
+                <li>Annual Rent: <span className="font-semibold" style={{ color: "#E0A935" }}>{formatCurrency(convert(annualRent))}</span></li>
+                <li>Total Rent ({years} yrs): <span className="font-semibold" style={{ color: "#E0A935" }}>{formatCurrency(convert(totalRent))}</span></li>
               </ul>
             </div>
           </div>
           {/* Capital Appreciation */}
-          <div className="rounded-2xl bg-[#18192a] border-2 border-[#FFD300] shadow flex flex-col">
-            <div className="text-[#FFD300] text-lg font-bold px-6 pt-6 pb-2">Capital Appreciation</div>
-            <div className="px-6 pb-6 pt-2 text-base text-[#fff] flex flex-col gap-2">
-              <ul className="list-disc list-inside text-[#fffbe6] space-y-1">
-                <li>Appreciation Rate: <span className="font-semibold text-[#FFD300]">{(appreciationRate * 100).toFixed(2)}% / year</span></li>
-                <li>Value in {years} yrs: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(allWealthData[years-1]?.value ?? 0))}</span></li>
-                <li>Total Gain: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert((allWealthData[years-1]?.value ?? 0) - initialValue))}</span></li>
+          <div className="rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex flex-col"
+            style={{
+              boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+              border: "1.5px solid #f4e8c7",
+            }}
+          >
+            <div className="text-lg font-bold px-6 pt-6 pb-2" style={{ color: "#720D4C" }}>Capital Appreciation</div>
+            <div className="px-6 pb-6 pt-2 text-base flex flex-col gap-2" style={{ color: "#1F1F1F" }}>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Appreciation Rate: <span className="font-semibold" style={{ color: "#E0A935" }}>{(appreciationRate * 100).toFixed(2)}% / year</span></li>
+                <li>Value in {years} yrs: <span className="font-semibold" style={{ color: "#E0A935" }}>{formatCurrency(convert(allWealthData[years-1]?.value ?? 0))}</span></li>
+                <li>Total Gain: <span className="font-semibold" style={{ color: "#E0A935" }}>{formatCurrency(convert((allWealthData[years-1]?.value ?? 0) - initialValue))}</span></li>
               </ul>
             </div>
           </div>
           {/* ROI Summary */}
-          <div className="rounded-2xl bg-[#18192a] border-2 border-[#FFD300] shadow flex flex-col">
-            <div className="text-[#FFD300] text-lg font-bold px-6 pt-6 pb-2">ROI Summary</div>
-            <div className="px-6 pb-6 pt-2 text-base text-[#fff] flex flex-col gap-2">
-              <ul className="list-disc list-inside text-[#fffbe6] space-y-1">
-                <li>Overall ROI: <span className="font-semibold text-[#FFD300]">{roi.toFixed(2)}%</span></li>
-                <li>Total Expected Return: <span className="font-semibold text-[#FFD300]">{formatCurrency(convert(Math.round(totalGain + totalRent)))}</span></li>
+          <div className="rounded-2xl bg-white border-2 border-[#E0A935] shadow-lg flex flex-col"
+            style={{
+              boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+              border: "1.5px solid #f4e8c7",
+            }}
+          >
+            <div className="text-lg font-bold px-6 pt-6 pb-2" style={{ color: "#720D4C" }}>ROI Summary</div>
+            <div className="px-6 pb-6 pt-2 text-base flex flex-col gap-2" style={{ color: "#1F1F1F" }}>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Overall ROI: <span className="font-semibold" style={{ color: "#E0A935" }}>{roi.toFixed(2)}%</span></li>
+                <li>Total Expected Return: <span className="font-semibold" style={{ color: "#E0A935" }}>{formatCurrency(convert(Math.round(totalGain + totalRent)))}</span></li>
               </ul>
             </div>
           </div>
@@ -467,11 +515,22 @@ const TamilInvestmentResults = () => {
         {/* AI Investment Summary ONLY */}
         <div className="w-full flex flex-col gap-6 mt-8">
           {aiSummary && (
-            <Card className="mb-6 bg-[#18192a] border-2 border-[#FFD700] rounded-2xl shadow w-full">
+            <Card
+              className="mb-6 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg w-full"
+              style={{
+                boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+                border: "1.5px solid #f4e8c7",
+              }}
+            >
               <CardContent className="p-8">
-                <div className="text-2xl font-bold text-[#FFD700] mb-4">AI Investment Summary</div>
-                <div className="bg-[#fffbe6] rounded-xl p-6 mb-2 shadow-inner">
-                  <div className="text-[#18192a] text-lg leading-relaxed">
+                <div
+                  className="text-2xl font-bold mb-4"
+                  style={{ color: "#720D4C" }}
+                >
+                  AI Investment Summary
+                </div>
+                <div className="bg-[#f9f7fa] rounded-xl p-6 mb-2 shadow-inner">
+                  <div className="text-lg leading-relaxed" style={{ color: "#1F1F1F" }}>
                     {aiSummary
                       .replace(/\*/g, "")
                       .replace(/\(Tamil\s*\+\s*English\)/gi, "")
