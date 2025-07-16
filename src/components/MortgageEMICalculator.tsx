@@ -148,8 +148,8 @@ const MortgageEMICalculator = () => {
   };
 
   return (
-    <div
-      className="min-h-screen w-full flex flex-col items-center justify-start py-6 px-2"
+<div
+      className="min-h-screen h-screen w-full flex flex-col items-center justify-start py-6 px-2 overflow-y-auto"
       style={{
         background: "linear-gradient(135deg, #f9f7fa 0%, #f4f0f7 100%)",
         fontFamily: "'Inter', 'Poppins', sans-serif",
