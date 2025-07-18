@@ -27,7 +27,12 @@ const MortgageEMIResults = () => {
     result.age > (result.businessOwner ? 70 : 65) ||
     result.eligibleTenure <= 0 ||
     result.emi > Number(result.monthlyIncome) * 0.5 ||
-    result.propertyValue < 500000;
+    result.propertyValue < 500000 ||
+    // New: Negative or zero values for property, down payment, income, age
+    Number(result.propertyValue) <= 0 ||
+    Number(result.downPayment) <= 0 ||
+    Number(result.monthlyIncome) <= 0 ||
+    Number(result.age) <= 0;
 
   if (isIneligible) {
     // Build reasons array based on failed conditions
@@ -49,6 +54,18 @@ const MortgageEMIResults = () => {
     }
     if (result.propertyValue < 500000) {
       reasons.push("Property value is below AED 500,000, which is the minimum for most UAE banks.");
+    }
+    if (Number(result.propertyValue) <= 0) {
+      reasons.push("Property value must be greater than zero.");
+    }
+    if (Number(result.downPayment) <= 0) {
+      reasons.push("Down payment must be greater than zero.");
+    }
+    if (Number(result.monthlyIncome) <= 0) {
+      reasons.push("Monthly income must be greater than zero.");
+    }
+    if (Number(result.age) <= 0) {
+      reasons.push("Age must be greater than zero.");
     }
 
     return (
@@ -81,7 +98,7 @@ const MortgageEMIResults = () => {
               🚫 Not Eligible for Mortgage
             </div>
             <div className="text-lg mb-4 text-center font-semibold" style={{ color: "#FFFFFF" }}>
-              We’re sorry! Based on your current inputs, you're not eligible for a mortgage in the UAE at this time.
+              Unfortunately, you're not eligible for a mortgage based on the current inputs. Please check your age, income, or employment type and try again.
             </div>
             {reasons.length > 0 && (
               <div className="text-base mb-4 text-left font-medium" style={{ color: "#FFD300", maxWidth: "500px" }}>
@@ -93,9 +110,6 @@ const MortgageEMIResults = () => {
                 </ul>
               </div>
             )}
-            <div className="text-base mb-6 text-center font-medium" style={{ color: "#FFFFFF" }}>
-              You may explore our other financing options or contact a Lyka Realty advisor for personalized assistance.
-            </div>
             <div className="flex flex-col gap-3 w-full mt-2">
               <Button
                 style={{
@@ -108,7 +122,7 @@ const MortgageEMIResults = () => {
                 }}
                 onClick={() => window.location.href = "/mortgage-emi-calculator"}
               >
-                🔁 Change Inputs
+                🔁 Recalculate
               </Button>
               <Button
                 style={{
@@ -122,7 +136,7 @@ const MortgageEMIResults = () => {
                 }}
                 onClick={() => window.open("https://wa.me/971501234567?text=Hi%20Lyka%20Realty%20Advisor,%20I%20need%20help%20with%20mortgage%20eligibility.", "_blank")}
               >
-                💬 Talk to an Advisor
+                📞 Talk to an Expert
               </Button>
             </div>
           </div>
