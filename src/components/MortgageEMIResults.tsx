@@ -166,13 +166,13 @@ const MortgageEMIResults = () => {
         </div>
         {/* Important Notice Card (always first if present) */}
         {result.disclaimers && result.disclaimers.length > 0 && (
-          <div
-            className="mb-4 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-6"
-            style={{
-              boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
-              border: "1.5px solid #f4e8c7",
-            }}
-          >
+        <div
+className="mb-2 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-6"
+          style={{
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+          }}
+        >
             <div className="text-base font-bold mb-2 flex items-center gap-2" style={{ color: "#720D4C", fontFamily: "'Inter', 'Poppins', sans-serif" }}>
               <span>⚠️</span> Important Notice
             </div>
@@ -185,39 +185,41 @@ const MortgageEMIResults = () => {
         )}
         {/* Section 1: Mortgage Overview */}
         <div
-          className="mb-4 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-6"
+className="mb-2 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-6"
           style={{
             boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
             border: "1.5px solid #f4e8c7",
           }}
         >
-          <div className="flex items-center gap-2 mb-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
-            <span role="img" aria-label="house" style={{ fontSize: 22 }}>🏠</span>
-            <span className="font-bold" style={{ fontSize: 18, color: "#720D4C" }}>Max Eligible Mortgage:</span>
-            <span className="font-bold" style={{ fontSize: 18, marginLeft: "auto", color: "#E0A935" }}>
+<div className="grid grid-cols-[minmax(100px,0.45fr)_1fr] gap-y-2 mb-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            <div className="flex items-center gap-2">
+              <span role="img" aria-label="house" style={{ fontSize: 22 }}>🏠</span>
+              <span className="font-bold" style={{ fontSize: 18, color: "#720D4C" }}>Max Eligible Mortgage:</span>
+            </div>
+            <span className="font-bold text-right" style={{ fontSize: 18, color: "#E0A935" }}>
               AED {result.propertyValue?.toLocaleString(undefined, { maximumFractionDigits: 0 })}
             </span>
-          </div>
-          <div className="flex items-center gap-2 mb-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
-            <span role="img" aria-label="down payment" style={{ fontSize: 22 }}>💰</span>
-            <span className="font-bold" style={{ fontSize: 18, color: "#720D4C" }}>Required Down Payment:</span>
-            <span className="font-bold" style={{ fontSize: 18, marginLeft: "auto", color: "#E0A935" }}>
-              AED {result.down?.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+            <div className="flex items-center gap-2">
+              <span role="img" aria-label="down payment" style={{ fontSize: 22 }}>💰</span>
+              <span className="font-bold" style={{ fontSize: 18, color: "#720D4C" }}>Required Down Payment:</span>
+            </div>
+<span className="font-bold text-right" style={{ fontSize: 18, color: "#E0A935" }}>
+              AED {(result.propertyValue ? (result.propertyValue * 0.2).toLocaleString(undefined, { maximumFractionDigits: 0 }) : "0")}
             </span>
-          </div>
-          <div className="flex items-center gap-2" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
-            <span role="img" aria-label="upfront" style={{ fontSize: 22 }}>💵</span>
-            <span className="font-bold" style={{ fontSize: 18, color: "#720D4C" }}>Total Upfront Cash Needed:</span>
-            <span className="font-bold" style={{ fontSize: 18, marginLeft: "auto", color: "#E0A935" }}>
-              {result.propertyValue
-                ? `AED ${(result.propertyValue * 0.12).toLocaleString(undefined, { maximumFractionDigits: 0 })} – AED ${(result.propertyValue * 0.16).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+            <div className="flex items-center gap-2">
+              <span role="img" aria-label="upfront" style={{ fontSize: 22 }}>💵</span>
+              <span className="font-bold" style={{ fontSize: 18, color: "#720D4C" }}>Total Upfront Cash Needed:</span>
+            </div>
+            <span className="font-bold text-right" style={{ fontSize: 18, color: "#E0A935" }}>
+{result.propertyValue
+                ? `AED ${(result.propertyValue * 0.06).toLocaleString(undefined, { maximumFractionDigits: 0 })} – AED ${(result.propertyValue * 0.08).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
                 : "AED 0"}
             </span>
           </div>
         </div>
         {/* Section 2: Loan Terms */}
         <div
-          className="mb-4 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-6"
+          className="mb-2 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-6"
           style={{
             boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
             border: "1.5px solid #f4e8c7",
@@ -226,32 +228,32 @@ const MortgageEMIResults = () => {
           <div className="text-lg font-bold mb-2 flex items-center gap-2" style={{ color: "#720D4C", fontFamily: "'Inter', 'Poppins', sans-serif" }}>
             <span role="img" aria-label="calendar">🗓️</span> Loan Terms
           </div>
-          <div className="flex flex-col gap-2">
+<div className="grid grid-cols-[minmax(100px,0.45fr)_1fr] gap-y-2">
             <div className="flex items-center gap-2">
               <span role="img" aria-label="tenure">📅</span>
               <span className="font-semibold" style={{ color: "#1F1F1F", fontFamily: "'Inter', 'Poppins', sans-serif" }}>Eligible Loan Tenure:</span>
-              <span className="font-bold ml-auto" style={{ color: "#E0A935" }}>{result.eligibleTenure} years</span>
             </div>
+            <span className="font-bold text-right" style={{ color: "#E0A935" }}>{result.eligibleTenure} years</span>
             <div className="flex items-center gap-2">
               <span role="img" aria-label="emi">💳</span>
               <span className="font-semibold" style={{ color: "#1F1F1F", fontFamily: "'Inter', 'Poppins', sans-serif" }}>Monthly EMI:</span>
-              <span className="font-bold ml-auto" style={{ color: "#E0A935" }}>AED {result.emi?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
             </div>
+            <span className="font-bold text-right" style={{ color: "#E0A935" }}>AED {result.emi?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
             <div className="flex items-center gap-2">
               <span role="img" aria-label="interest">📊</span>
               <span className="font-semibold" style={{ color: "#1F1F1F", fontFamily: "'Inter', 'Poppins', sans-serif" }}>Total Interest Payable:</span>
-              <span className="font-bold ml-auto" style={{ color: "#E0A935" }}>AED {result.totalInterest?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
             </div>
+            <span className="font-bold text-right" style={{ color: "#E0A935" }}>AED {result.totalInterest?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
             <div className="flex items-center gap-2">
               <span role="img" aria-label="repayment">🧾</span>
               <span className="font-semibold" style={{ color: "#1F1F1F", fontFamily: "'Inter', 'Poppins', sans-serif" }}>Total Loan Repayment:</span>
-              <span className="font-bold ml-auto" style={{ color: "#E0A935" }}>AED {result.totalPayable?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
             </div>
+            <span className="font-bold text-right" style={{ color: "#E0A935" }}>AED {result.totalPayable?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
           </div>
         </div>
         {/* Section 3: Repayment Breakdown Chart */}
         <div
-          className="mb-4 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-6"
+className="mb-4 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-6"
           style={{
             boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
             border: "1.5px solid #f4e8c7",
@@ -267,9 +269,10 @@ const MortgageEMIResults = () => {
     Interest: { label: "Interest", color: "#444" },
     Fees: { label: "Processing Fee", color: "#888" },
   }}
-  className="w-full max-w-xs mx-auto"
+  className="w-full mx-auto"
 >
-  <Recharts.PieChart width={320} height={240}>
+<Recharts.ResponsiveContainer width="100%" height={320}>
+  <Recharts.PieChart>
     <Recharts.Pie
       data={[
         { name: "Principal", value: result.principal || 0, fill: "#FFD700" },
@@ -279,40 +282,45 @@ const MortgageEMIResults = () => {
       dataKey="value"
       nameKey="name"
       cx="50%"
-      cy="65%"
-      outerRadius={85}
+      cy="50%"
+      outerRadius="80%"
       paddingAngle={2}
       labelLine
-      label={({ name, percent, x, y }) =>
-        percent > 0
-          ? (
-            <text
-              x={x}
-              y={y}
-              fill={name === "Principal" ? "#FFD700" : "#fff"}
-              fontWeight="bold"
-              fontSize={14}
-              textAnchor="middle"
-              dominantBaseline="central"
-            >
-              {`${name} ${(percent * 100).toFixed(0)}%`}
-            </text>
-          )
-          : null
-      }
+      label={({ name, percent, x, y, fill }) => {
+        // Choose contrasting color for label
+        let labelColor = "#222";
+        if (fill === "#444" || fill === "#888") labelColor = "#fff";
+        if (fill === "#FFD700") labelColor = "#222";
+        return percent > 0 ? (
+          <text
+            x={x}
+            y={y}
+            fill={labelColor}
+            fontWeight="bold"
+            fontSize={14}
+            textAnchor="middle"
+            dominantBaseline="central"
+            stroke="#fff"
+            strokeWidth={fill === "#FFD700" ? 0 : 0.5}
+          >
+            {`${name} ${(percent * 100).toFixed(0)}%`}
+          </text>
+        ) : null;
+      }}
     >
       <Recharts.Cell fill="#FFD700" />
       <Recharts.Cell fill="#444" />
       <Recharts.Cell fill="#888" />
     </Recharts.Pie>
     <Recharts.Tooltip />
-    <Recharts.Legend />
+    <Recharts.Legend layout="horizontal" align="center" verticalAlign="bottom" iconType="circle" />
   </Recharts.PieChart>
+</Recharts.ResponsiveContainer>
 </ChartContainer>
           </div>
         </div>
         {/* Amortization Accordion */}
-        <div className="bg-white rounded-2xl px-6 pt-4 pb-8 flex flex-col gap-4 shadow-lg mt-6 border-2 border-[#E0A935]"
+        <div className="bg-white rounded-2xl px-6 pt-4 pb-8 flex flex-col gap-4 shadow-lg mb-2 border-2 border-[#E0A935]"
           style={{
             boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
             border: "1.5px solid #f4e8c7",
@@ -326,24 +334,24 @@ const MortgageEMIResults = () => {
                   <table className="min-w-full text-xs" style={{ color: "#1F1F1F" }}>
                     <thead>
                       <tr>
-                        <th className="px-2 py-1 border-b border-[#E0A935]">Month</th>
-                        <th className="px-2 py-1 border-b border-[#E0A935]">Principal</th>
-                        <th className="px-2 py-1 border-b border-[#E0A935]">Interest</th>
-                        <th className="px-2 py-1 border-b border-[#E0A935]">Balance</th>
+<th className="px-2 py-1 border-b border-[#E0A935]">Month</th>
+<th className="px-2 py-1 border-b border-[#E0A935]">Principal</th>
+<th className="px-2 py-1 border-b border-[#E0A935]">Interest</th>
+<th className="px-2 py-1 border-b border-[#E0A935]">Amount to be Paid</th>
                       </tr>
                     </thead>
                     <tbody>
                       {result.amortization && result.amortization.slice(0, 24).map((row: any, idx: number) => (
                         <tr key={idx}>
-                          <td className="px-2 py-1 border-b border-gray-200">{row.month}</td>
-                          <td className="px-2 py-1 border-b border-gray-200">{row.principal.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
-                          <td className="px-2 py-1 border-b border-gray-200">{row.interest.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
-                          <td className="px-2 py-1 border-b border-gray-200">{row.balance.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+<td className="px-2 py-1 border-b border-gray-200">{row.month}</td>
+<td className="px-2 py-1 border-b border-gray-200">{row.principal.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+<td className="px-2 py-1 border-b border-gray-200">{row.interest.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
+<td className="px-2 py-1 border-b border-gray-200">{(row.principal + row.interest).toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
                         </tr>
                       ))}
                       {result.amortization && result.amortization.length > 24 && (
                         <tr>
-                          <td colSpan={4} className="text-center text-[#E0A935] py-2">...showing first 24 months</td>
+<td colSpan={4} className="text-center text-[#E0A935] py-2">...showing first 24 months</td>
                         </tr>
                       )}
                     </tbody>

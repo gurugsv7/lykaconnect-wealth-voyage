@@ -50,7 +50,7 @@ const features = [
       </div>
     ),
     title: "Investment Risk Estimator",
-    desc: "Estimate potential returns for low and high risk strategies. Get smart suggestions and see UAE visa eligibility based on your investment.",
+    desc: "Estimate potential returns for low and high risk strategies.",
     bullets: [
       "Low & high risk return estimates",
       "Smart budget suggestions",
@@ -136,7 +136,10 @@ const AIFeatures = () => {
 
 
 const visibleFeatures = features.filter(
-  f => f.title === "Tamil Millionaire Journey" || f.title === "Mortgage & EMI Calculator"
+  f =>
+    f.title === "Tamil Millionaire Journey" ||
+    f.title === "Mortgage & EMI Calculator" ||
+    f.title === "Investment Risk Estimator"
 );
 
 const extraFeatures = features.filter(

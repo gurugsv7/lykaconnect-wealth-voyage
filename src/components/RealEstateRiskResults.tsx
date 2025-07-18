@@ -81,176 +81,152 @@ const RealEstateRiskResults: React.FC = () => {
 
   return (
     <div
+      className="min-h-screen flex flex-col items-center justify-start py-0 px-0 overflow-y-auto pb-24"
       style={{
-        minHeight: "100vh",
-        background:
-          "linear-gradient(135deg, #18181b 0%, #23272f 60%, #1e293b 100%)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "2rem 1rem",
+        background: "linear-gradient(135deg, #f9f7fa 0%, #f4f0f7 100%)",
+        fontFamily: "'Inter', 'Poppins', sans-serif",
       }}
     >
-      <button
-        onClick={() => navigate("/real-estate-risk-calculator")}
-        style={{
-          background: "linear-gradient(90deg,#FFD740,#FFA000)",
-          color: "#23272f",
-          padding: "0.7rem 1.5rem",
-          borderRadius: "0.75rem",
-          fontWeight: 700,
-          fontSize: "1rem",
-          border: "none",
-          marginBottom: "1.5rem",
-          cursor: "pointer",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-          transition: "background 0.2s",
-          alignSelf: "flex-start",
-          marginLeft: 0,
-        }}
-      >
-        ← Back to Calculator
-      </button>
-      <button
-        onClick={() => navigate("/")}
-        style={{
-          background: "#23272f",
-          color: "#FFD740",
-          padding: "0.7rem 1.5rem",
-          borderRadius: "0.75rem",
-          fontWeight: 700,
-          fontSize: "1rem",
-          border: "1px solid #FFD740",
-          marginBottom: "1.5rem",
-          marginLeft: "1rem",
-          cursor: "pointer",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-          transition: "background 0.2s",
-          alignSelf: "flex-start",
-        }}
-      >
-        ← Back to Home
-      </button>
-      <div style={{ ...cardStyle, width: "100%", maxWidth: 480 }}>
-        <h2 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem" }}>
-          Smart Investment Range Estimator
-        </h2>
-        {ready ? (
-          <>
-            <div style={cardStyle}>
-              <div style={{ fontWeight: 600, marginBottom: 6 }}>
-                {investment > 0 && investment < 200000 ? (
-                  <>
-                    Your AED {investment.toLocaleString()} investment qualifies for high-risk properties.<br />
-                    <span style={{ color: "#FFD740", fontWeight: 700 }}>
-                      These typically start from AED 150,000+ in emerging areas and off-plan developments.
-                    </span>
-                  </>
+      <div className="w-full max-w-2xl mx-auto flex flex-col gap-0">
+        <div className="flex items-center justify-between pt-6 pb-2 px-4">
+          <button
+            onClick={() => navigate("/real-estate-risk-calculator")}
+            className="text-yellow-400 bg-transparent hover:bg-transparent px-0 py-0 text-base font-bold"
+            style={{
+              boxShadow: "none",
+              minWidth: 0,
+              background: "none",
+              border: "none",
+              fontFamily: "'Inter', 'Poppins', sans-serif",
+              cursor: "pointer"
+            }}
+          >
+            ← Back to Calculator
+          </button>
+          
+        </div>
+        <div
+          className="mb-4 bg-white border-2 border-[#E0A935] rounded-2xl shadow-lg p-4 sm:p-6 w-full"
+          style={{
+            boxShadow: "0 4px 24px 0 rgba(224,169,53,0.08), 0 0 0 1.5px #E0A93522 inset",
+            border: "1.5px solid #f4e8c7",
+            width: "100%",
+            maxWidth: "100vw",
+            margin: 0
+          }}
+        >
+          <h2 className="text-2xl font-bold mb-2 text-center" style={{ color: "#720D4C", fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            Smart Investment Range Estimator
+          </h2>
+          {ready ? (
+            <div className="flex flex-col gap-4">
+              {/* Visa eligibility meter */}
+              <div className="bg-[#F9F7FA] border border-[#E0A935] rounded-xl p-4 flex flex-col gap-2">
+                <div className="text-base font-bold text-[#720D4C] mb-2 flex items-center gap-2">
+                  <span role="img" aria-label="visa">🛂</span>
+                  UAE Investor Visa Progress
+                </div>
+                {visaEligible ? (
+                  <div className="bg-[#e6ffe6] border border-[#4ade80] rounded-xl p-3 text-[#4ade80] font-semibold text-center">
+                    You're eligible for UAE Investor Visa (2–10 years residency)
+                  </div>
                 ) : (
                   <>
-                    Your AED {investment.toLocaleString()} investment qualifies for Dubai's investable property market.
+                    <div className="w-full h-4 bg-[#f4e8c7] rounded-lg overflow-hidden border border-[#E0A935] mb-2">
+                      <div
+                        className="h-4 rounded-lg"
+                        style={{
+                          width: Math.min((investment / 750000) * 100, 100) + "%",
+                          background: "linear-gradient(90deg,#FFD740,#FFA000)",
+                          transition: "width 0.5s"
+                        }}
+                      />
+                    </div>
+                    <div className="text-[#FFD740] font-semibold text-sm flex flex-wrap items-center">
+                      Progress towards AED 750,000 minimum investment for UAE Residency
+                      <a
+                        href="/uae-investor-visa"
+                        className="ml-2 underline text-[#FFD740] font-bold"
+                        style={{ fontSize: "1.08rem", display: "inline-flex", alignItems: "center" }}
+                      >
+                        Know More about Investor Visa <span style={{ marginLeft: 4, fontSize: 18 }}>→</span>
+                      </a>
+                    </div>
                   </>
                 )}
               </div>
+              
               {/* Smart AI suggestion for low investment */}
               {investment > 0 && investment < 200000 && (
-                <div style={{
-                  background: "rgba(255, 215, 64, 0.15)",
-                  border: "1px solid #FFD740",
-                  borderRadius: "0.75rem",
-                  padding: "1rem",
-                  margin: "1rem 0",
-                  color: "#FFD740",
-                  fontWeight: 600,
-                  textAlign: "center",
-                }}>
-                  Consider increasing your investment to access lower-risk, ready properties with stable rental returns.
+                <div className="bg-[#FFF3CD] border border-[#FFD740] rounded-xl p-3 text-[#FFD740] font-semibold text-center">
+                  Your AED {investment.toLocaleString()} investment qualifies for high-risk properties.<br />
+                  <span>
+                    These typically start from AED 150,000+ in emerging areas and off-plan developments.
+                  </span>
+                  <div className="mt-2 text-[#FFD740] font-bold">
+                    Consider increasing your investment to access lower-risk, ready properties with stable rental returns.
+                  </div>
                 </div>
               )}
-              {/* Bar graph */}
-              <div style={{ margin: "1.5rem 0" }}>
-                <div style={{ fontSize: "0.95rem", color: "#FFD740", marginBottom: 4 }}>
-                  ✅ Your Budget vs Recommended Safe Investment Range
+              {/* Budget vs High Risk Limit */}
+              <div className="bg-[#F9F7FA] border border-[#E0A935] rounded-xl p-4 flex flex-col gap-2">
+                <div className="text-base font-bold text-[#720D4C] mb-2 flex items-center gap-2">
+                  <span role="img" aria-label="bar">📊</span>
+                  Your Budget vs Highest Risk Limit
                 </div>
-                <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 13, color: "#4ade80", fontWeight: 600 }}>
-                      ✅ Your Budget: {investment.toLocaleString()} AED
-                    </div>
-                    <div style={progressBarStyle(100)}>
-                      <div style={progressFillStyle(invBar)} />
-                    </div>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#4ade80] font-semibold">Your Budget</span>
+                    <span className="text-[#4ade80] font-semibold">{investment.toLocaleString()} AED</span>
                   </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 13, color: "#FFD740", fontWeight: 600 }}>
-                      ✅ Lowest Safe Zone: 200,000 AED
-                    </div>
-                    <div style={progressBarStyle(100)}>
-                      <div style={progressFillStyle(100)} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button
-              style={{
-                width: "100%",
-                background: "#23272f",
-                color: "#FFD740",
-                padding: "0.9rem",
-                borderRadius: "0.75rem",
-                fontWeight: 700,
-                fontSize: "1.1rem",
-                border: "1px solid #FFD740",
-                marginTop: "0.5rem",
-                cursor: "pointer",
-                marginBottom: "1rem",
-              }}
-              onClick={() => setShowModal(true)}
-            >
-              ✅ See Safe Investment Range
-            </button>
-            {/* Visa eligibility meter */}
-            <div style={{ marginTop: 16 }}>
-              <div style={{ fontWeight: 600, marginBottom: 6 }}>
-                ✅ UAE Investor Visa Progress
-              </div>
-              {visaEligible ? (
-                <div style={{ ...highlightStyle, color: "#4ade80", border: "1px solid #4ade80" }}>
-                  ✅ You're eligible for UAE Investor Visa (2–10 years residency)
-                </div>
-              ) : (
-                <>
-                  <div style={progressBarStyle(100)}>
-                    <div style={progressFillStyle(visaPercent)} />
-                  </div>
-                  <div style={{ color: "#FFD740", fontWeight: 600, fontSize: 13, display: "flex", alignItems: "center", flexWrap: "wrap" }}>
-                    {visaPercent.toFixed(0)}% of AED 750,000 minimum investment for UAE Residency
-                    <a
-                      href="/uae-investor-visa"
+                  <div className="w-full h-4 bg-[#f4e8c7] rounded-lg overflow-hidden mb-2 border border-[#E0A935]">
+                    <div
+                      className="h-4 rounded-lg"
                       style={{
-                        marginLeft: 10,
-                        color: "#FFD740",
-                        fontWeight: 700,
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                        fontSize: "1.08rem",
-                        display: "inline-flex",
-                        alignItems: "center",
+                        width: "100%",
+                        background: "linear-gradient(90deg,#FFD740,#FFA000)",
+                        transition: "width 0.5s"
                       }}
-                    >
-                      Know More about Investor Visa <span style={{ marginLeft: 4, fontSize: 18 }}>→</span>
-                    </a>
+                    />
                   </div>
-                </>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#FFD740] font-semibold">Highest Risk Limit</span>
+                    <span className="text-[#FFD740] font-semibold">{(investment * 5).toLocaleString()} AED</span>
+                  </div>
+                  <div className="w-full h-4 bg-[#f4e8c7] rounded-lg overflow-hidden border border-[#E0A935]">
+                    <div
+                      className="h-4 rounded-lg"
+                      style={{
+                        width: "100%",
+                        background: "linear-gradient(90deg,#FFD740,#FFA000)",
+                        opacity: 0.5,
+                        transition: "width 0.5s"
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Show Safest Risk Button or Value */}
+              {!showSafe ? (
+                <button
+                  className="w-full bg-[#FFD740] text-[#720D4C] font-bold rounded-lg py-3 text-base shadow hover:bg-yellow-300 transition-all mt-2"
+                  style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}
+                  onClick={() => setShowModal(true)}
+                >
+                  Show Safest Risk Limit
+                </button>
+              ) : (
+                <div className="w-full bg-[#e6ffe6] border border-[#4ade80] rounded-lg py-3 text-base font-bold text-[#228B22] text-center mt-2">
+                  Safest Risk Limit (3.5×): {(investment * 3.5).toLocaleString()} AED
+                </div>
               )}
             </div>
-          </>
-        ) : (
-          <div style={{ color: "#FFD740", fontWeight: 600 }}>
-            Invalid or missing input. Please return to the calculator.
-          </div>
-        )}
+          ) : (
+            <div className="text-[#FFD740] font-bold text-center">
+              Invalid or missing input. Please return to the calculator.
+            </div>
+          )}
 
         {/* Safe Return Modal */}
         {showModal && (
@@ -410,6 +386,7 @@ const RealEstateRiskResults: React.FC = () => {
           }
         `}
       </style>
+    </div>
     </div>
   );
 };
