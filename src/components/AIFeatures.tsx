@@ -180,11 +180,11 @@ const extraFeatures = features.filter(
             Unlock smarter Dubai real estate decisions with AI.
           </p>
         </div>
-        <div className="w-full flex flex-col sm:flex-row gap-4 justify-center items-stretch mb-4">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 place-items-center mb-4">
           {visibleFeatures.map((f, i) => (
             <div
               key={i}
-              className={`flex flex-col items-center justify-between rounded-2xl shadow-md px-4 py-5${i <= 1 ? " ml-2 sm:ml-0" : ""}`}
+              className="flex flex-col items-center justify-between rounded-2xl shadow-md px-4 py-5"
               style={{
                 background: "#fff",
                 border: "1.5px solid #E0A935",
@@ -235,11 +235,11 @@ const extraFeatures = features.filter(
           </Button>
         </div>
         {showAll && (
-          <div className="w-full flex flex-col sm:flex-row gap-4 justify-center items-stretch mt-4">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 place-items-center mt-4">
             {extraFeatures.map((f, i) => (
               <div
                 key={i}
-                className={`flex flex-col items-center justify-between rounded-2xl shadow-md px-4 py-5${i === 0 ? " ml-2 sm:ml-0" : ""}`}
+              className="flex flex-col items-center justify-between rounded-2xl shadow-md px-4 py-5"
                 style={{
                   background: "#fff",
                   border: "1.5px solid #E0A935",

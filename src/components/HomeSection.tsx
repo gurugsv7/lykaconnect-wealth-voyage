@@ -1,7 +1,9 @@
 import React from 'react';
 import { Search, TrendingUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeSection: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <section
       id="home"
@@ -58,7 +60,10 @@ const HomeSection: React.FC = () => {
           Search Listings
         </button>
 
-        <button className="w-full bg-[#E0A935] text-[#1F1F1F] py-4 px-6 rounded-xl font-semibold flex items-center justify-center gap-3 shadow-lg hover:bg-[#d19a2f] transition-colors">
+        <button 
+          onClick={() => navigate('/tamil-investment-analysis')}
+          className="w-full bg-[#E0A935] text-[#1F1F1F] py-4 px-6 rounded-xl font-semibold flex items-center justify-center gap-3 shadow-lg hover:bg-[#d19a2f] transition-colors"
+        >
           <TrendingUp size={20} />
           Millionaire Countdown
         </button>

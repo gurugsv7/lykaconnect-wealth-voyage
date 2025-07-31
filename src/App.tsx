@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
 import AIWealthForecast from "./pages/AIWealthForecast";
@@ -38,7 +38,7 @@ function App() {
       }}
       className="bg-[var(--background)] text-[var(--body)] min-h-screen"
     >
-      <BrowserRouter basename="/">
+      <HashRouter>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
@@ -61,7 +61,7 @@ function App() {
           {/* Add other routes as needed */}
         </Routes>
         <BottomNavBar />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
